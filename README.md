@@ -18,9 +18,9 @@ Three real outputs, all three styles, two languages.
 
 | Case | Style | Language | Source type |
 |------|-------|----------|-------------|
-| [Great Myths of the Great Depression](https://peppersun.github.io/visual-summary/examples/great-depression-trial.html) | **Clear** | English | Policy essay |
-| [Response to Jeffrey Sachs](https://peppersun.github.io/visual-summary/examples/response-to-jeffrey-sachs-visual-summary.html) | **Mature** | English | Academic rebuttal |
-| [官方的人口预估可能偏乐观 · 荣鼎](https://peppersun.github.io/visual-summary/examples/荣鼎人口分析.html) | **Vibrant** | 简体中文 | Macroeconomic report |
+| [Great Myths of the Great Depression](https://peppersun.github.io/Visual-Summary-Skill/examples/great-depression-trial.html) | **Clear** | English | Policy essay |
+| [Response to Jeffrey Sachs](https://peppersun.github.io/Visual-Summary-Skill/examples/response-to-jeffrey-sachs-visual-summary.html) | **Mature** | English | Academic rebuttal |
+| [官方的人口预估可能偏乐观 · 荣鼎](https://peppersun.github.io/Visual-Summary-Skill/examples/荣鼎人口分析.html) | **Vibrant** | 简体中文 | Macroeconomic report |
 
 > Live previews hosted via GitHub Pages. Clone the repo to open locally — no server needed.
 
@@ -53,12 +53,12 @@ Add the skill to your Cursor rules directory, or install via the Cursor plugin m
 The `agents/openai.yaml` file is included for Codex compatibility. Clone the repo and register the skill folder in your Codex agent configuration.
 
 ```bash
-git clone https://github.com/PepperSun/visual-summary
+git clone https://github.com/PepperSun/Visual-Summary-Skill
 ```
 
 **Gemini CLI**
 ```bash
-git clone https://github.com/PepperSun/visual-summary
+git clone https://github.com/PepperSun/Visual-Summary-Skill
 # Point your Gemini CLI skill path to the cloned folder
 ```
 
@@ -68,7 +68,7 @@ Download [`visual-summary.skill`](visual-summary.skill) and load it through your
 
 **From source (all platforms)**
 ```bash
-git clone https://github.com/PepperSun/visual-summary
+git clone https://github.com/PepperSun/Visual-Summary-Skill
 ```
 Then point your agent host at the cloned folder. The entry point is `SKILL.md`.
 
