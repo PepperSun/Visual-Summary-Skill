@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Type · 3 styles</title>
+<link rel="stylesheet" href="_cmp.css">
+<style>
+  .display { line-height:1; margin-bottom:14px; }
+  .body  { font-size:13px;line-height:1.55;margin-bottom:6px; }
+  .meta  { font:400 11px/1.4 'JetBrains Mono',monospace;color:#888;letter-spacing:0.04em;text-transform:uppercase; }
+
+  .clear .display { font:700 38px/1 'Inter';letter-spacing:-0.025em;color:#1B2240; }
+  .clear .body    { color:#4A5478;font-family:'Inter'; }
+
+  .mature .display { font:700 42px/1 'Source Serif 4',serif;letter-spacing:-0.025em;color:#1A1614; }
+  .mature .body    { color:#3D332C;font-family:'Inter'; }
+  .mature .body b  { font-family:'Source Serif 4',serif;font-weight:700;color:#1A1614;background:#DEC4E0;padding:1px 4px;font-size:1.06em;-webkit-box-decoration-break:clone;box-decoration-break:clone; }
+
+  .vibrant .display { font:900 42px/0.98 'Inter';letter-spacing:-0.035em;color:#0A0A0A; }
+  .vibrant .body    { color:#444;font-weight:500;font-family:'Inter'; }
+</style></head>
+<body class="cmp-page">
+  <div class="cmp-head">
+    <h1>Typography</h1>
+    <div class="sub">DISPLAY + BODY · ONE FAMILY PER STYLE</div>
+  </div>
+  <div class="cmp-grid">
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm clear"><span class="dot"></span>Clear</div><div class="meta">INTER 700 · INTER 400</div></div>
+      <div class="cmp-stage clear">
+        <div class="display">A clearer way to read.</div>
+        <p class="body">A plainspoken account of how Sapiens moved from one ape to a planet-running species, in five turning points.</p>
+        <div class="meta">DISPLAY 38 / BODY 13</div>
+      </div>
+    </div>
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm mature"><span class="dot"></span>Mature</div><div class="meta">SOURCE SERIF · INTER</div></div>
+      <div class="cmp-stage mature">
+        <div class="display">Three lives, one species.</div>
+        <p class="body">Modern institutions are <b>not less imagined</b> than tribal gods — only more elaborately drawn. The same engine, a louder costume.</p>
+        <div class="meta">DISPLAY 42 / BODY 13</div>
+      </div>
+    </div>
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm vibrant"><span class="dot"></span>Vibrant</div><div class="meta">INTER 900 · INTER 500</div></div>
+      <div class="cmp-stage vibrant">
+        <div class="display">Conquer the page.</div>
+        <p class="body">A six-stage chain — each step makes the next one possible. Saturated, decisive, no hierarchy by grayness.</p>
+        <div class="meta">DISPLAY 42 / BODY 13</div>
+      </div>
+    </div>
+  </div>
+</body></html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Pattern · Logic chain · 3 styles</title>
+<link rel="stylesheet" href="_cmp.css">
+<style>
+  .cmp-stage { padding: 22px 22px; min-height: 0; align-items: stretch; gap: 30px; }
+  .var-label { font:600 9.5px/1 'JetBrains Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;color:#999;margin-bottom:14px;display:flex;align-items:center;gap:10px; }
+  .var-label::after { content:"";flex:1;height:1px;background:#E5E5E5; }
+  .clear .var-label   { color:#8189A6; }
+  .mature .var-label  { color:#7C4A31;font-family:'Source Serif 4',serif;font-style:italic;font-weight:400;letter-spacing:0.04em;text-transform:none; }
+  .vibrant .var-label { color:#0A0A0A; }
+  .vibrant .var-label::after { background:#0A0A0A;height:2px; }
+
+  /* ============ A · LINEAR STEPS ============ */
+  .step { display:grid;grid-template-columns:36px 1fr;gap:12px;align-items:start; }
+  .step + .step { margin-top:12px; }
+  .badge { width:32px;height:32px;display:flex;align-items:center;justify-content:center;font:800 13px/1 'Inter'; }
+  .ttl { font:700 14px/1.25 'Inter';letter-spacing:-0.01em; }
+  .desc { font:400 12px/1.5 'Inter';margin-top:2px; }
+
+  .clear .badge { border-radius:50%; }
+  .clear .s1 .badge { background:#EAF1FF;color:#2D5BFF; }
+  .clear .s2 .badge { background:#E4F6F4;color:#0E8C7E; }
+  .clear .s3 .badge { background:#EFEBFF;color:#6151D6; }
+  .clear .ttl { color:#1B2240; }
+  .clear .desc { color:#4A5478; }
+
+  .mature .badge { background:transparent;color:#1A1614;border:1px solid #1A1614;font-family:'Source Serif 4',serif;font-weight:700; }
+  .mature .ttl { font-family:'Source Serif 4',serif;font-weight:700;font-size:16px;color:#1A1614;letter-spacing:-0.015em; }
+  .mature .desc { color:#3D332C; }
+  .mature .desc b { font-family:'Source Serif 4',serif;font-weight:700;color:#1A1614;background:#DEC4E0;padding:1px 4px;font-size:1.06em;-webkit-box-decoration-break:clone;box-decoration-break:clone; }
+
+  .vibrant .badge { border-radius:8px;border:2px solid #0A0A0A;color:#fff; }
+  .vibrant .s1 .badge { background:#2747FF; }
+  .vibrant .s2 .badge { background:#FFD400;color:#0A0A0A; }
+  .vibrant .s3 .badge { background:#FF3024; }
+  .vibrant .ttl { font-weight:900;font-size:15px;color:#0A0A0A;letter-spacing:-0.02em; }
+  .vibrant .desc { color:#444;font-weight:500; }
+
+  /* ============ B · DECISION TREE (Y/N branching) ============ */
+  /* Top row: 9 columns — START | → | Q1 | yes→ | Q2 | yes→ | Q3 | yes→ | SOLVE */
+  .dtree .top { display:grid;grid-template-columns:50px 18px 1fr 18px 1fr 18px 1fr 18px 50px;gap:0 4px;align-items:center;font-size:11px; }
+  .dtree .top .startend { font-weight:900;text-align:center;letter-spacing:-0.01em;font-size:11px; }
+  .dtree .top .q { padding:8px 2px;text-align:center;line-height:1.2;position:relative; }
+  .dtree .top .arr { position:relative;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700; }
+  .dtree .top .arr .yes { position:absolute;top:-14px;font-style:italic;font-size:10px;font-weight:400;line-height:1; }
+
+  /* Branches/actions/cards: 3 columns aligned to Q1/Q2/Q3 of the 9-col top.
+     We use grid lines to hit columns 3, 5, 7. */
+  .dtree .branches,
+  .dtree .actions,
+  .dtree .cards {
+    display:grid;grid-template-columns:50px 18px 1fr 18px 1fr 18px 1fr 18px 50px;gap:0 4px;
+  }
+  .dtree .branches { margin-top:4px;align-items:start; }
+  .dtree .branches .no { text-align:center;padding:0;position:relative;height:34px; }
+  .dtree .branches .no .lbl { font-style:italic;font-size:10px;position:absolute;top:0;left:50%;transform:translateX(-50%); }
+  .dtree .branches .no .arr { position:absolute;top:14px;left:50%;transform:translateX(-50%);font-size:13px; }
+
+  .dtree .actions { align-items:center; }
+  .dtree .actions .pill { padding:6px 6px;text-align:center;font:900 10.5px/1 'Inter';letter-spacing:0; }
+
+  .dtree .cards { margin-top:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px; }
+  .dtree .cards > div:first-child, .dtree .cards > div:last-child { display:none; }
+  .dtree .cards > div:empty { display:none; }
+  .dtree .cards .stepnum { font:700 10px/1 'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px; }
+  .dtree .cards .card { padding:12px 10px;font-size:11px;line-height:1.4; }
+  .dtree .cards .card h5 { font:700 13px/1.2 'Inter';margin:0 0 6px;letter-spacing:-0.01em; }
+  .dtree .cards .card .ifrow { font-size:10px;margin:6px 0;line-height:1.4; }
+  .dtree .cards .card ul { margin:6px 0 0;padding-left:14px; }
+  .dtree .cards .card ul li { margin:3px 0; }
+  .dtree .cards > div:first-child, .dtree .cards > div:last-child { visibility:hidden; }
+
+  /* CLEAR — pastel pills, soft cards */
+  .clear .dtree .top { color:#1B2240; }
+  .clear .dtree .top .startend { color:#2D5BFF; }
+  .clear .dtree .top .q { font-weight:600; }
+  .clear .dtree .top .arr { color:#1B2240; }
+  .clear .dtree .top .arr .yes { color:#0E8C7E; }
+  .clear .dtree .branches .no .lbl { color:#C66224; }
+  .clear .dtree .branches .no .arr { color:#1B2240; }
+  .clear .dtree .actions .pill { background:#1B2240;color:#fff;border-radius:999px; }
+  .clear .dtree .cards .card { background:#fff;border:1px solid #E6EBF5;border-radius:12px; }
+  .clear .dtree .cards .stepnum { color:#8189A6; }
+  .clear .dtree .cards .card h5 { color:#1B2240; }
+  .clear .dtree .cards .card .ifrow { color:#4A5478; }
+  .clear .dtree .cards .card .ifrow b { background:#EAF1FF;color:#2D5BFF;padding:1px 5px;border-radius:4px;font-weight:600; }
+  .clear .dtree .cards .card ul li { color:#4A5478; }
+  .clear .dtree .cards .card ul li b { color:#1B2240;font-weight:700; }
+
+  /* MATURE — serif Q's, ink pills, ruled cards */
+  .mature .dtree .top { color:#1A1614;font-family:'Source Serif 4',serif; }
+  .mature .dtree .top .startend { font-family:'Source Serif 4',serif;color:#1A1614;font-size:13px; }
+  .mature .dtree .top .q { font-weight:700;font-size:13px; }
+  .mature .dtree .top .arr { color:#1A1614; }
+  .mature .dtree .top .arr .yes { color:#7C4A31;font-family:'Source Serif 4',serif; }
+  .mature .dtree .branches .no .lbl { color:#7C4A31;font-family:'Source Serif 4',serif; }
+  .mature .dtree .branches .no .arr { color:#1A1614; }
+  .mature .dtree .actions .pill { background:#1A1614;color:#fff;border-radius:0;font-family:'Source Serif 4',serif;font-weight:700; }
+  .mature .dtree .cards .card { border-top:1px solid #1A1614;border-bottom:1px solid #1A1614;background:transparent;padding:14px 10px; }
+  .mature .dtree .cards .stepnum { color:#7C4A31;font-family:'Source Serif 4',serif;font-style:italic;font-weight:400;letter-spacing:0;text-transform:none; }
+  .mature .dtree .cards .card h5 { font-family:'Source Serif 4',serif;color:#1A1614;font-size:14px; }
+  .mature .dtree .cards .card .ifrow { color:#3D332C; }
+  .mature .dtree .cards .card .ifrow b { font-family:'Source Serif 4',serif;font-weight:700;color:#1A1614;background:#DEC4E0;padding:1px 4px; }
+  .mature .dtree .cards .card ul li { color:#3D332C;font-family:'Inter'; }
+  .mature .dtree .cards .card ul li b { font-family:'Source Serif 4',serif;font-weight:700;color:#1A1614;background:#DEC4E0;padding:0 3px; }
+
+  /* VIBRANT — bold pills, hard-shadow cards */
+  .vibrant .dtree .top { color:#0A0A0A; }
+  .vibrant .dtree .top .startend { font-weight:900;font-size:14px; }
+  .vibrant .dtree .top .q { font-weight:900;font-size:12px; }
+  .vibrant .dtree .top .arr { color:#0A0A0A;font-weight:900; }
+  .vibrant .dtree .top .arr .yes { color:#1FA85A;font-weight:600; }
+  .vibrant .dtree .branches .no .lbl { color:#FF3024;font-weight:600; }
+  .vibrant .dtree .branches .no .arr { color:#0A0A0A;font-weight:900; }
+  .vibrant .dtree .actions .pill { background:#0A0A0A;color:#fff;border:2px solid #0A0A0A;border-radius:999px; }
+  .vibrant .dtree .cards .card { background:#fff;border:2px solid #0A0A0A;border-radius:10px;box-shadow:4px 4px 0 #FFD400; }
+  .vibrant .dtree .cards .stepnum { color:#0A0A0A; }
+  .vibrant .dtree .cards .card h5 { color:#0A0A0A;font-weight:900; }
+  .vibrant .dtree .cards .card .ifrow { color:#0A0A0A;font-weight:600; }
+  .vibrant .dtree .cards .card .ifrow b { background:#FFD400;color:#0A0A0A;padding:1px 5px;border:1px solid #0A0A0A;border-radius:3px;font-weight:900; }
+  .vibrant .dtree .cards .card ul li { color:#0A0A0A; }
+  .vibrant .dtree .cards .card ul li b { color:#0A0A0A;font-weight:900; }
+</style></head>
+<body class="cmp-page">
+  <div class="cmp-head">
+    <h1>Pattern — Logic chain</h1>
+    <div class="sub">TWO MODES · LINEAR STEPS &amp; DECISION TREE · ACROSS 3 STYLES</div>
+  </div>
+  <div class="cmp-grid">
+
+    <!-- ============ CLEAR ============ -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm clear"><span class="dot"></span>Clear</div><div class="meta">CIRCLES · PASTEL PILLS</div></div>
+      <div class="cmp-stage clear">
+        <div>
+          <div class="var-label">A · Linear chain</div>
+          <div class="step s1"><div class="badge">1</div><div><div class="ttl">Mutation rewires the brain.</div><div class="desc">Speech turns recursive and unbounded.</div></div></div>
+          <div class="step s2"><div class="badge">2</div><div><div class="ttl">Language describes the unreal.</div><div class="desc">Spirits, plans, hypotheticals enter speech.</div></div></div>
+          <div class="step s3"><div class="badge">3</div><div><div class="ttl">Strangers share invisible stories.</div><div class="desc">Tribes, gods, money — built on consensus.</div></div></div>
+        </div>
+        <div>
+          <div class="var-label">B · Decision tree (Y/N branching)</div>
+          <div class="dtree">
+            <div class="top">
+              <div class="startend">START</div>
+              <div class="arr">→</div>
+              <div class="q">Know the problem?</div>
+              <div class="arr"><span class="yes">yes</span>→</div>
+              <div class="q">Know the reason?</div>
+              <div class="arr"><span class="yes">yes</span>→</div>
+              <div class="q">Know the meaning?</div>
+              <div class="arr"><span class="yes">yes</span>→</div>
+              <div class="startend">SOLVE</div>
+            </div>
+            <div class="branches">
+              <div></div><div></div>
+              <div class="no"><span class="lbl">no</span><span class="arr">↓</span></div>
+              <div></div>
+              <div class="no"><span class="lbl">no</span><span class="arr">↓</span></div>
+              <div></div>
+              <div class="no"><span class="lbl">no</span><span class="arr">↓</span></div>
+              <div></div><div></div>
+            </div>
+            <div class="actions">
+              <div></div><div></div>
+              <div class="pill">DEFINE</div>
+              <div></div>
+              <div class="pill">ANALYSE</div>
+              <div></div>
+              <div class="pill">SYNTHESISE</div>
+              <div></div><div></div>
+            </div>
+            <div class="cards">
+              <div></div>
+              <div><div class="stepnum">Step 1</div><div class="card"><h5>Do we know the real problem?</h5><div class="ifrow">If yes → <b>Step 2</b><br>If no → <b>DEFINE</b></div><ul><li>Be concrete on <b>what</b> isn't working</li><li>Get specific on <b>who</b> it impacts</li><li>Find <b>why</b> it matters</li></ul></div></div>
+              <div><div class="stepnum">Step 2</div><div class="card"><h5>Do we understand why?</h5><div class="ifrow">If yes → <b>Step 3</b><br>If no → <b>ANALYSE</b></div><ul><li>Look at <b>data</b> &amp; trends</li><li>Talk to <b>customers</b></li><li>Run <b>5 whys</b> on root cause</li></ul></div></div>
+              <div><div class="stepnum">Step 3</div><div class="card"><h5>Do we know what it means?</h5><div class="ifrow">If yes → <b>SOLVE</b><br>If no → <b>SYNTHESISE</b></div><ul><li>Look for <b>patterns</b></li><li>Ask: what's the <b>tension</b>?</li><li>Test the <b>underlying</b> story</li></ul></div></div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ MATURE ============ -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm mature"><span class="dot"></span>Mature</div><div class="meta">SQUARE NUMERALS · INK PILLS</div></div>
+      <div class="cmp-stage mature">
+        <div>
+          <div class="var-label">i. linear chain</div>
+          <div class="step s1"><div class="badge">I</div><div><div class="ttl">A mutation rewires the brain.</div><div class="desc">Speech becomes <b>recursive and unbounded</b>, for the first time on Earth.</div></div></div>
+          <div class="step s2"><div class="badge">II</div><div><div class="ttl">Language leaves the physical world.</div><div class="desc">It can describe spirits, plans, things <b>that do not exist</b>.</div></div></div>
+          <div class="step s3"><div class="badge">III</div><div><div class="ttl">Strangers believe one story.</div><div class="desc">Tribes, gods, money — real because <b>everyone agrees</b>.</div></div></div>
+        </div>
+        <div>
+          <div class="var-label">ii. decision tree (yes / no)</div>
+          <div class="dtree">
+            <div class="top">
+              <div class="startend">START</div>
+              <div class="arr">→</div>
+              <div class="q">Know the problem?</div>
+              <div class="arr"><span class="yes">yes</span>→</div>
+              <div class="q">Know the reason?</div>
+              <div class="arr"><span class="yes">yes</span>→</div>
+              <div class="q">Know the meaning?</div>
+              <div class="arr"><span class="yes">yes</span>→</div>
+              <div class="startend">SOLVE</div>
+            </div>
+            <div class="branches">
+              <div></div><div></div>
+              <div class="no"><span class="lbl">no</span><span class="arr">↓</span></div>
+              <div></div>
+              <div class="no"><span class="lbl">no</span><span class="arr">↓</span></div>
+              <div></div>
+              <div class="no"><span class="lbl">no</span><span class="arr">↓</span></div>
+              <div></div><div></div>
+            </div>
+            <div class="actions">
+              <div></div><div></div>
+              <div class="pill">DEFINE</div>
+              <div></div>
+              <div class="pill">ANALYSE</div>
+              <div></div>
+              <div class="pill">SYNTHESISE</div>
+              <div></div><div></div>
+            </div>
+            <div class="cards">
+              <div></div>
+              <div><div class="stepnum">step 1</div><div class="card"><h5>Do we know the real problem?</h5><div class="ifrow">If yes → <b>Step 2</b><br>If no → <b>DEFINE</b></div><ul><li>Be concrete on <b>what</b> isn't working</li><li>Get specific on <b>who</b> it impacts</li><li>Summarise into a <b>statement</b></li></ul></div></div>
+              <div><div class="stepnum">step 2</div><div class="card"><h5>Do we understand why?</h5><div class="ifrow">If yes → <b>Step 3</b><br>If no → <b>ANALYSE</b></div><ul><li>Look at <b>data</b> trends</li><li>Talk to <b>customers</b></li><li>Use <b>5 whys</b></li></ul></div></div>
+              <div><div class="stepnum">step 3</div><div class="card"><h5>Do we know what it means?</h5><div class="ifrow">If yes → <b>SOLVE</b><br>If no → <b>SYNTHESISE</b></div><ul><li>Find <b>patterns</b></li><li>Ask the <b>tension</b></li><li>Test the <b>underlying</b> need</li></ul></div></div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ VIBRANT ============ -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm vibrant"><span class="dot"></span>Vibrant</div><div class="meta">INK PILLS · YELLOW SHADOW CARDS</div></div>
+      <div class="cmp-stage vibrant">
+        <div>
+          <div class="var-label">A · LINEAR CHAIN</div>
+          <div class="step s1"><div class="badge">1</div><div><div class="ttl">MUTATION REWIRES THE BRAIN.</div><div class="desc">Speech turns recursive and unbounded.</div></div></div>
+          <div class="step s2"><div class="badge">2</div><div><div class="ttl">LANGUAGE LEAVES THE PHYSICAL.</div><div class="desc">Spirits, plans, hypotheticals enter speech.</div></div></div>
+          <div class="step s3"><div class="badge">3</div><div><div class="ttl">STRANGERS SHARE ONE STORY.</div><div class="desc">Tribes, gods, money — built on consensus.</div></div></div>
+        </div>
+        <div>
+          <div class="var-label">B · DECISION TREE (Y/N)</div>
+          <div class="dtree">
+            <div class="top">
+              <div class="startend">START</div>
+              <div class="arr">→</div>
+              <div class="q">KNOW THE PROBLEM?</div>
+              <div class="arr"><span class="yes">yes</span>→</div>
+              <div class="q">KNOW THE REASON?</div>
+              <div class="arr"><span class="yes">yes</span>→</div>
+              <div class="q">KNOW THE MEANING?</div>
+              <div class="arr"><span class="yes">yes</span>→</div>
+              <div class="startend">SOLVE</div>
+            </div>
+            <div class="branches">
+              <div></div><div></div>
+              <div class="no"><span class="lbl">no</span><span class="arr">↓</span></div>
+              <div></div>
+              <div class="no"><span class="lbl">no</span><span class="arr">↓</span></div>
+              <div></div>
+              <div class="no"><span class="lbl">no</span><span class="arr">↓</span></div>
+              <div></div><div></div>
+            </div>
+            <div class="actions">
+              <div></div><div></div>
+              <div class="pill">DEFINE</div>
+              <div></div>
+              <div class="pill">ANALYSE</div>
+              <div></div>
+              <div class="pill">SYNTHESISE</div>
+              <div></div><div></div>
+            </div>
+            <div class="cards">
+              <div></div>
+              <div><div class="stepnum">STEP 1</div><div class="card"><h5>KNOW THE REAL PROBLEM?</h5><div class="ifrow">YES → <b>Step 2</b><br>NO → <b>DEFINE</b></div><ul><li>Concrete on <b>what</b> fails</li><li>Specific on <b>who</b> hurts</li><li>Write a <b>statement</b></li></ul></div></div>
+              <div><div class="stepnum">STEP 2</div><div class="card"><h5>UNDERSTAND WHY?</h5><div class="ifrow">YES → <b>Step 3</b><br>NO → <b>ANALYSE</b></div><ul><li>Look at <b>data</b></li><li>Talk to <b>customers</b></li><li>Run <b>5 whys</b></li></ul></div></div>
+              <div><div class="stepnum">STEP 3</div><div class="card"><h5>KNOW THE MEANING?</h5><div class="ifrow">YES → <b>SOLVE</b><br>NO → <b>SYNTHESISE</b></div><ul><li>Find <b>patterns</b></li><li>Spot the <b>tension</b></li><li>Test <b>underlying</b> need</li></ul></div></div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body></html>

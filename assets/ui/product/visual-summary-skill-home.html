@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visual Summary · Skill Landing</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top left, var(--pivot-1) 0 180px, transparent 180px),
+      linear-gradient(180deg, color-mix(in srgb, var(--surface) 90%, var(--primary-1) 10%), var(--bg));
+    color: var(--ink);
+    font-family: var(--ff-body);
+  }
+  .shell {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 34px 20px 72px;
+  }
+  .hero {
+    display: grid;
+    gap: 18px;
+    margin-bottom: 26px;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--pivot);
+    font: 700 12px/1 var(--ff-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 24px;
+    height: 8px;
+    border-radius: 999px;
+    background: currentColor;
+  }
+  .hero-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 18px;
+    align-items: end;
+  }
+  h1 {
+    margin: 0;
+    font-family: var(--ff-display);
+    font-size: clamp(56px, 9vw, 92px);
+    line-height: 0.92;
+    letter-spacing: -0.06em;
+    text-wrap: balance;
+  }
+  .hero-copy {
+    max-width: 32ch;
+    margin: 14px 0 0;
+    color: var(--ink-2);
+    font: 500 18px/1.62 var(--ff-body);
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-bottom: 10px;
+  }
+  .chip,
+  .option {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    padding: 0 14px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-2);
+    box-shadow: var(--shadow-1);
+    font: 700 12px/1 var(--ff-body);
+    transition:
+      background-color 160ms ease,
+      color 160ms ease,
+      border-color 160ms ease,
+      box-shadow 160ms ease;
+  }
+  .surface-stack {
+    display: grid;
+    gap: 18px;
+    max-width: 760px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 26px;
+    padding: 28px 32px 30px;
+    box-shadow: var(--shadow-1);
+  }
+  .card-head {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: 18px;
+    align-items: start;
+    margin-bottom: 22px;
+  }
+  .icon-wrap {
+    width: 56px;
+    height: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background: var(--primary-1);
+    color: var(--primary);
+  }
+  .card-title {
+    margin: 0;
+    font: 800 28px/1.08 var(--ff-display);
+    letter-spacing: -0.04em;
+  }
+  .card-copy {
+    margin: 10px 0 0;
+    max-width: 28ch;
+    color: var(--ink-2);
+    font: 500 17px/1.56 var(--ff-body);
+  }
+  .label {
+    margin: 0 0 16px;
+    color: var(--ink-3);
+    font: 700 12px/1 var(--ff-mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .option-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .rule-list {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .rule-list li {
+    padding: 14px 16px;
+    border-radius: 18px;
+    background: var(--bg-2);
+    color: var(--ink-2);
+    font: 600 15px/1.56 var(--ff-body);
+  }
+  .rule-list strong {
+    color: var(--ink);
+  }
+  button.option {
+    appearance: none;
+    cursor: pointer;
+    min-height: 52px;
+    padding: 0 20px;
+    font: 700 17px/1 var(--ff-body);
+  }
+  .option.active {
+    background: var(--primary);
+    border-color: transparent;
+    color: #fff;
+  }
+  body[data-style="mature"] {
+    background: var(--bg);
+  }
+  [data-style="mature"] .card,
+  [data-style="mature"] .chip,
+  [data-style="mature"] .option {
+    border-radius: 0;
+    box-shadow: none;
+  }
+  [data-style="mature"] .rule-list li {
+    border-radius: 0;
+    background: transparent;
+    border: 1px solid var(--line);
+  }
+  [data-style="mature"] .icon-wrap {
+    border: 1px solid var(--ink);
+    border-radius: 0;
+    background: transparent;
+    color: var(--ink);
+  }
+  [data-style="mature"] .option.active {
+    background: var(--lilac);
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+  [data-style="vibrant"] .card,
+  [data-style="vibrant"] .chip,
+  [data-style="vibrant"] .option {
+    border: 2px solid var(--ink);
+    box-shadow: none;
+  }
+  [data-style="vibrant"] .rule-list li {
+    border: 2px solid var(--ink);
+    background: #fff;
+  }
+  [data-style="vibrant"] .icon-wrap {
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    color: var(--ink);
+  }
+  [data-style="vibrant"] .option.active {
+    border-color: var(--ink);
+  }
+  @media (max-width: 860px) {
+    .hero-row {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+    .chips {
+      justify-content: flex-start;
+      padding-bottom: 0;
+    }
+    .surface-stack {
+      max-width: none;
+    }
+  }
+  @media (max-width: 640px) {
+    .shell {
+      padding-inline: 14px;
+    }
+    .card {
+      padding: 22px 18px 24px;
+    }
+    .card-head {
+      grid-template-columns: 48px minmax(0, 1fr);
+      gap: 14px;
+    }
+    .icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+    }
+    button.option {
+      min-height: 48px;
+      padding-inline: 16px;
+      font-size: 16px;
+    }
+  }
+</style>
+</head>
+<body data-style="clear">
+  <div class="shell">
+    <section class="hero">
+      <div class="eyebrow">Skill-only mode</div>
+      <div class="hero-row">
+        <div>
+          <h1>Visual summary</h1>
+          <p class="hero-copy">This skill turns source documents into styled HTML summary pages. Upload a file through your host assistant, then specify the output language and style in your prompt.</p>
+        </div>
+        <div class="chips" aria-label="Mode tags">
+          <span class="chip">Skill-only mode</span>
+          <span class="chip">Host upload</span>
+          <span class="chip">Styled HTML output</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="surface-stack">
+      <article class="card">
+        <div class="card-head">
+          <div class="icon-wrap" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg>
+          </div>
+          <div>
+            <h2 class="card-title">Output language</h2>
+            <p class="card-copy">Follow the source language by default, or pick a fixed target language.</p>
+          </div>
+        </div>
+        <p class="label">Language mode</p>
+        <div class="option-row" id="language-row">
+          <button class="option active" data-language="follow-source" type="button">Follow source</button>
+          <button class="option" data-language="english" type="button">English</button>
+          <button class="option" data-language="simplified-chinese" type="button">简体中文</button>
+          <button class="option" data-language="traditional-chinese" type="button">繁體中文</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <div class="icon-wrap" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="12" r="2.5"></circle><circle cx="17" cy="12" r="2.5"></circle><path d="M9.5 12h5"></path></svg>
+          </div>
+          <div>
+            <h2 class="card-title">Output style</h2>
+            <p class="card-copy">Choose Clear, Mature, or Vibrant. Default to Clear.</p>
+          </div>
+        </div>
+        <p class="label">Style mode</p>
+        <div class="option-row" id="style-row">
+          <button class="option active" data-style-choice="clear" type="button">Clear</button>
+          <button class="option" data-style-choice="mature" type="button">Mature</button>
+          <button class="option" data-style-choice="vibrant" type="button">Vibrant</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <div class="icon-wrap" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+          </div>
+          <div>
+            <h2 class="card-title">Output contract</h2>
+            <p class="card-copy">The final delivery stays visual, compact, and structurally explicit.</p>
+          </div>
+        </div>
+        <ul class="rule-list">
+          <li><strong>Final format:</strong> styled HTML page, not plain text.</li>
+          <li><strong>Voice:</strong> compact third-person objective summary, including first-person sources.</li>
+          <li><strong>Section count:</strong> short sources use 3 sections; longer sources stay within 3 to 5.</li>
+          <li><strong>Structure primitive:</strong> causal or inferential trunks use logic chains; parallel points, cases, and dimensions use tables.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+
+<script>
+  const state = {
+    language: "follow-source",
+    style: "clear"
+  };
+
+  const languageButtons = Array.from(document.querySelectorAll("[data-language]"));
+  const styleButtons = Array.from(document.querySelectorAll("[data-style-choice]"));
+
+  function setLanguage(language) {
+    state.language = language;
+    languageButtons.forEach((button) => {
+      button.classList.toggle("active", button.getAttribute("data-language") === language);
+    });
+  }
+
+  function setStyle(style) {
+    state.style = style;
+    document.body.dataset.style = style;
+    styleButtons.forEach((button) => {
+      button.classList.toggle("active", button.getAttribute("data-style-choice") === style);
+    });
+  }
+
+  languageButtons.forEach((button) => {
+    button.addEventListener("click", () => setLanguage(button.getAttribute("data-language")));
+  });
+
+  styleButtons.forEach((button) => {
+    button.addEventListener("click", () => setStyle(button.getAttribute("data-style-choice")));
+  });
+
+  setLanguage("follow-source");
+  setStyle("clear");
+</script>
+</body>
+</html>

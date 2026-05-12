@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Inputs · 3 styles</title>
+<link rel="stylesheet" href="_cmp.css">
+<style>
+  .lbl { font:600 11px/1 'Inter',sans-serif; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:8px; display:block; }
+  .clear .lbl   { color:#4A5478; }
+  .mature .lbl  { font-family:'JetBrains Mono',monospace; color:#7A6B5F; font-weight:400; }
+  .vibrant .lbl { color:#0A0A0A; font-weight:800; }
+
+  .clear .input { display:block;width:100%;padding:12px 16px;border-radius:12px;border:1px solid #E6EBF5;background:#fff;font:400 14px/1.2 'Inter',sans-serif;color:#1B2240; }
+  .clear .input:focus { outline:0;border-color:#2D5BFF;box-shadow:0 0 0 4px #EAF1FF; }
+
+  .mature .input { display:block;width:100%;padding:10px 0;border:0;border-bottom:1px solid #1A1614;background:transparent;font:400 18px/1.2 'Source Serif 4',serif;color:#1A1614; }
+  .mature .input:focus { outline:0;border-bottom-color:#7C4A31; }
+  .mature .input::placeholder { color:#7A6B5F; font-style:italic; }
+
+  .vibrant .input { display:block;width:100%;padding:13px 18px;border-radius:999px;border:2px solid #0A0A0A;background:#fff;font:600 14px/1.2 'Inter',sans-serif;color:#0A0A0A; }
+  .vibrant .input:focus { outline:0;box-shadow:4px 4px 0 #2747FF; }
+
+  .field { width:100%; }
+  .checkpair { display:flex;align-items:center;gap:10px;margin-top:14px; }
+  .clear .check  { width:18px;height:18px;border-radius:6px;border:1px solid #C8DCFF;background:#EAF1FF;display:inline-flex;align-items:center;justify-content:center;color:#2D5BFF;font-weight:800;font-size:12px; }
+  .mature .check { width:18px;height:18px;border:1px solid #1A1614;background:transparent;display:inline-flex;align-items:center;justify-content:center;color:#1A1614;font-weight:700; }
+  .vibrant .check{ width:20px;height:20px;border-radius:6px;border:2px solid #0A0A0A;background:#FFD400;display:inline-flex;align-items:center;justify-content:center;color:#0A0A0A;font-weight:800;font-size:13px; }
+  .ck-lbl { font-size:13px; }
+  .clear .ck-lbl   { color:#4A5478; }
+  .mature .ck-lbl  { color:#3D332C; }
+  .vibrant .ck-lbl { color:#0A0A0A; font-weight:600; }
+</style></head>
+<body class="cmp-page">
+  <div class="cmp-head">
+    <h1>Form inputs</h1>
+    <div class="sub">FIELD + CHECKBOX</div>
+  </div>
+  <div class="cmp-grid">
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm clear"><span class="dot"></span>Clear</div><div class="meta">ROUNDED · HALO</div></div>
+      <div class="cmp-stage clear">
+        <div class="field"><label class="lbl">Book title</label><input class="input" placeholder="Sapiens by Y. N. Harari"></div>
+        <div class="checkpair"><span class="check">✓</span><span class="ck-lbl">Email me when ready</span></div>
+      </div>
+    </div>
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm mature"><span class="dot"></span>Mature</div><div class="meta">UNDERLINE · SERIF</div></div>
+      <div class="cmp-stage mature">
+        <div class="field"><label class="lbl">Book title</label><input class="input" placeholder="e.g. Sapiens by Y. N. Harari"></div>
+        <div class="checkpair"><span class="check">✓</span><span class="ck-lbl">Email me when ready</span></div>
+      </div>
+    </div>
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm vibrant"><span class="dot"></span>Vibrant</div><div class="meta">PILL · 2PX OUTLINE</div></div>
+      <div class="cmp-stage vibrant">
+        <div class="field"><label class="lbl">Book title</label><input class="input" placeholder="Sapiens by Y. N. Harari"></div>
+        <div class="checkpair"><span class="check">✓</span><span class="ck-lbl">Email me when ready</span></div>
+      </div>
+    </div>
+  </div>
+</body></html>

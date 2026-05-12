@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visual Summary · Local App Shell</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top left, var(--primary-1) 0 160px, transparent 160px),
+      radial-gradient(circle at bottom right, var(--pivot-1) 0 180px, transparent 180px),
+      var(--bg);
+    color: var(--ink);
+    font-family: var(--ff-body);
+  }
+  .shell {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 28px 20px 64px;
+  }
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    margin-bottom: var(--sp-7);
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font: 800 13px/1 var(--ff-body);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .brand-dots {
+    display: inline-flex;
+    gap: 6px;
+  }
+  .brand-dots span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .brand-dots span:nth-child(1) { background: var(--primary); }
+  .brand-dots span:nth-child(2) { background: var(--pivot); }
+  .brand-dots span:nth-child(3) { background: var(--ink); }
+  .button,
+  button {
+    appearance: none;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    min-height: 48px;
+    padding: 0 18px;
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-1);
+    font: 700 14px/1 var(--ff-body);
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .button.primary,
+  button.primary {
+    background: var(--primary);
+    color: #fff;
+    border-color: transparent;
+  }
+  [data-style="mature"] .button.primary,
+  [data-style="mature"] button.primary {
+    background: var(--ink);
+  }
+  [data-style="vibrant"] .button,
+  [data-style="vibrant"] button {
+    border: 2px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--primary);
+    font-weight: 800;
+  }
+  [data-style="vibrant"] .button.primary,
+  [data-style="vibrant"] button.primary {
+    background: var(--primary);
+    color: #fff;
+  }
+  .button.secondary,
+  button.secondary {
+    background: transparent;
+  }
+  .screen[hidden] { display: none; }
+  .hero {
+    max-width: 760px;
+    margin-bottom: var(--sp-7);
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    color: var(--pivot);
+    font: 700 12px/1 var(--ff-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 24px;
+    height: 8px;
+    border-radius: 999px;
+    background: currentColor;
+  }
+  h1 {
+    margin: 0 0 14px;
+    font-family: var(--ff-display);
+    font-size: clamp(42px, 6.6vw, 74px);
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+    text-wrap: balance;
+  }
+  .hero-copy {
+    margin: 0;
+    color: var(--ink-2);
+    font: 500 18px/1.62 var(--ff-body);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+    gap: 20px;
+    align-items: start;
+  }
+  .stack {
+    display: grid;
+    gap: 20px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-1);
+  }
+  [data-style="vibrant"] .card {
+    border: 2px solid var(--ink);
+    box-shadow: none;
+  }
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .icon-wrap,
+  .icon-inline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-1);
+    color: var(--primary);
+    flex: 0 0 auto;
+  }
+  .icon-wrap {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+  }
+  .icon-inline {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+  }
+  [data-style="mature"] .icon-wrap,
+  [data-style="mature"] .icon-inline {
+    border: 1px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    border-radius: 0;
+  }
+  [data-style="vibrant"] .icon-wrap,
+  [data-style="vibrant"] .icon-inline {
+    border: 2px solid var(--ink);
+    background: var(--primary-1);
+    color: var(--ink);
+    border-radius: 50%;
+  }
+  .card-title {
+    margin: 0;
+    font: 800 22px/1.14 var(--ff-display);
+    letter-spacing: -0.03em;
+  }
+  .card-copy {
+    margin: 6px 0 0;
+    color: var(--ink-2);
+    font: 500 14px/1.56 var(--ff-body);
+  }
+  .step-stack {
+    display: grid;
+    gap: 20px;
+    max-width: 980px;
+  }
+  .step-card {
+    display: grid;
+    gap: 18px;
+  }
+  .step-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .step-lead {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .step-marker {
+    width: 56px;
+    height: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background: var(--primary-1);
+    color: var(--primary);
+    font: 800 24px/1 var(--ff-display);
+    letter-spacing: -0.04em;
+    flex: 0 0 auto;
+  }
+  [data-style="mature"] .step-marker {
+    border: 1px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    border-radius: 0;
+  }
+  [data-style="vibrant"] .step-marker {
+    border: 2px solid var(--ink);
+    background: var(--primary-1);
+    color: var(--ink);
+    border-radius: 50%;
+  }
+  .step-status {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 0 12px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--line);
+    background: var(--primary-1);
+    color: var(--primary);
+    font: 700 12px/1 var(--ff-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  [data-style="vibrant"] .step-status {
+    border: 2px solid var(--ink);
+  }
+  .step-note {
+    color: var(--ink-3);
+    font: 600 13px/1.55 var(--ff-body);
+  }
+  .step-card.complete {
+    background: linear-gradient(180deg, var(--bg-2), var(--surface));
+  }
+  .step-card.complete .step-marker,
+  .step-card.complete .step-status {
+    background: var(--line-soft);
+    color: var(--ink-2);
+  }
+  .step-card.locked .step-status {
+    background: color-mix(in srgb, var(--pivot-1) 54%, white 46%);
+    color: var(--ink);
+  }
+  .option-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .option-card,
+  .form-panel {
+    padding: 18px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+  }
+  [data-style="vibrant"] .option-card,
+  [data-style="vibrant"] .form-panel {
+    border: 2px solid var(--ink);
+    background: #fff;
+  }
+  .dropzone {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 300px;
+    padding: 28px;
+    text-align: center;
+    border: 2px dashed var(--line);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(180deg, var(--primary-1), transparent);
+    overflow: hidden;
+  }
+  [data-style="mature"] .dropzone {
+    background: transparent;
+    border-style: solid;
+  }
+  [data-style="vibrant"] .dropzone {
+    border-color: var(--ink);
+    background: linear-gradient(180deg, var(--primary-1), #fff);
+  }
+  .dropzone input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .dropzone.disabled {
+    opacity: 0.48;
+  }
+  .dropzone.disabled input {
+    cursor: not-allowed;
+  }
+  .dropzone strong {
+    display: block;
+    margin-bottom: 10px;
+    font: 800 30px/1.06 var(--ff-display);
+    letter-spacing: -0.03em;
+  }
+  .dropzone p {
+    max-width: 42ch;
+    margin: 0 0 12px;
+    color: var(--ink-2);
+    font: 500 14px/1.58 var(--ff-body);
+  }
+  .support,
+  .chip-row,
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .support span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 0 10px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-2);
+    font: 700 12px/1 var(--ff-body);
+  }
+  [data-style="vibrant"] .support span {
+    border: 2px solid var(--ink);
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    padding: 0 12px;
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--ink-2);
+    font: 700 12px/1 var(--ff-body);
+    cursor: pointer;
+  }
+  [data-style="vibrant"] .chip {
+    border: 2px solid var(--ink);
+  }
+  .chip.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: transparent;
+  }
+  [data-style="mature"] .chip.active {
+    background: var(--lilac);
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  [data-style="vibrant"] .chip.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--ink);
+  }
+  .label {
+    margin: 0 0 10px;
+    color: var(--ink-3);
+    font: 700 11px/1 var(--ff-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .scope-note,
+  .status-panel,
+  .alert {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 16px 18px;
+    border-radius: var(--radius-md);
+    font: 600 14px/1.56 var(--ff-body);
+  }
+  .scope-note,
+  .status-panel {
+    background: var(--line-soft);
+    color: var(--ink-2);
+  }
+  .alert {
+    border: 1px solid transparent;
+  }
+  .alert.error {
+    background: color-mix(in srgb, var(--pivot-1) 58%, white 42%);
+    color: var(--ink);
+  }
+  .alert.success {
+    background: color-mix(in srgb, var(--primary-1) 58%, white 42%);
+    color: var(--ink);
+  }
+  [data-style="mature"] .scope-note,
+  [data-style="mature"] .status-panel {
+    background: var(--bg-2);
+  }
+  [data-style="vibrant"] .scope-note,
+  [data-style="vibrant"] .status-panel,
+  [data-style="vibrant"] .alert {
+    border: 2px solid var(--ink);
+    background: #fff;
+  }
+  .scope-note strong,
+  .status-panel strong {
+    color: var(--ink);
+  }
+  .contract-note {
+    display: grid;
+    gap: 10px;
+    padding: 18px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .contract-note strong {
+    color: var(--ink);
+    font: 800 16px/1.2 var(--ff-display);
+    letter-spacing: -0.02em;
+  }
+  .contract-note ul {
+    margin: 0;
+    padding-left: 18px;
+    color: var(--ink-2);
+    font: 600 13px/1.58 var(--ff-body);
+  }
+  [data-style="vibrant"] .contract-note {
+    border: 2px solid var(--ink);
+  }
+  .form-grid {
+    display: grid;
+    gap: 14px;
+  }
+  .field {
+    display: grid;
+    gap: 8px;
+  }
+  .field span {
+    font: 700 12px/1 var(--ff-mono);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .field input {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    font: 600 14px/1 var(--ff-body);
+  }
+  [data-style="vibrant"] .field input {
+    border: 2px solid var(--ink);
+  }
+  .field input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-1) 70%, white 30%);
+  }
+  .field small {
+    color: var(--ink-3);
+    font: 500 12px/1.5 var(--ff-body);
+  }
+  .row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--ink-3);
+  }
+  .status-dot.ok { background: var(--primary); }
+  .status-dot.error { background: var(--pivot); }
+  .status-text {
+    font: 700 13px/1.45 var(--ff-body);
+  }
+  .helper {
+    color: var(--ink-3);
+    font: 500 13px/1.55 var(--ff-body);
+  }
+  .loading-panel {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .progress-list {
+    display: grid;
+    gap: 14px;
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .progress-item {
+    display: grid;
+    grid-template-columns: 52px 1fr auto;
+    gap: 16px;
+    align-items: center;
+    padding: 18px 20px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+  }
+  [data-style="vibrant"] .progress-item {
+    border: 2px solid var(--ink);
+  }
+  .progress-item .num {
+    width: 52px;
+    height: 52px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: var(--line-soft);
+    color: var(--ink-2);
+    font: 800 16px/1 var(--ff-body);
+  }
+  .progress-item .copy strong {
+    display: block;
+    margin-bottom: 4px;
+    font: 800 17px/1.2 var(--ff-display);
+    letter-spacing: -0.02em;
+  }
+  .progress-item .copy span {
+    color: var(--ink-2);
+    font: 500 14px/1.5 var(--ff-body);
+  }
+  .progress-item .state {
+    min-width: 96px;
+    text-align: right;
+    color: var(--ink-3);
+    font: 700 12px/1 var(--ff-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .progress-item.active { border-color: var(--primary); }
+  .progress-item.active .num {
+    background: var(--primary);
+    color: #fff;
+  }
+  .progress-item.done .num {
+    background: var(--pivot);
+    color: #fff;
+  }
+  .summary-shell {
+    display: grid;
+    gap: 20px;
+  }
+  .summary-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+    gap: 20px;
+  }
+  .summary-title {
+    margin: 0;
+    font-family: var(--ff-display);
+    font-size: clamp(34px, 5vw, 58px);
+    line-height: 0.96;
+    letter-spacing: -0.04em;
+  }
+  .overview-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 18px;
+  }
+  .overview-line {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 16px 18px;
+    border-radius: var(--radius-md);
+    background: var(--line-soft);
+  }
+  [data-style="vibrant"] .overview-line {
+    border: 2px solid var(--ink);
+    background: #fff;
+  }
+  .overview-badge {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: var(--primary);
+    color: #fff;
+    font: 800 14px/1 var(--ff-body);
+  }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .summary-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 12px;
+    font: 800 22px/1.15 var(--ff-display);
+    letter-spacing: -0.03em;
+  }
+  .summary-card p,
+  .summary-card li,
+  .summary-card td,
+  .summary-card th {
+    color: var(--ink-2);
+    font: 500 14px/1.58 var(--ff-body);
+  }
+  .summary-card ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+  .summary-card table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+  }
+  .summary-card th,
+  .summary-card td {
+    border-top: 1px solid var(--line);
+    padding: 10px 8px;
+    text-align: left;
+    vertical-align: top;
+  }
+  [data-style="vibrant"] .summary-card th,
+  [data-style="vibrant"] .summary-card td {
+    border-top: 2px solid var(--ink);
+  }
+  .summary-card th {
+    color: var(--ink);
+    font-weight: 800;
+  }
+  .chain-list,
+  .timeline-list {
+    display: grid;
+    gap: 12px;
+  }
+  .chain-item,
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+  .mini-badge {
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: var(--primary-1);
+    color: var(--primary);
+    font: 800 13px/1 var(--ff-body);
+  }
+  [data-style="vibrant"] .mini-badge {
+    border: 2px solid var(--ink);
+    color: var(--ink);
+    background: var(--primary-1);
+  }
+  .callout {
+    padding: 18px;
+    border-radius: var(--radius-md);
+    background: var(--primary-1);
+    color: var(--ink);
+    font: 700 15px/1.58 var(--ff-body);
+  }
+  [data-style="vibrant"] .callout {
+    border: 2px solid var(--ink);
+  }
+  .footer-note {
+    color: var(--ink-3);
+    font: 600 13px/1.58 var(--ff-body);
+  }
+  .empty-state {
+    padding: 24px;
+    border-radius: var(--radius-md);
+    background: var(--line-soft);
+    color: var(--ink-2);
+    font: 600 14px/1.58 var(--ff-body);
+  }
+  [data-style="vibrant"] .empty-state {
+    border: 2px solid var(--ink);
+    background: #fff;
+  }
+  @media (max-width: 980px) {
+    .grid,
+    .summary-hero,
+    .summary-grid {
+      grid-template-columns: 1fr;
+    }
+    .option-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 640px) {
+    .shell {
+      padding-inline: 14px;
+    }
+    .topbar {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .card,
+    .progress-item {
+      padding: 18px;
+    }
+    .progress-item {
+      grid-template-columns: 44px 1fr;
+    }
+    .progress-item .state {
+      grid-column: 2;
+      text-align: left;
+    }
+    .step-head,
+    .step-lead {
+      flex-direction: column;
+    }
+  }
+</style>
+</head>
+<body data-style="clear">
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span>Visual Summary</span>
+      </div>
+      <div class="row">
+        <a class="button secondary" id="landing-page-link" href="./visual-summary-skill-home.html" target="_blank" rel="noopener" hidden>Basic capabilities</a>
+        <button class="secondary" id="settings-button" type="button">API settings</button>
+        <button id="new-summary-button" type="button" hidden>New summary</button>
+      </div>
+    </header>
+
+    <section class="screen" data-screen="input">
+      <div class="hero">
+        <div class="eyebrow">Local app mode</div>
+        <h1>Visual summary</h1>
+        <p class="hero-copy">Complete two required steps, then the backend returns structured summary data and the browser renders a styled HTML summary page automatically.</p>
+      </div>
+
+      <div id="input-alerts" class="stack"></div>
+
+      <div class="step-stack">
+        <article class="card step-card" id="api-step-card">
+          <div class="step-head">
+            <div class="step-lead">
+              <span class="step-marker" id="api-step-marker">1</span>
+              <div>
+                <p class="label">Required step 1</p>
+                <h2 class="card-title">Fill API key</h2>
+                <p class="card-copy">The browser sends the key to the local backend. The backend stores it and uses it for future model calls.</p>
+              </div>
+            </div>
+            <div class="step-status" id="api-step-status">Checking</div>
+          </div>
+
+          <div class="status-panel">
+            <span class="status-dot" id="api-status-dot"></span>
+            <div>
+              <strong id="api-status-title">Checking backend status</strong>
+              <div class="helper" id="api-status-copy">Waiting for local backend.</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <button class="primary" id="connect-button" type="button">Fill API key</button>
+            <button class="secondary" id="clear-key-button" type="button">Clear stored key</button>
+          </div>
+
+          <div class="step-note" id="api-step-note">If the system already has a stored API key, this step becomes checked and can be skipped. You can still replace the key at any time.</div>
+
+          <div class="form-panel" id="api-form-card" hidden>
+            <div class="card-head">
+              <div class="icon-wrap" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10V7a5 5 0 0 1 10 0v3"/><rect x="5" y="10" width="14" height="10" rx="2"/></svg>
+              </div>
+              <div>
+                <h2 class="card-title">Add or update API key</h2>
+                <p class="card-copy">The frontend sends the new key to the backend. The backend replaces the stored key used for future summaries.</p>
+              </div>
+            </div>
+            <div class="form-grid">
+              <label class="field">
+                <span>Provider API key</span>
+                <input id="api-key-input" type="password" autocomplete="off" placeholder="your-api-key">
+                <small>Recommended backend contract: `POST /auth/api-key` with JSON `{ "apiKey": "..." }`. Keep the key aligned with the provider configured in the backend.</small>
+              </label>
+              <div class="row">
+                <button class="primary" id="save-key-button" type="button">Save key</button>
+                <button class="secondary" id="cancel-key-button" type="button">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card step-card" id="upload-step-card">
+          <div class="step-head">
+            <div class="step-lead">
+              <span class="step-marker">2</span>
+              <div>
+                <p class="label">Required step 2</p>
+                <h2 class="card-title">Upload file</h2>
+                <p class="card-copy">After file selection, the app uploads the file with the chosen language and style, then enters loading immediately.</p>
+              </div>
+            </div>
+            <div class="step-status" id="upload-step-status">Waiting for step 1</div>
+          </div>
+
+          <label class="dropzone" id="dropzone">
+            <input id="file-input" type="file" accept=".pdf,.txt,.md,.markdown,.docx,image/*">
+            <div>
+              <strong>Drop a file here or click to upload.</strong>
+              <p>The upload action starts as soon as a file is chosen. If authorization fails, the app returns to step 1 so the stored key can be corrected.</p>
+              <div class="support">
+                <span>PDF</span>
+                <span>Image</span>
+                <span>TXT</span>
+                <span>DOCX</span>
+                <span>Under 50 MB</span>
+              </div>
+            </div>
+          </label>
+
+          <div class="option-grid">
+            <div class="option-card">
+              <p class="label">Output language</p>
+              <p class="card-copy">Follow the source language by default, or pick a fixed target language.</p>
+              <div class="chip-row" id="language-row" style="margin-top: 14px;">
+                <button class="chip active" data-language="auto" type="button">Follow source</button>
+                <button class="chip" data-language="english" type="button">English</button>
+                <button class="chip" data-language="simplified-chinese" type="button">简体中文</button>
+                <button class="chip" data-language="traditional-chinese" type="button">繁體中文</button>
+              </div>
+            </div>
+
+            <div class="option-card">
+              <p class="label">Output style</p>
+              <p class="card-copy">Choose Clear, Mature, or Vibrant. Clear is the default.</p>
+              <div class="chip-row" id="style-row" style="margin-top: 14px;">
+                <button class="chip active" data-style-choice="clear" type="button">Clear</button>
+                <button class="chip" data-style-choice="mature" type="button">Mature</button>
+                <button class="chip" data-style-choice="vibrant" type="button">Vibrant</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="scope-note">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/></svg>
+            <span>Default parser scope: <strong>text and formulas only</strong>. Do not imply semantic understanding of charts, diagrams, or image-first content unless the backend actually supports it.</span>
+          </div>
+
+          <div class="contract-note">
+            <strong>Backend summary contract</strong>
+            <ul>
+              <li>Final delivery renders as a styled HTML summary page.</li>
+              <li>Use compact third-person objective voice, including first-person sources.</li>
+              <li>Short sources render in 3 sections; longer sources stay within 3 to 5.</li>
+              <li>Causal or inferential trunks use logic chains; parallel points, cases, and dimensions use tables.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="loading" hidden>
+      <div class="hero loading-panel">
+        <div class="eyebrow">Parsing</div>
+        <h1>Building the summary now.</h1>
+        <p class="hero-copy" id="loading-copy">Processing your file through the local backend.</p>
+        <ul class="progress-list" id="progress-list">
+          <li class="progress-item active">
+            <div class="num">1</div>
+            <div class="copy">
+              <strong>Uploading file and options</strong>
+              <span>Send the file, language choice, and style choice to the backend.</span>
+            </div>
+            <div class="state">Active</div>
+          </li>
+          <li class="progress-item">
+            <div class="num">2</div>
+            <div class="copy">
+              <strong>Extracting text and formulas</strong>
+              <span>Backend extracts text-bearing content from the uploaded file.</span>
+            </div>
+            <div class="state">Pending</div>
+          </li>
+          <li class="progress-item">
+            <div class="num">3</div>
+            <div class="copy">
+              <strong>Calling the model</strong>
+              <span>Backend uses the stored provider key to request structured summary output.</span>
+            </div>
+            <div class="state">Pending</div>
+          </li>
+          <li class="progress-item">
+            <div class="num">4</div>
+            <div class="copy">
+              <strong>Rendering output</strong>
+              <span>Browser receives structured summary data and renders the final styled HTML page.</span>
+            </div>
+            <div class="state">Pending</div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="summary" hidden>
+      <div class="summary-shell">
+        <div id="summary-alerts" class="stack"></div>
+
+        <div class="summary-hero">
+          <article class="card">
+            <div class="eyebrow">Summary output</div>
+            <h1 class="summary-title" id="summary-title">Summary title</h1>
+            <p class="card-copy" id="summary-subtitle">Styled HTML output from the local backend will render here.</p>
+            <div class="meta-row" id="summary-meta"></div>
+            <div class="overview-list" id="summary-overview"></div>
+          </article>
+
+          <aside class="card">
+            <div class="card-head">
+              <div class="icon-wrap" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 9h8"/><path d="M8 13h8"/><path d="M8 17h5"/></svg>
+              </div>
+              <div>
+                <h2 class="card-title">Result state</h2>
+                <p class="card-copy">This page is for real structured output rendered as styled HTML. If the model call fails, the app should reopen API setup instead of staying here with stale content.</p>
+              </div>
+            </div>
+            <div class="callout" id="summary-callout">Waiting for backend summary data.</div>
+          </aside>
+        </div>
+
+        <div class="summary-grid" id="summary-sections"></div>
+        <div class="footer-note" id="summary-footer">Expected contract: short sources use 3 sections; longer sources stay within 3 to 5; causality uses chains; parallel reasoning stays tabular.</div>
+      </div>
+    </section>
+  </div>
+
+<script>
+  const BACKEND_ORIGIN = "http://127.0.0.1:8787";
+  const APP_SURFACE = "local-app-shell";
+  const APP_VERSION = "2026-05-01";
+  const SUMMARY_CONTRACT = {
+    finalFormat: "styled-html",
+    voice: "third-person-objective",
+    shortSourceSections: "3",
+    longSourceSections: "3-5",
+    causalPrimitive: "logic-chain",
+    parallelPrimitive: "table"
+  };
+
+  function createClientId() {
+    if (window.crypto && typeof window.crypto.randomUUID === "function") {
+      return window.crypto.randomUUID();
+    }
+    return "vs-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
+  }
+
+  function getFileExtension(fileName) {
+    const parts = String(fileName || "").toLowerCase().split(".");
+    return parts.length > 1 ? parts.pop() : "unknown";
+  }
+
+  const screens = {
+    input: document.querySelector('[data-screen="input"]'),
+    loading: document.querySelector('[data-screen="loading"]'),
+    summary: document.querySelector('[data-screen="summary"]')
+  };
+
+  const state = {
+    style: "clear",
+    language: "auto",
+    connected: false,
+    backendReachable: false,
+    savingKey: false,
+    loading: false,
+    latestSummary: null,
+    currentScreen: "input",
+    sessionId: createClientId(),
+    currentAttemptId: null
+  };
+
+  const fileInput = document.getElementById("file-input");
+  const dropzone = document.getElementById("dropzone");
+  const inputAlerts = document.getElementById("input-alerts");
+  const summaryAlerts = document.getElementById("summary-alerts");
+  const apiStepCard = document.getElementById("api-step-card");
+  const apiStepMarker = document.getElementById("api-step-marker");
+  const apiStepStatus = document.getElementById("api-step-status");
+  const apiStepNote = document.getElementById("api-step-note");
+  const uploadStepCard = document.getElementById("upload-step-card");
+  const uploadStepStatus = document.getElementById("upload-step-status");
+  const connectButton = document.getElementById("connect-button");
+  const clearKeyButton = document.getElementById("clear-key-button");
+  const settingsButton = document.getElementById("settings-button");
+  const newSummaryButton = document.getElementById("new-summary-button");
+  const apiFormCard = document.getElementById("api-form-card");
+  const apiKeyInput = document.getElementById("api-key-input");
+  const saveKeyButton = document.getElementById("save-key-button");
+  const cancelKeyButton = document.getElementById("cancel-key-button");
+  const apiStatusDot = document.getElementById("api-status-dot");
+  const apiStatusTitle = document.getElementById("api-status-title");
+  const apiStatusCopy = document.getElementById("api-status-copy");
+  const loadingCopy = document.getElementById("loading-copy");
+  const progressItems = Array.from(document.querySelectorAll(".progress-item"));
+  const styleButtons = Array.from(document.querySelectorAll("[data-style-choice]"));
+  const languageButtons = Array.from(document.querySelectorAll("[data-language]"));
+  const landingPageLink = document.getElementById("landing-page-link");
+  const summaryTitle = document.getElementById("summary-title");
+  const summarySubtitle = document.getElementById("summary-subtitle");
+  const summaryMeta = document.getElementById("summary-meta");
+  const summaryOverview = document.getElementById("summary-overview");
+  const summaryCallout = document.getElementById("summary-callout");
+  const summarySections = document.getElementById("summary-sections");
+  const summaryFooter = document.getElementById("summary-footer");
+
+  function showScreen(name) {
+    state.currentScreen = name;
+    Object.entries(screens).forEach(([key, node]) => {
+      node.hidden = key !== name;
+    });
+    landingPageLink.hidden = name !== "summary";
+    newSummaryButton.hidden = name !== "summary";
+  }
+
+  function setStyle(style) {
+    state.style = style;
+    document.body.dataset.style = style;
+    styleButtons.forEach((button) => {
+      button.classList.toggle("active", button.getAttribute("data-style-choice") === style);
+    });
+  }
+
+  function setLanguage(language) {
+    state.language = language;
+    languageButtons.forEach((button) => {
+      button.classList.toggle("active", button.getAttribute("data-language") === language);
+    });
+  }
+
+  function renderAlert(target, type, message) {
+    target.innerHTML = "";
+    if (!message) return;
+    const node = document.createElement("div");
+    node.className = "alert " + type;
+    node.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 8h.01"></path><path d="M11 12h1v4h1"></path></svg><span>' + message + "</span>";
+    target.appendChild(node);
+  }
+
+  function setApiCardVisible(visible) {
+    apiFormCard.hidden = !visible;
+    if (visible) apiKeyInput.focus();
+  }
+
+  function setUploadEnabled(enabled) {
+    fileInput.disabled = !enabled;
+    dropzone.classList.toggle("disabled", !enabled);
+  }
+
+  function syncInputState() {
+    apiStepCard.classList.toggle("complete", state.connected);
+    apiStepCard.classList.toggle("locked", !state.backendReachable);
+    uploadStepCard.classList.toggle("locked", !state.connected);
+
+    apiStepMarker.textContent = state.connected ? "✓" : "1";
+    apiStepStatus.textContent = state.connected
+      ? "✓ No need to fill"
+      : state.backendReachable
+        ? "Required"
+        : "Backend unavailable";
+    uploadStepStatus.textContent = state.connected
+      ? "Ready to upload"
+      : state.backendReachable
+        ? "Waiting for step 1"
+        : "Waiting for backend";
+    apiStepNote.textContent = state.connected
+      ? "A stored API key already exists in the system, so this step can be skipped. Use Update API key if you want to replace it."
+      : state.backendReachable
+        ? "This step is required once. After the backend stores a key, later visits can skip re-entering it."
+        : "Start the local backend first, then save an API key so uploads can proceed.";
+
+    connectButton.textContent = state.connected ? "Update API key" : "Fill API key";
+    settingsButton.textContent = state.connected ? "Update API key" : "API settings";
+    clearKeyButton.disabled = !state.backendReachable || !state.connected;
+  }
+
+  function resetProgress() {
+    progressItems.forEach((item, index) => {
+      item.classList.remove("active", "done");
+      item.querySelector(".state").textContent = index === 0 ? "Active" : "Pending";
+      if (index === 0) item.classList.add("active");
+    });
+  }
+
+  function markProgress(index) {
+    progressItems.forEach((item, itemIndex) => {
+      item.classList.remove("active");
+      if (itemIndex < index) {
+        item.classList.add("done");
+        item.querySelector(".state").textContent = "Done";
+      } else if (itemIndex === index) {
+        item.classList.add("active");
+        item.querySelector(".state").textContent = "Active";
+      } else {
+        item.querySelector(".state").textContent = "Pending";
+      }
+    });
+  }
+
+  function buildRequestHeaders(extraHeaders = {}) {
+    return {
+      "X-Visual-Summary-Source": APP_SURFACE,
+      "X-Visual-Summary-App-Version": APP_VERSION,
+      "X-Visual-Summary-Client-Session": state.sessionId,
+      "X-Visual-Summary-Screen": state.currentScreen,
+      "X-Visual-Summary-Final-Format": SUMMARY_CONTRACT.finalFormat,
+      "X-Visual-Summary-Voice": SUMMARY_CONTRACT.voice,
+      "X-Visual-Summary-Short-Source-Sections": SUMMARY_CONTRACT.shortSourceSections,
+      "X-Visual-Summary-Long-Source-Sections": SUMMARY_CONTRACT.longSourceSections,
+      "X-Visual-Summary-Causal-Primitive": SUMMARY_CONTRACT.causalPrimitive,
+      "X-Visual-Summary-Parallel-Primitive": SUMMARY_CONTRACT.parallelPrimitive,
+      ...(extraHeaders || {})
+    };
+  }
+
+  async function backendFetch(path, options = {}) {
+    const response = await fetch(BACKEND_ORIGIN + path, {
+      ...options,
+      headers: buildRequestHeaders(options.headers || {})
+    });
+    return response;
+  }
+
+  async function loadAuthStatus() {
+    try {
+      const response = await backendFetch("/auth/status", {
+        headers: {
+          "X-Visual-Summary-Action": "load-auth-status"
+        }
+      });
+      if (!response.ok) throw new Error("status " + response.status);
+      const payload = await response.json();
+      state.backendReachable = true;
+      state.connected = Boolean(payload.connected || payload.hasApiKey);
+      apiStatusDot.className = "status-dot " + (state.connected ? "ok" : "");
+      apiStatusTitle.textContent = state.connected ? "Backend connected" : "Backend reachable, API key missing";
+      apiStatusCopy.textContent = state.connected
+        ? "Stored key is available in the local backend. Uploads can call the model directly."
+        : "Store an API key in the local backend before uploading a file.";
+      setUploadEnabled(state.connected);
+      if (!state.connected) {
+        setApiCardVisible(true);
+      } else {
+        setApiCardVisible(false);
+      }
+      syncInputState();
+      return payload;
+    } catch (error) {
+      state.backendReachable = false;
+      state.connected = false;
+      apiStatusDot.className = "status-dot error";
+      apiStatusTitle.textContent = "Backend unavailable";
+      apiStatusCopy.textContent = "Expected local backend at " + BACKEND_ORIGIN + ". Start it first, then store an API key.";
+      setUploadEnabled(false);
+      setApiCardVisible(true);
+      syncInputState();
+      renderAlert(
+        inputAlerts,
+        "error",
+        "Local backend is not reachable. This HTML shell expects a backend with /auth/status, /auth/api-key, /auth/clear, and /api/summarize."
+      );
+      return null;
+    }
+  }
+
+  async function saveApiKey() {
+    const value = apiKeyInput.value.trim();
+    if (!value) {
+      renderAlert(inputAlerts, "error", "Enter an API key before saving.");
+      return;
+    }
+    state.savingKey = true;
+    saveKeyButton.disabled = true;
+    try {
+      const response = await backendFetch("/auth/api-key", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Visual-Summary-Action": "save-api-key"
+        },
+        body: JSON.stringify({ apiKey: value })
+      });
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(text || "status " + response.status);
+      }
+      apiKeyInput.value = "";
+      renderAlert(inputAlerts, "success", "API key stored in backend.");
+      setApiCardVisible(false);
+      await loadAuthStatus();
+    } catch (error) {
+      renderAlert(inputAlerts, "error", "Saving API key failed. " + String(error.message || error));
+    } finally {
+      state.savingKey = false;
+      saveKeyButton.disabled = false;
+    }
+  }
+
+  async function clearApiKey() {
+    try {
+      const response = await backendFetch("/auth/clear", {
+        method: "POST",
+        headers: {
+          "X-Visual-Summary-Action": "clear-api-key"
+        }
+      });
+      if (!response.ok) throw new Error("status " + response.status);
+      renderAlert(inputAlerts, "success", "Stored API key cleared from backend.");
+      state.connected = false;
+      await loadAuthStatus();
+    } catch (error) {
+      renderAlert(inputAlerts, "error", "Clearing stored key failed. " + String(error.message || error));
+    }
+  }
+
+  function openSettingsWithMessage(message) {
+    showScreen("input");
+    setApiCardVisible(true);
+    renderAlert(inputAlerts, "error", message);
+  }
+
+  function textNode(tag, value) {
+    const node = document.createElement(tag);
+    node.textContent = value;
+    return node;
+  }
+
+  function renderMetaChip(text) {
+    const chip = document.createElement("span");
+    chip.className = "chip";
+    chip.textContent = text;
+    return chip;
+  }
+
+  function renderOverview(lines) {
+    summaryOverview.innerHTML = "";
+    if (!Array.isArray(lines) || !lines.length) return;
+    lines.forEach((line, index) => {
+      const row = document.createElement("div");
+      row.className = "overview-line";
+      row.innerHTML = '<span class="overview-badge">' + (index + 1) + "</span>";
+      const copy = document.createElement("div");
+      copy.textContent = line;
+      row.appendChild(copy);
+      summaryOverview.appendChild(row);
+    });
+  }
+
+  function renderTable(section) {
+    const table = document.createElement("table");
+    const columns = Array.isArray(section.table?.columns) ? section.table.columns : [];
+    const rows = Array.isArray(section.table?.rows) ? section.table.rows : [];
+    if (columns.length) {
+      const thead = document.createElement("thead");
+      const tr = document.createElement("tr");
+      columns.forEach((column) => tr.appendChild(textNode("th", column)));
+      thead.appendChild(tr);
+      table.appendChild(thead);
+    }
+    const tbody = document.createElement("tbody");
+    rows.forEach((row) => {
+      const tr = document.createElement("tr");
+      (Array.isArray(row) ? row : []).forEach((cell) => {
+        tr.appendChild(textNode("td", String(cell)));
+      });
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    return table;
+  }
+
+  function renderChain(section) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "chain-list";
+    (section.chain || []).forEach((item, index) => {
+      const row = document.createElement("div");
+      row.className = "chain-item";
+      row.innerHTML = '<span class="mini-badge">' + (index + 1) + "</span>";
+      const copy = document.createElement("div");
+      if (item.title) copy.appendChild(textNode("strong", item.title));
+      if (item.description) copy.appendChild(textNode("p", item.description));
+      row.appendChild(copy);
+      wrapper.appendChild(row);
+    });
+    return wrapper;
+  }
+
+  function renderTimeline(section) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "timeline-list";
+    (section.timeline || []).forEach((item, index) => {
+      const row = document.createElement("div");
+      row.className = "timeline-item";
+      row.innerHTML = '<span class="mini-badge">' + (index + 1) + "</span>";
+      const copy = document.createElement("div");
+      if (item.label) copy.appendChild(textNode("strong", item.label));
+      if (item.detail) copy.appendChild(textNode("p", item.detail));
+      row.appendChild(copy);
+      wrapper.appendChild(row);
+    });
+    return wrapper;
+  }
+
+  function renderSection(section) {
+    const card = document.createElement("article");
+    card.className = "card summary-card";
+    const title = document.createElement("h3");
+    title.innerHTML = '<span class="icon-inline" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"></path><path d="M8 9h8"></path><path d="M8 13h8"></path><path d="M8 17h5"></path></svg></span>';
+    title.appendChild(document.createTextNode(section.title || "Section"));
+    card.appendChild(title);
+
+    if (Array.isArray(section.summaryLines)) {
+      section.summaryLines.forEach((line) => card.appendChild(textNode("p", line)));
+    }
+    if (Array.isArray(section.paragraphs)) {
+      section.paragraphs.forEach((paragraph) => card.appendChild(textNode("p", paragraph)));
+    }
+    if (Array.isArray(section.bullets) && section.bullets.length) {
+      const ul = document.createElement("ul");
+      section.bullets.forEach((bullet) => ul.appendChild(textNode("li", bullet)));
+      card.appendChild(ul);
+    }
+    if (section.callout) {
+      const callout = document.createElement("div");
+      callout.className = "callout";
+      callout.textContent = section.callout;
+      card.appendChild(callout);
+    }
+    if (section.kind === "table" && section.table) card.appendChild(renderTable(section));
+    if (section.kind === "chain" && Array.isArray(section.chain)) card.appendChild(renderChain(section));
+    if (section.kind === "timeline" && Array.isArray(section.timeline)) card.appendChild(renderTimeline(section));
+    return card;
+  }
+
+  function renderSummary(payload) {
+    state.latestSummary = payload;
+    summaryAlerts.innerHTML = "";
+    summaryTitle.textContent = payload.title || "Untitled summary";
+    summarySubtitle.textContent = payload.subtitle || "Styled HTML summary rendered from structured backend output.";
+    summaryCallout.textContent = payload.callout || "Structured summary loaded from local backend and rendered as styled HTML.";
+    summaryFooter.textContent = payload.footerNote || "Expected contract: short sources use 3 sections; longer sources stay within 3 to 5; causality uses chains; parallel reasoning stays tabular.";
+
+    summaryMeta.innerHTML = "";
+    [payload.author, payload.date].filter(Boolean).forEach((value) => {
+      summaryMeta.appendChild(renderMetaChip(value));
+    });
+    (payload.tags || []).forEach((tag) => summaryMeta.appendChild(renderMetaChip(tag)));
+
+    renderOverview(payload.overview || []);
+
+    summarySections.innerHTML = "";
+    if (Array.isArray(payload.sections) && payload.sections.length) {
+      payload.sections.forEach((section) => summarySections.appendChild(renderSection(section)));
+    } else {
+      const empty = document.createElement("div");
+      empty.className = "empty-state";
+      empty.textContent = "Backend response did not contain summary sections.";
+      summarySections.appendChild(empty);
+    }
+  }
+
+  async function summarizeFile(file) {
+    if (!state.connected) {
+      openSettingsWithMessage("Store a valid API key in the backend before uploading a file.");
+      return;
+    }
+    const attemptId = createClientId();
+    const fileExtension = getFileExtension(file.name);
+    state.currentAttemptId = attemptId;
+    renderAlert(inputAlerts, "", "");
+    resetProgress();
+    loadingCopy.textContent = "Processing " + file.name + " through " + BACKEND_ORIGIN + ".";
+    showScreen("loading");
+    markProgress(0);
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("language", state.language);
+    formData.append("style", state.style);
+    formData.append("finalFormat", SUMMARY_CONTRACT.finalFormat);
+    formData.append("summaryVoice", SUMMARY_CONTRACT.voice);
+    formData.append("shortSourceSections", SUMMARY_CONTRACT.shortSourceSections);
+    formData.append("longSourceSections", SUMMARY_CONTRACT.longSourceSections);
+    formData.append("causalPrimitive", SUMMARY_CONTRACT.causalPrimitive);
+    formData.append("parallelPrimitive", SUMMARY_CONTRACT.parallelPrimitive);
+
+    try {
+      markProgress(1);
+      const response = await backendFetch("/api/summarize", {
+        method: "POST",
+        headers: {
+          "X-Visual-Summary-Action": "summarize",
+          "X-Visual-Summary-Attempt-Id": attemptId,
+          "X-Visual-Summary-Requested-Language": state.language,
+          "X-Visual-Summary-Requested-Style": state.style,
+          "X-Visual-Summary-File-Extension": fileExtension,
+          "X-Visual-Summary-File-Bytes": String(file.size || 0)
+        },
+        body: formData
+      });
+
+      if (response.status === 401 || response.status === 403) {
+        state.currentAttemptId = null;
+        openSettingsWithMessage("Model call failed with an authorization error. Update the stored API key and try again.");
+        return;
+      }
+      if (!response.ok) {
+        const text = await response.text();
+        state.currentAttemptId = null;
+        openSettingsWithMessage("Summarization failed. " + (text || "status " + response.status));
+        return;
+      }
+
+      markProgress(2);
+      const payload = await response.json();
+      markProgress(3);
+      state.currentAttemptId = null;
+      renderSummary(payload);
+      showScreen("summary");
+    } catch (error) {
+      state.currentAttemptId = null;
+      openSettingsWithMessage("Backend request failed. Verify the local server is running and update the API key if needed.");
+    }
+  }
+
+  connectButton.addEventListener("click", () => setApiCardVisible(true));
+  settingsButton.addEventListener("click", () => {
+    showScreen("input");
+    setApiCardVisible(true);
+  });
+  cancelKeyButton.addEventListener("click", () => setApiCardVisible(false));
+  saveKeyButton.addEventListener("click", saveApiKey);
+  clearKeyButton.addEventListener("click", clearApiKey);
+  newSummaryButton.addEventListener("click", () => {
+    fileInput.value = "";
+    showScreen("input");
+    renderAlert(inputAlerts, "", "");
+  });
+  fileInput.addEventListener("change", () => {
+    if (!fileInput.files || !fileInput.files.length) return;
+    summarizeFile(fileInput.files[0]);
+  });
+
+  styleButtons.forEach((button) => {
+    button.addEventListener("click", () => setStyle(button.getAttribute("data-style-choice")));
+  });
+  languageButtons.forEach((button) => {
+    button.addEventListener("click", () => setLanguage(button.getAttribute("data-language")));
+  });
+
+  setStyle("clear");
+  setLanguage("auto");
+  setUploadEnabled(false);
+  syncInputState();
+  showScreen("input");
+  loadAuthStatus();
+</script>
+</body>
+</html>

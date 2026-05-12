@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Dense table · 3 styles</title>
+<link rel="stylesheet" href="_cmp.css">
+<style>
+  .cmp-stage { padding: 18px 16px; min-height: 480px; align-items: stretch; justify-content: flex-start; gap:0; }
+  .tnote { font:500 9.5px/1.3 'JetBrains Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;opacity:0.55;margin: 8px 4px 0; }
+  .tnote b { font-weight:700;opacity:0.85; }
+
+  table { width:100%;border-collapse:collapse;table-layout:fixed; }
+  th, td { padding:8px 10px;font-size:11.5px;line-height:1.4;text-align:left;vertical-align:top;overflow:hidden; }
+  th { font-size:10.5px; }
+  .num { text-align:right;font-variant-numeric: tabular-nums; }
+
+  /* ============ CLEAR — zebra rows + tinted column groups ============ */
+  .clear table th {
+    font:700 10px/1.2 'Inter';letter-spacing:0.04em;text-transform:uppercase;color:#4A5478;
+    border-bottom:1px solid #E6EBF5;background:#F6F8FE;padding:9px 10px;
+  }
+  /* column groups: pastel tints on a 2-col group + 2-col group */
+  .clear table .gA { background:rgba(202,221,255,0.18); }
+  .clear table .gB { background:rgba(214,196,224,0.16); }
+  .clear table .gC { background:rgba(198,228,198,0.18); }
+  .clear table tbody tr { transition: background .1s ease; }
+  .clear table tbody tr:nth-child(even) td:not(.gA):not(.gB):not(.gC) { background:#FBFCFF; }
+  .clear table tbody tr:nth-child(even) td.gA { background:rgba(202,221,255,0.30); }
+  .clear table tbody tr:nth-child(even) td.gB { background:rgba(214,196,224,0.26); }
+  .clear table tbody tr:nth-child(even) td.gC { background:rgba(198,228,198,0.28); }
+  .clear table .lbl { font-weight:700;color:#1B2240; }
+  .clear table td { color:#4A5478; }
+  .clear table tbody tr:hover td { background:#EAF1FF !important; }
+  .clear .grp-head th { background:#fff;color:#8189A6;font:600 9.5px/1 'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;padding:6px 10px 4px;border-bottom:0; }
+  .clear .grp-head th.gA { color:#2D5BFF; }
+  .clear .grp-head th.gB { color:#6151D6; }
+  .clear .grp-head th.gC { color:#2E8B40; }
+
+  /* ============ MATURE — strong row rules + serif row labels ============ */
+  .mature table th {
+    font:700 12px/1.2 'Source Serif 4',serif;color:#1A1614;letter-spacing:0;
+    border-bottom:1.5px solid #1A1614;border-top:1px solid #1A1614;padding:10px;background:#FBF7F0;
+  }
+  .mature table .grp-head th { background:#F4EEE2;font:italic 400 11px/1 'Source Serif 4',serif;color:#7C4A31;border:0;border-top:1px solid #1A1614;padding:6px 10px;text-transform:none;letter-spacing:0; }
+  .mature table tbody td { border-bottom:1px solid #E4D9C5;font:400 12.5px/1.5 'Inter';color:#3D332C;padding:11px 10px; }
+  .mature table tbody tr.section td { background:#F4EEE2;font:italic 700 11px/1 'Source Serif 4',serif;color:#7C4A31;text-transform:uppercase;letter-spacing:0.06em;padding:7px 10px;border-bottom:1px solid #1A1614;border-top:1px solid #1A1614; }
+  .mature table .lbl { font-family:'Source Serif 4',serif;font-weight:700;color:#1A1614;font-size:14px; }
+  .mature table b { font-family:'Source Serif 4',serif;font-weight:700;color:#1A1614;background:#DEC4E0;padding:1px 4px;font-size:1.06em; }
+  .mature table .num { font-family:'Source Serif 4',serif;font-variant-numeric: oldstyle-nums tabular-nums;font-size:13px;color:#1A1614; }
+  .mature table tbody tr:hover td { background:#F4EEE2; }
+
+  /* ============ VIBRANT — colored column headers + outlined cells ============ */
+  .vibrant table { border:2px solid #0A0A0A;border-radius:8px;overflow:hidden; }
+  .vibrant table .grp-head th { font:900 10px/1 'Inter';letter-spacing:0.04em;text-transform:uppercase;color:#fff;padding:8px 10px;border-right:2px solid #0A0A0A;border-bottom:2px solid #0A0A0A; }
+  .vibrant table .grp-head th:last-child { border-right:0; }
+  .vibrant table .grp-head th.gA { background:#2747FF; }
+  .vibrant table .grp-head th.gB { background:#FF3024; }
+  .vibrant table .grp-head th.gC { background:#1FA85A; }
+  .vibrant table .grp-head th.lblh { background:#0A0A0A; }
+  .vibrant table thead.sub th { font:800 10px/1 'Inter';letter-spacing:0.02em;color:#0A0A0A;background:#fff;border-right:1px solid #E5E5E5;border-bottom:2px solid #0A0A0A;padding:8px 10px; }
+  .vibrant table thead.sub th:last-child { border-right:0; }
+  .vibrant table tbody td { font:600 12px/1.4 'Inter';color:#0A0A0A;border-right:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;padding:10px; }
+  .vibrant table tbody td:last-child { border-right:0; }
+  .vibrant table tbody tr:nth-child(odd) td { background:#FAFAFA; }
+  .vibrant table tbody tr.pivot td { background:#FFD400;font-weight:800; }
+  .vibrant table .lbl { font-weight:900;color:#0A0A0A; }
+  .vibrant table .num { font-weight:900; }
+  .vibrant table tbody tr:hover td { background:#EFEFEF; }
+  .vibrant table tbody tr.pivot:hover td { background:#FFE74D; }
+</style></head>
+<body class="cmp-page">
+  <div class="cmp-head">
+    <h1>Dense table — 6 rows × 7 columns</h1>
+    <div class="sub">SO YOUR EYE DOESN'T LOSE THE LINE</div>
+  </div>
+  <div class="cmp-grid">
+
+    <!-- ============ CLEAR ============ -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm clear"><span class="dot"></span>Clear</div><div class="meta">ZEBRA + COLOR-GROUPED COLS</div></div>
+      <div class="cmp-stage clear">
+        <table>
+          <thead>
+            <tr class="grp-head"><th></th><th class="gA" colspan="2">Origin</th><th class="gB" colspan="2">Pivot</th><th class="gC" colspan="2">Today</th></tr>
+            <tr><th></th><th class="gA">Date</th><th class="gA">Tools</th><th class="gB">Date</th><th class="gB">Trigger</th><th class="gC">State</th><th class="gC num">Pop. (B)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="lbl">Genus Homo</td><td class="gA">2.5 mya</td><td class="gA">Stone</td><td class="gB">—</td><td class="gB">—</td><td class="gC">Extinct</td><td class="gC num">0</td></tr>
+            <tr><td class="lbl">H. erectus</td><td class="gA">1.9 mya</td><td class="gA">Hand-axe</td><td class="gB">—</td><td class="gB">Fire control</td><td class="gC">Extinct</td><td class="gC num">0</td></tr>
+            <tr><td class="lbl">H. neanderth.</td><td class="gA">400 kya</td><td class="gA">Mousterian</td><td class="gB">—</td><td class="gB">Burial rites</td><td class="gC">Absorbed</td><td class="gC num">0</td></tr>
+            <tr><td class="lbl">H. sapiens</td><td class="gA">300 kya</td><td class="gA">Composite</td><td class="gB">70 kya</td><td class="gB">Cog. revolution</td><td class="gC">Dominant</td><td class="gC num">8.1</td></tr>
+            <tr><td class="lbl">H. floresiensis</td><td class="gA">100 kya</td><td class="gA">Flake</td><td class="gB">—</td><td class="gB">Island dwarfism</td><td class="gC">Extinct</td><td class="gC num">0</td></tr>
+            <tr><td class="lbl">Denisovan</td><td class="gA">200 kya</td><td class="gA">Bone tools</td><td class="gB">—</td><td class="gB">Interbreed</td><td class="gC">Absorbed</td><td class="gC num">0</td></tr>
+          </tbody>
+        </table>
+        <p class="tnote"><b>strategy</b> · column groups tinted · zebra rows · hover row highlight</p>
+      </div>
+    </div>
+
+    <!-- ============ MATURE ============ -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm mature"><span class="dot"></span>Mature</div><div class="meta">RULES + SECTION ROWS</div></div>
+      <div class="cmp-stage mature">
+        <table>
+          <thead>
+            <tr><th></th><th>First appeared</th><th>Tool industry</th><th>Pivot event</th><th class="num">Range (k yrs)</th><th>Outcome</th><th class="num">Pop. (B)</th></tr>
+          </thead>
+          <tbody>
+            <tr class="section"><td colspan="7">i. Predecessors</td></tr>
+            <tr><td class="lbl">Genus Homo</td><td>2.5 mya</td><td>Stone</td><td>—</td><td class="num">1,500</td><td>Extinct</td><td class="num">0</td></tr>
+            <tr><td class="lbl">H. erectus</td><td>1.9 mya</td><td>Hand-axe</td><td>Fire control</td><td class="num">1,800</td><td>Extinct</td><td class="num">0</td></tr>
+            <tr class="section"><td colspan="7">ii. Co-existing kin</td></tr>
+            <tr><td class="lbl">H. neanderth.</td><td>400 kya</td><td>Mousterian</td><td>Burial rites</td><td class="num">360</td><td>Absorbed</td><td class="num">0</td></tr>
+            <tr><td class="lbl">Denisovan</td><td>200 kya</td><td>Bone tools</td><td>Interbreeding</td><td class="num">170</td><td>Absorbed</td><td class="num">0</td></tr>
+            <tr class="section"><td colspan="7">iii. The pivot</td></tr>
+            <tr><td class="lbl">H. sapiens</td><td>300 kya</td><td>Composite</td><td><b>Cog. revolution</b></td><td class="num">300</td><td>Dominant</td><td class="num">8.1</td></tr>
+            <tr><td class="lbl">H. floresiensis</td><td>100 kya</td><td>Flake</td><td>Island dwarfism</td><td class="num">88</td><td>Extinct</td><td class="num">0</td></tr>
+          </tbody>
+        </table>
+        <p class="tnote"><b>strategy</b> · italic section rows · hairline rules · serif tabular figures</p>
+      </div>
+    </div>
+
+    <!-- ============ VIBRANT ============ -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm vibrant"><span class="dot"></span>Vibrant</div><div class="meta">COLORED COL HEADERS · PIVOT ROW</div></div>
+      <div class="cmp-stage vibrant">
+        <table>
+          <thead class="grp-head">
+            <tr><th class="lblh"></th><th class="gA" colspan="2">ORIGIN</th><th class="gB" colspan="2">PIVOT</th><th class="gC" colspan="2">TODAY</th></tr>
+          </thead>
+          <thead class="sub">
+            <tr><th></th><th>Date</th><th>Tools</th><th>Date</th><th>Trigger</th><th>State</th><th class="num">Pop B</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="lbl">Genus Homo</td><td>2.5 MYA</td><td>Stone</td><td>—</td><td>—</td><td>EXTINCT</td><td class="num">0</td></tr>
+            <tr><td class="lbl">H. erectus</td><td>1.9 MYA</td><td>Hand-axe</td><td>—</td><td>Fire</td><td>EXTINCT</td><td class="num">0</td></tr>
+            <tr><td class="lbl">Neanderthal</td><td>400 KYA</td><td>Mousterian</td><td>—</td><td>Burial</td><td>ABSORBED</td><td class="num">0</td></tr>
+            <tr class="pivot"><td class="lbl">★ H. sapiens</td><td>300 KYA</td><td>Composite</td><td>70 KYA</td><td>Cog. rev.</td><td>DOMINANT</td><td class="num">8.1</td></tr>
+            <tr><td class="lbl">H. floresiensis</td><td>100 KYA</td><td>Flake</td><td>—</td><td>Dwarfism</td><td>EXTINCT</td><td class="num">0</td></tr>
+            <tr><td class="lbl">Denisovan</td><td>200 KYA</td><td>Bone</td><td>—</td><td>Interbreed</td><td>ABSORBED</td><td class="num">0</td></tr>
+          </tbody>
+        </table>
+        <p class="tnote"><b>strategy</b> · colored column groups · pivot row in yellow · zebra fallback</p>
+      </div>
+    </div>
+
+  </div>
+</body></html>

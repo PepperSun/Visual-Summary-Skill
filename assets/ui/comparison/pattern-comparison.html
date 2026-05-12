@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Pattern · Comparison · 3 styles</title>
+<link rel="stylesheet" href="_cmp.css">
+<style>
+  /* shared header rows */
+  .ct { width:100%;border-collapse:collapse; }
+  .ct th, .ct td { text-align:left;padding:10px 8px;font-size:12.5px;line-height:1.4;vertical-align:top; }
+
+  /* CLEAR: pastel tint per column header */
+  .clear .ct th { font:700 11px/1 'Inter';letter-spacing:0.04em;text-transform:uppercase;border-bottom:1px solid #E6EBF5;padding-bottom:8px; }
+  .clear .ct th.h1 { color:#2D5BFF; }
+  .clear .ct th.h2 { color:#0E8C7E; }
+  .clear .ct th.h3 { color:#6151D6; }
+  .clear .ct .row td { border-bottom:1px dashed #EFF2F8;color:#4A5478;font:400 12.5px/1.5 'Inter'; }
+  .clear .ct .lbl { color:#1B2240;font-weight:700; }
+  .clear .ct .hl { padding:1px 6px;border-radius:4px;font-weight:600;}
+  .clear .ct .hl-blue { background:#EAF1FF;color:#2D5BFF; }
+  .clear .ct .hl-teal { background:#E4F6F4;color:#0E8C7E; }
+  .clear .ct .hl-lav  { background:#EFEBFF;color:#6151D6; }
+
+  /* MATURE: ruled rows, serif headers */
+  .mature .ct th { font:700 14px/1.2 'Source Serif 4',serif;color:#1A1614;border-bottom:1px solid #1A1614;padding-bottom:10px;letter-spacing:-0.01em; }
+  .mature .ct .row td { border-bottom:1px solid #E4D9C5;color:#3D332C;font:400 12.5px/1.55 'Inter'; }
+  .mature .ct .lbl { font-family:'Source Serif 4',serif;font-weight:700;color:#1A1614;font-size:14px; }
+  .mature .ct b { font-family:'Source Serif 4',serif;font-weight:700;color:#1A1614;background:#DEC4E0;padding:1px 4px;font-size:1.06em;-webkit-box-decoration-break:clone;box-decoration-break:clone; }
+
+  /* VIBRANT: colored block headers, ink rules */
+  .vibrant .ct th { font:900 11px/1 'Inter';letter-spacing:0.04em;text-transform:uppercase;color:#fff;padding:10px 12px; }
+  .vibrant .ct th.h1 { background:#2747FF; }
+  .vibrant .ct th.h2 { background:#FF3024; }
+  .vibrant .ct th.h3 { background:#0A0A0A; }
+  .vibrant .ct th.lblh { background:transparent;color:#0A0A0A;border:0; }
+  .vibrant .ct .row td { border-top:2px solid #0A0A0A;color:#444;font:500 12.5px/1.5 'Inter';padding:12px 10px; }
+  .vibrant .ct .lbl { color:#0A0A0A;font-weight:900;font-size:13px; }
+</style></head>
+<body class="cmp-page">
+  <div class="cmp-head">
+    <h1>Pattern — Comparison</h1>
+    <div class="sub">FORAGER · FARMER · MODERN ACROSS THREE DIMENSIONS</div>
+  </div>
+  <div class="cmp-grid">
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm clear"><span class="dot"></span>Clear</div><div class="meta">PASTEL HEADERS</div></div>
+      <div class="cmp-stage clear">
+        <table class="ct"><thead><tr><th></th><th class="h1">Forager</th><th class="h2">Farmer</th><th class="h3">Modern</th></tr></thead>
+          <tbody>
+            <tr class="row"><td class="lbl">Diet</td><td><span class="hl hl-blue">Wide</span>, seasonal</td><td><span class="hl hl-teal">Narrow staples</span></td><td><span class="hl hl-lav">Engineered abundance</span></td></tr>
+            <tr class="row"><td class="lbl">Belief</td><td>Animist</td><td>Theist</td><td><span class="hl hl-lav">Humanist</span></td></tr>
+            <tr class="row"><td class="lbl">Group</td><td>Band of ~150</td><td>Village → state</td><td><span class="hl hl-lav">Imagined nation</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm mature"><span class="dot"></span>Mature</div><div class="meta">RULED ROWS</div></div>
+      <div class="cmp-stage mature">
+        <table class="ct"><thead><tr><th></th><th>Forager</th><th>Farmer</th><th>Modern</th></tr></thead>
+          <tbody>
+            <tr class="row"><td class="lbl">Diet</td><td><b>Wide, seasonal</b></td><td>Narrow staples</td><td>Engineered abundance</td></tr>
+            <tr class="row"><td class="lbl">Belief</td><td>Animist</td><td><b>Theist</b></td><td>Humanist</td></tr>
+            <tr class="row"><td class="lbl">Group</td><td>Band of ~150</td><td>Village → state</td><td><b>Imagined nation</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm vibrant"><span class="dot"></span>Vibrant</div><div class="meta">COLORED BLOCK HEADERS</div></div>
+      <div class="cmp-stage vibrant">
+        <table class="ct"><thead><tr><th class="lblh"></th><th class="h1">FORAGER</th><th class="h2">FARMER</th><th class="h3">MODERN</th></tr></thead>
+          <tbody>
+            <tr class="row"><td class="lbl">DIET</td><td>Wide, seasonal</td><td>Narrow staples</td><td>Engineered abundance</td></tr>
+            <tr class="row"><td class="lbl">BELIEF</td><td>Animist</td><td>Theist</td><td>Humanist</td></tr>
+            <tr class="row"><td class="lbl">GROUP</td><td>Band of ~150</td><td>Village → state</td><td>Imagined nation</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body></html>

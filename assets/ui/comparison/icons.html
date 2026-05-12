@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Icons · 3 styles</title>
+<link rel="stylesheet" href="_cmp.css">
+<style>
+  .iconrow { display:flex;gap:18px;align-items:center;flex-wrap:wrap; }
+  .ico-tile { width:56px;height:56px;display:flex;align-items:center;justify-content:center; }
+  .ico-cap { font:600 11px/1.3 'Inter';margin-top:6px;text-align:center;display:block; }
+  .ico-cell { display:flex;flex-direction:column;align-items:center;gap:2px; }
+  .clear .ico-cap   { color:#4A5478; }
+  .mature .ico-cap  { color:#3D332C; font-family:'Source Serif 4',serif;font-weight:400;font-style:italic; font-size:12px; }
+  .vibrant .ico-cap { color:#0A0A0A; text-transform:uppercase; letter-spacing:0.04em; }
+
+  /* Clear: rounded square tile, soft pastel */
+  .clear .ico-tile  { background:#EFEBFF;border-radius:14px;color:#6151D6; }
+  /* Mature: thin line, no fill */
+  .mature .ico-tile { border:1px solid #1A1614;color:#1A1614;border-radius:0; }
+  /* Vibrant: ink outline, yellow fill */
+  .vibrant .ico-tile{ background:#FFD400;border:2px solid #0A0A0A;border-radius:50%;color:#0A0A0A; }
+</style></head>
+<body class="cmp-page">
+  <div class="cmp-head">
+    <h1>Iconography</h1>
+    <div class="sub">BOOK · CHAIN · BOOKMARK · INSIGHT</div>
+  </div>
+  <div class="cmp-grid">
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm clear"><span class="dot"></span>Clear</div><div class="meta">ROUNDED TILE · 1.5PX</div></div>
+      <div class="cmp-stage clear">
+        <div class="iconrow">
+          <div class="ico-cell"><div class="ico-tile"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h12a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4z"/><path d="M4 17h12"/></svg></div><span class="ico-cap">Book</span></div>
+          <div class="ico-cell"><div class="ico-tile"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="12" r="3"/><path d="M9 12h6"/></svg></div><span class="ico-cap">Chain</span></div>
+          <div class="ico-cell"><div class="ico-tile"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M6 4h12v17l-6-4-6 4z"/></svg></div><span class="ico-cap">Bookmark</span></div>
+          <div class="ico-cell"><div class="ico-tile"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M5 6l2 2M3 13h3M19 6l-2 2M21 13h-3"/><path d="M9 19a3 3 0 0 0 6 0v-1H9z"/><path d="M9 18c0-3-3-4-3-7a6 6 0 0 1 12 0c0 3-3 4-3 7"/></svg></div><span class="ico-cap">Insight</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm mature"><span class="dot"></span>Mature</div><div class="meta">HAIRLINE · NO FILL</div></div>
+      <div class="cmp-stage mature">
+        <div class="iconrow">
+          <div class="ico-cell"><div class="ico-tile"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><path d="M4 4h12a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4z"/><path d="M4 17h12"/></svg></div><span class="ico-cap">Book</span></div>
+          <div class="ico-cell"><div class="ico-tile"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="12" r="3"/><path d="M9 12h6"/></svg></div><span class="ico-cap">Chain</span></div>
+          <div class="ico-cell"><div class="ico-tile"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round"><path d="M6 4h12v17l-6-4-6 4z"/></svg></div><span class="ico-cap">Bookmark</span></div>
+          <div class="ico-cell"><div class="ico-tile"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M5 6l2 2M3 13h3M19 6l-2 2M21 13h-3"/><path d="M9 19a3 3 0 0 0 6 0v-1H9z"/><path d="M9 18c0-3-3-4-3-7a6 6 0 0 1 12 0c0 3-3 4-3 7"/></svg></div><span class="ico-cap">Insight</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm vibrant"><span class="dot"></span>Vibrant</div><div class="meta">CIRCLE · 2PX</div></div>
+      <div class="cmp-stage vibrant">
+        <div class="iconrow">
+          <div class="ico-cell"><div class="ico-tile"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 4h12a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4z"/><path d="M4 17h12"/></svg></div><span class="ico-cap">Book</span></div>
+          <div class="ico-cell"><div class="ico-tile"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="12" r="3"/><path d="M9 12h6"/></svg></div><span class="ico-cap">Chain</span></div>
+          <div class="ico-cell"><div class="ico-tile"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M6 4h12v17l-6-4-6 4z"/></svg></div><span class="ico-cap">Bookmark</span></div>
+          <div class="ico-cell"><div class="ico-tile"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M5 6l2 2M3 13h3M19 6l-2 2M21 13h-3"/><path d="M9 19a3 3 0 0 0 6 0v-1H9z"/><path d="M9 18c0-3-3-4-3-7a6 6 0 0 1 12 0c0 3-3 4-3 7"/></svg></div><span class="ico-cap">Insight</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body></html>

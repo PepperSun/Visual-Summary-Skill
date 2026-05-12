@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Buttons · 3 styles</title>
+<link rel="stylesheet" href="_cmp.css">
+<style>
+  /* CLEAR */
+  .clear .btn { display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;font:600 13.5px/1 'Inter',sans-serif;border:0;cursor:pointer; }
+  .clear .btn-primary { background:#2D5BFF;color:#fff; }
+  .clear .btn-soft    { background:#EAF1FF;color:#2D5BFF; }
+  .clear .btn-ghost   { background:transparent;color:#4A5478;border:1px solid #E6EBF5; }
+
+  /* MATURE */
+  .mature .btn { display:inline-flex;align-items:center;gap:8px;padding:12px 22px;font:600 13.5px/1 'Inter',sans-serif;border:0;cursor:pointer;border-radius:0; }
+  .mature .btn-primary { background:#7C4A31;color:#FBF7F0; }
+  .mature .btn-soft    { background:#1A1614;color:#FBF7F0; }
+  .mature .btn-ghost   { background:transparent;color:#1A1614;border:1px solid #1A1614; }
+
+  /* VIBRANT */
+  .vibrant .btn { display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font:800 13.5px/1 'Inter',sans-serif;border:2px solid #0A0A0A;cursor:pointer;letter-spacing:-0.01em; }
+  .vibrant .btn-primary { background:#2747FF;color:#fff;border-color:#2747FF; }
+  .vibrant .btn-soft    { background:#FFD400;color:#0A0A0A; }
+  .vibrant .btn-ghost   { background:transparent;color:#0A0A0A; }
+
+  .row { display:flex;flex-wrap:wrap;gap:8px;align-items:center; }
+</style></head>
+<body class="cmp-page">
+  <div class="cmp-head">
+    <h1>Buttons</h1>
+    <div class="sub">PRIMARY · SOFT · GHOST</div>
+  </div>
+  <div class="cmp-grid">
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm clear"><span class="dot"></span>Clear</div><div class="meta">PILL · SOFT</div></div>
+      <div class="cmp-stage clear">
+        <div class="row"><button class="btn btn-primary">Continue →</button></div>
+        <div class="row"><button class="btn btn-soft">Save for later</button><button class="btn btn-ghost">Cancel</button></div>
+      </div>
+    </div>
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm mature"><span class="dot"></span>Mature</div><div class="meta">SQUARE · INK</div></div>
+      <div class="cmp-stage mature">
+        <div class="row"><button class="btn btn-primary">Read summary →</button></div>
+        <div class="row"><button class="btn btn-soft">Continue</button><button class="btn btn-ghost">Cancel</button></div>
+      </div>
+    </div>
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm vibrant"><span class="dot"></span>Vibrant</div><div class="meta">PILL · OUTLINED</div></div>
+      <div class="cmp-stage vibrant">
+        <div class="row"><button class="btn btn-primary">Visualize →</button></div>
+        <div class="row"><button class="btn btn-soft">Save</button><button class="btn btn-ghost">Cancel</button></div>
+      </div>
+    </div>
+  </div>
+</body></html>

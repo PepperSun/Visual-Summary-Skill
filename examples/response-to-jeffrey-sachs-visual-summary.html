@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Response to Jeffrey Sachs — Visual Summary</title>
+<style>
+  :root {
+    --paper: #fbf7f0;
+    --paper-2: #f4eee2;
+    --ink: #1a1614;
+    --ink-2: #3d332c;
+    --ink-3: #7a6b5f;
+    --chestnut: #7c4a31;
+    --chestnut-dk: #5e3724;
+    --lilac: #dec4e0;
+    --lilac-soft: #ebd9ec;
+    --rule: #d4c7b5;
+    --rule-soft: #e4d9c5;
+    --shadow: 0 18px 48px rgba(26, 22, 20, 0.06);
+    --max: 1200px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  b {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-weight: 700;
+    color: var(--ink);
+    background: var(--lilac);
+    padding: 1px 4px;
+    font-size: 1.06em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  .page {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+
+  .masthead {
+    display: grid;
+    gap: 22px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .eyebrow,
+  .sec-tag,
+  .meta-label,
+  .mini-label,
+  th {
+    font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--chestnut);
+  }
+
+  .header-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(280px, 0.9fr);
+    gap: 28px;
+    align-items: start;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: "Source Serif 4", Georgia, serif;
+    margin: 0;
+    letter-spacing: -0.025em;
+  }
+
+  h1 {
+    font-size: clamp(2.8rem, 5vw, 4.9rem);
+    line-height: 0.98;
+    max-width: 10ch;
+  }
+
+  .submeta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border: 1px solid var(--rule);
+    background: var(--paper-2);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .meta-card,
+  .section,
+  .note,
+  .stat,
+  .chain-step {
+    border: 1px solid var(--rule);
+    background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0)) var(--paper);
+  }
+
+  .meta-card {
+    padding: 18px 18px 16px;
+    box-shadow: var(--shadow);
+  }
+
+  .meta-row {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .meta-row:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .meta-label {
+    display: block;
+    font-size: 10px;
+    color: var(--ink-3);
+    margin-bottom: 6px;
+  }
+
+  .meta-value {
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+
+  .note {
+    margin-top: 20px;
+    padding: 16px 18px;
+    display: grid;
+    gap: 4px;
+  }
+
+  .note strong {
+    font-size: 13px;
+    color: var(--chestnut-dk);
+  }
+
+  .note p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+
+  main {
+    margin-top: 28px;
+    display: grid;
+    gap: 26px;
+  }
+
+  .section {
+    padding: 22px;
+  }
+
+  .sec-tag {
+    font-size: 10px;
+    color: var(--ink-3);
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 18px;
+  }
+
+  .section h2 {
+    font-size: clamp(1.7rem, 2.4vw, 2.35rem);
+    line-height: 1.08;
+    margin-bottom: 16px;
+    max-width: 22ch;
+  }
+
+  .judgment {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.9fr);
+    gap: 22px;
+    align-items: start;
+  }
+
+  .judgment-copy {
+    display: grid;
+    gap: 12px;
+  }
+
+  .judgment-copy p {
+    margin: 0;
+    font-size: 18px;
+    color: var(--ink-2);
+  }
+
+  .stats {
+    display: grid;
+    gap: 12px;
+  }
+
+  .stat {
+    padding: 14px 16px;
+  }
+
+  .stat .num {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 42px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .mini-label {
+    display: block;
+    font-size: 10px;
+    color: var(--ink-3);
+    margin-bottom: 8px;
+  }
+
+  .stat p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin-top: 8px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 860px;
+  }
+
+  th,
+  td {
+    vertical-align: top;
+    text-align: left;
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  th {
+    font-size: 10px;
+    color: var(--ink-3);
+    background: var(--paper-2);
+  }
+
+  td {
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+
+  .table-wrap tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .chain {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 6px;
+  }
+
+  .chain-step {
+    position: relative;
+    padding: 16px 16px 18px;
+    min-height: 170px;
+  }
+
+  .chain-step::after {
+    content: "→";
+    position: absolute;
+    right: -11px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    display: grid;
+    place-items: center;
+    background: var(--paper);
+    color: var(--chestnut);
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 20px;
+  }
+
+  .chain-step:last-child::after {
+    display: none;
+  }
+
+  .chain-step h3 {
+    font-size: 21px;
+    line-height: 1.05;
+    margin-bottom: 12px;
+  }
+
+  .chain-step p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+
+  .closing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 4px;
+  }
+
+  .closing-grid .stat {
+    min-height: 158px;
+  }
+
+  .closing-grid h3 {
+    font-size: 28px;
+    line-height: 1.05;
+    margin: 0 0 10px;
+  }
+
+  .footer {
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+
+  @media (max-width: 980px) {
+    .header-grid,
+    .judgment,
+    .closing-grid,
+    .chain {
+      grid-template-columns: 1fr;
+    }
+
+    .chain-step::after {
+      content: "↓";
+      right: 50%;
+      top: auto;
+      bottom: -11px;
+      transform: translateX(50%);
+    }
+
+    h1 {
+      max-width: none;
+    }
+
+    table {
+      min-width: 720px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .page {
+      padding: 28px 16px 64px;
+    }
+
+    .section,
+    .meta-card,
+    .note {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .judgment-copy p {
+      font-size: 17px;
+    }
+
+    td,
+    .chain-step p,
+    .meta-value,
+    .note p {
+      font-size: 13.5px;
+    }
+  }
+</style>
+</head>
+<body data-style="mature">
+  <div class="page">
+    <header class="masthead">
+      <div class="eyebrow">Visual Summary · Mature</div>
+      <div class="header-grid">
+        <div>
+          <h1>Response to Jeffrey Sachs</h1>
+          <div class="submeta">
+            <span class="tag">Political Economy</span>
+            <span class="tag">Development Debate</span>
+          </div>
+        </div>
+        <aside class="meta-card">
+          <div class="meta-row">
+            <span class="meta-label">Author</span>
+            <div class="meta-value">Daron Acemoglu and James Robinson</div>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Date</span>
+            <div class="meta-value">Wednesday, November 21, 2012</div>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Source</span>
+            <div class="meta-value">Archived web print from the Why Nations Fail website via the Wayback Machine</div>
+          </div>
+        </aside>
+      </div>
+      <div class="note">
+        <strong>Source note</strong>
+        <p>The file name references <em>Why Nations Fail</em>, but the PDF itself contains a two-page archived post titled <em>Response to Jeffrey Sachs</em>, and this page summarizes that source.</p>
+      </div>
+    </header>
+
+    <main>
+      <section class="section">
+        <div class="sec-tag">01 · Whole-document judgment</div>
+        <div class="judgment">
+          <div class="judgment-copy">
+            <h2>A combative reply that says the review attacks a book the authors did not write</h2>
+            <p>The post treats Jeffrey Sachs's review as a <b>misreading</b> rather than as a serious rival framework.</p>
+            <p>It argues that the review blurs distinctions the book makes, especially between <b>extractive catch-up growth</b> and <b>sustained inclusive innovation</b>.</p>
+            <p>The defended center is that <b>institutions and politics</b> do the main explanatory work even when geography, resources, and authoritarian spurts matter at the margin.</p>
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <span class="mini-label">Objections answered</span>
+              <div class="num">12</div>
+              <p>The source walks through twelve numbered complaints and tries to fold most of them back into the book's own framework.</p>
+            </div>
+            <div class="stat">
+              <span class="mini-label">Recurring moves</span>
+              <div class="num">4</div>
+              <p>The reply leans on <b>misreading</b>, <b>distinction</b>, <b>counterexample</b>, and <b>existing research</b>.</p>
+            </div>
+            <div class="stat">
+              <span class="mini-label">Core claim preserved</span>
+              <div class="num">1</div>
+              <p>A useful development framework must <b>rank causes</b> instead of treating every possible factor as equally decisive.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="sec-tag">02 · Point-by-point rebuttal</div>
+        <h2>Where the authors say Sachs misreads the book</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Opponent claim</th>
+                <th>Author rebuttal</th>
+                <th>Key evidence</th>
+                <th>Residual judgment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Dictatorships and authoritarian states can drive reform, diffusion, and fast growth.</td>
+                <td>The reply says the book already allows <b>extractive catch-up growth</b> and keeps it separate from <b>sustained innovation</b>.</td>
+                <td>It points to China and to chapters that distinguish <b>technology import</b> from innovation.</td>
+                <td>Short-run speed does not overturn the institutional framework.</td>
+              </tr>
+              <tr>
+                <td>Resources and bad geography can cripple states and explain weak development.</td>
+                <td>The reply says <b>geographic correlation</b> does not establish <b>cross-country causation</b>.</td>
+                <td>It dismisses Sachs's regressions and cites prior work where institutional controls absorb the geography effect.</td>
+                <td>Geography can matter locally without ranking as the master cause.</td>
+              </tr>
+              <tr>
+                <td>The book makes extraordinary claims without extraordinary evidence.</td>
+                <td>The reply says a general-audience book omits econometrics but rests on <b>published institutional research</b>.</td>
+                <td>It cites <b>The Colonial Origins of Comparative Development</b> and <b>Reversal of Fortune</b> as the empirical base.</td>
+                <td>The attack misses the split between a public framework and its academic apparatus.</td>
+              </tr>
+              <tr>
+                <td>Botswana prospered because diamonds mattered more than institutions.</td>
+                <td>The reply says <b>diamonds mattered through institutions</b>, not outside them.</td>
+                <td>It contrasts Botswana with Sierra Leone, Angola, and Nigeria, where resource rents fed instability or weak governance.</td>
+                <td>Resources change outcomes only after politics decides how rents are used.</td>
+              </tr>
+              <tr>
+                <td>Nogales proves geography, not institutions, explains prosperity gaps.</td>
+                <td>The reply says the border case tests <b>institutional divergence</b>, not the trivial fact that <b>location affects trade</b>.</td>
+                <td>It notes that Nogales exists because of a political boundary and that the richer side is still the one with better institutions.</td>
+                <td>Local spatial advantages do not rescue the broader geography hypothesis.</td>
+              </tr>
+              <tr>
+                <td>Political institutions are weak predictors and miss authoritarian Asia.</td>
+                <td>The reply says the book avoids <b>point forecasting</b> and already treats <b>extractive growth spurts</b> as possible.</td>
+                <td>It says inclusive institutions are hard to build from extractive ones and names Ethiopia and Rwanda as more relevant cases than Sachs's examples.</td>
+                <td>Prediction is secondary to explaining why growth endures or stalls.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="sec-tag">03 · Rebuttal method</div>
+        <h2>How the reply tries to make its counterargument hold</h2>
+        <div class="chain">
+          <article class="chain-step">
+            <span class="mini-label">Step 1</span>
+            <h3>Strip away the caricature</h3>
+            <p>The reply first says Sachs is attacking positions the book explicitly qualifies or rejects.</p>
+          </article>
+          <article class="chain-step">
+            <span class="mini-label">Step 2</span>
+            <h3>Restore the distinctions</h3>
+            <p>It repeatedly separates <b>innovation</b> from diffusion and <b>durable inclusion</b> from short-run extraction.</p>
+          </article>
+          <article class="chain-step">
+            <span class="mini-label">Step 3</span>
+            <h3>Shift from variables to hierarchy</h3>
+            <p>It says a framework is useful only when it <b>ranks causes</b> instead of listing every factor at equal weight.</p>
+          </article>
+          <article class="chain-step">
+            <span class="mini-label">Step 4</span>
+            <h3>Test the hierarchy with cases</h3>
+            <p>It uses Botswana, Nogales, China, and colonial evidence to show how borders, rents, and technology flows pass through institutions.</p>
+          </article>
+          <article class="chain-step">
+            <span class="mini-label">Step 5</span>
+            <h3>Return to the thesis</h3>
+            <p>The surviving conclusion is that <b>historical institutional persistence</b> remains the main explanation for large prosperity gaps.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="sec-tag">04 · Reaffirmed claim</div>
+        <h2>What the authors say still stands after the fight</h2>
+        <div class="closing-grid">
+          <div class="stat">
+            <span class="mini-label">On geography</span>
+            <h3>Geography stays in the background</h3>
+            <p>Geography is treated as a <b>background condition</b> and local constraint, not as a sufficient account of wide income divergence.</p>
+          </div>
+          <div class="stat">
+            <span class="mini-label">On growth</span>
+            <h3>Growth can arrive before inclusion</h3>
+            <p>Extractive regimes can produce <b>rapid catch-up</b>, but they cannot reliably sustain open-ended innovation and broad inclusion.</p>
+          </div>
+          <div class="stat">
+            <span class="mini-label">On the book</span>
+            <h3>The framework is meant to rank causes</h3>
+            <p><em>Why Nations Fail</em> is defended as a <b>ranking framework</b>, not as an encyclopedic checklist or a forecasting machine.</p>
+          </div>
+        </div>
+        <div class="footer">Summary built from the PDF's actual text content rather than the file name.</div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

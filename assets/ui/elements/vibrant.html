@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Vibrant · Design elements</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --bg-2: #F4F5F7;
+    --ink: #0A0A0A;
+    --ink-2: #444;
+    --ink-3: #888;
+    --line: #E5E5E5;
+    --blue: #2747FF;
+    --yellow: #FFD400;
+    --red: #FF3024;
+    --green: #1FA85A;
+    --pink: #FF60A8;
+    --purple: #7A3CFF;
+  }
+  html, body { margin:0; padding:0; background: var(--bg); color: var(--ink); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+  .frame { max-width: 1240px; margin: 0 auto; padding: 56px 56px 80px; }
+  .eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); margin: 0 0 14px; }
+  h1 { font-size: 60px; font-weight: 900; line-height: 0.98; letter-spacing: -0.035em; margin: 0 0 14px; text-wrap: balance; }
+  h1 .dot { display: inline-block; width: 14px; height: 14px; background: var(--red); border-radius: 50%; margin-left: 6px; vertical-align: 14px; }
+  h1 .dot.y { background: var(--yellow); margin-left: 4px; }
+  .lead { font-size: 17px; color: var(--ink-2); margin: 0 0 48px; line-height: 1.5; max-width: 720px; font-weight: 500; }
+
+  .sec { margin-bottom: 56px; }
+  .sec-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--ink); }
+  .sec-title { font-size: 26px; font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 22px; }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 14px; }
+  .row:last-child { margin-bottom: 0; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grid-6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+  .card { background: var(--bg); border: 2px solid var(--ink); padding: 22px 24px; }
+  .label { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.06em; color: var(--ink-3); text-transform: uppercase; }
+
+  /* PALETTE */
+  .swatch { padding: 0; border: 2px solid var(--ink); }
+  .swatch .chip { aspect-ratio: 5/3; }
+  .swatch .meta { padding: 12px 14px; border-top: 2px solid var(--ink); background: var(--bg); }
+  .swatch .nm { font-size: 14px; font-weight: 800; line-height: 1.1; }
+  .swatch .role { font-size: 11px; color: var(--ink-3); margin-top: 2px; }
+  .swatch .hex { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--ink-2); margin-top: 6px; }
+
+  /* TYPE */
+  .type-row { display: grid; grid-template-columns: 90px 1fr 90px; align-items: baseline; gap: 18px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .type-row:last-child { border-bottom: 0; }
+  .type-row .nm { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-3); }
+  .type-row .meta { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--ink-3); text-align: right; }
+
+  /* TAGS */
+  .tag { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; font-size: 12px; font-weight: 800; line-height: 1; letter-spacing: -0.01em; }
+  .tag-blue   { background: var(--blue);   color: #fff; }
+  .tag-yellow { background: var(--yellow); color: var(--ink); }
+  .tag-red    { background: var(--red);    color: #fff; }
+  .tag-green  { background: var(--green);  color: #fff; }
+  .tag-purple { background: var(--purple); color: #fff; }
+  .tag-ink    { background: var(--ink);    color: #fff; }
+  .tag-line   { background: transparent; color: var(--ink); border: 2px solid var(--ink); }
+
+  /* BUTTONS */
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; border-radius: 999px; font-size: 14px; font-weight: 800; line-height: 1; cursor: pointer; transition: all .15s ease; font-family: inherit; border: 2px solid var(--ink); letter-spacing: -0.01em; }
+  .btn-primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .btn-primary:hover { background: var(--ink); border-color: var(--ink); }
+  .btn-yellow  { background: var(--yellow); color: var(--ink); border-color: var(--ink); }
+  .btn-red     { background: var(--red); color: #fff; border-color: var(--ink); }
+  .btn-ink     { background: var(--ink); color: #fff; }
+  .btn-line    { background: transparent; color: var(--ink); }
+  .btn-icon    { width: 44px; height: 44px; padding: 0; justify-content: center; background: var(--yellow); color: var(--ink); border-color: var(--ink); }
+  .btn-lg      { padding: 18px 30px; font-size: 16px; }
+  .btn-sm      { padding: 9px 16px; font-size: 12px; }
+
+  /* INPUTS */
+  .input { display: block; width: 100%; box-sizing: border-box; padding: 14px 18px; border-radius: 999px; border: 2px solid var(--ink); background: var(--bg); font-family: inherit; font-size: 14px; font-weight: 600; color: var(--ink); }
+  .input:focus { outline: 0; box-shadow: 4px 4px 0 var(--blue); }
+  .input::placeholder { color: var(--ink-3); font-weight: 500; }
+  .field-lbl { font-size: 12px; font-weight: 800; color: var(--ink); margin-bottom: 6px; display: block; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* HIGHLIGHTS */
+  .hl-text { font-size: 17px; line-height: 1.7; color: var(--ink-2); max-width: 660px; font-weight: 500; }
+  .hl-text .hl { padding: 2px 8px; border-radius: 999px; font-weight: 800; }
+  .hl-yellow { background: var(--yellow); color: var(--ink); }
+  .hl-red    { background: var(--red); color: #fff; }
+  .hl-blue   { background: var(--blue); color: #fff; }
+  .hl-green  { background: var(--green); color: #fff; }
+  .hl-mark { background: var(--yellow); padding: 0 4px; font-weight: 800; color: var(--ink); }
+
+  /* PATTERNS */
+  .pat-bars { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; height: 48px; }
+  .pat-bars .b { border-radius: 999px; display: flex; align-items: center; padding: 0 14px; font-weight: 800; font-size: 12px; color: #fff; letter-spacing: -0.01em; }
+  .pat-bars .b1 { background: var(--blue); }
+  .pat-bars .b2 { background: var(--yellow); color: var(--ink); }
+  .pat-bars .b3 { background: var(--red); }
+  .pat-bars .b4 { background: var(--green); }
+  .pat-bars .b5 { background: var(--purple); }
+  .pat-bars .b6 { background: var(--ink); }
+
+  .pat-num-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .pat-num-grid .nb { padding: 22px 18px 20px; border-radius: 16px; color: #fff; }
+  .pat-num-grid .nb .n { font-size: 48px; font-weight: 900; letter-spacing: -0.04em; line-height: 1; }
+  .pat-num-grid .nb .t { font-size: 13px; font-weight: 700; margin-top: 8px; line-height: 1.3; }
+  .pat-num-grid .nb.n1 { background: var(--blue); }
+  .pat-num-grid .nb.n2 { background: var(--red); }
+  .pat-num-grid .nb.n3 { background: var(--ink); }
+
+  .pat-stages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .pat-stages .st { display: flex; flex-direction: column; gap: 10px; }
+  .pat-stages .num { width: 40px; height: 40px; border-radius: 50%; color: #fff; font-weight: 800; font-size: 16px; display: flex; align-items: center; justify-content: center; }
+  .pat-stages .s1 .num { background: var(--blue); }
+  .pat-stages .s2 .num { background: var(--yellow); color: var(--ink); }
+  .pat-stages .s3 .num { background: var(--red); }
+  .pat-stages .stt { font-size: 17px; font-weight: 800; line-height: 1.15; letter-spacing: -0.015em; }
+  .pat-stages .std { font-size: 12.5px; color: var(--ink-3); line-height: 1.45; }
+
+  .pat-pie { display: flex; align-items: center; gap: 22px; }
+  .pat-pie .donut {
+    width: 120px; height: 120px; border-radius: 50%;
+    background: conic-gradient(var(--blue) 0 45%, var(--yellow) 45% 70%, var(--red) 70% 88%, var(--ink) 88% 100%);
+    position: relative;
+  }
+  .pat-pie .donut::after { content:""; position: absolute; inset: 28%; border-radius: 50%; background: var(--bg); }
+  .pat-pie .legend { display: flex; flex-direction: column; gap: 8px; font-size: 12.5px; }
+  .pat-pie .lg { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+  .pat-pie .lg .sw { width: 14px; height: 14px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="eyebrow">VIBRANT · DESIGN ELEMENTS</div>
+  <h1>Loud, primary, decisive<span class="dot"></span><span class="dot y"></span></h1>
+  <p class="lead">Saturated primary blocks, bold rounded geometry, heavy sans. Every component has a 2px ink outline. The palette is small but the contrast is total.</p>
+
+  <!-- PALETTE -->
+  <section class="sec">
+    <div class="sec-tag">01 · Palette</div>
+    <div class="sec-title">Six chromas + ink. No tints, no shades.</div>
+    <div class="grid-6">
+      <div class="swatch"><div class="chip" style="background: var(--blue);"></div><div class="meta"><div class="nm">Blue</div><div class="role">Primary</div><div class="hex">#2747FF</div></div></div>
+      <div class="swatch"><div class="chip" style="background: var(--yellow);"></div><div class="meta"><div class="nm">Yellow</div><div class="role">Highlight</div><div class="hex">#FFD400</div></div></div>
+      <div class="swatch"><div class="chip" style="background: var(--red);"></div><div class="meta"><div class="nm">Red</div><div class="role">Hero / pivot</div><div class="hex">#FF3024</div></div></div>
+      <div class="swatch"><div class="chip" style="background: var(--green);"></div><div class="meta"><div class="nm">Green</div><div class="role">Success</div><div class="hex">#1FA85A</div></div></div>
+      <div class="swatch"><div class="chip" style="background: var(--purple);"></div><div class="meta"><div class="nm">Purple</div><div class="role">Tertiary</div><div class="hex">#7A3CFF</div></div></div>
+      <div class="swatch"><div class="chip" style="background: var(--ink);"></div><div class="meta"><div class="nm">Ink</div><div class="role">Type / outline</div><div class="hex">#0A0A0A</div></div></div>
+    </div>
+  </section>
+
+  <!-- TYPE -->
+  <section class="sec">
+    <div class="sec-tag">02 · Typography</div>
+    <div class="sec-title">Inter only. Black weight is the personality.</div>
+    <div class="card">
+      <div class="type-row"><div class="nm">Display</div><div style="font-size:60px;font-weight:900;letter-spacing:-0.035em;line-height:1;">Conquer the page.</div><div class="meta">60 / 900</div></div>
+      <div class="type-row"><div class="nm">H2</div><div style="font-size:36px;font-weight:900;letter-spacing:-0.025em;line-height:1.05;">Six stages, one chain</div><div class="meta">36 / 900</div></div>
+      <div class="type-row"><div class="nm">H3</div><div style="font-size:22px;font-weight:800;letter-spacing:-0.015em;">Imagination is a tool</div><div class="meta">22 / 800</div></div>
+      <div class="type-row"><div class="nm">Lead</div><div style="font-size:17px;font-weight:500;line-height:1.5;color:var(--ink-2);">A six-stage chain — each step makes the next one possible.</div><div class="meta">17 / 500</div></div>
+      <div class="type-row"><div class="nm">Body</div><div style="font-size:14px;font-weight:500;line-height:1.6;color:var(--ink-2);">A still-unknown genetic shift makes Sapiens speech recursive and unbounded.</div><div class="meta">14 / 500</div></div>
+      <div class="type-row"><div class="nm">Caption</div><div style="font-size:12px;font-weight:600;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.04em;">Sapiens · Harari</div><div class="meta">12 / 600</div></div>
+      <div class="type-row"><div class="nm">Mono</div><div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ink);">data-direction="vibrant"</div><div class="meta">13 / 400</div></div>
+    </div>
+  </section>
+
+  <!-- TAGS -->
+  <section class="sec">
+    <div class="sec-tag">03 · Tags & badges</div>
+    <div class="sec-title">Pill geometry, full saturation, never hierarchy-by-grayness.</div>
+    <div class="row">
+      <span class="tag tag-blue">01 MUTATION</span>
+      <span class="tag tag-yellow">02 IMAGINATION</span>
+      <span class="tag tag-red">03 PIVOT</span>
+      <span class="tag tag-green">04 COOPERATION</span>
+      <span class="tag tag-purple">05 DOMINANCE</span>
+      <span class="tag tag-ink">06 TODAY</span>
+    </div>
+    <div class="row" style="margin-top:18px;">
+      <span class="tag tag-line">8 MIN READ</span>
+      <span class="tag tag-line">→ NEW</span>
+      <span class="tag tag-yellow">★ FEATURED</span>
+    </div>
+  </section>
+
+  <!-- BUTTONS -->
+  <section class="sec">
+    <div class="sec-tag">04 · Buttons</div>
+    <div class="sec-title">Pill, 2px ink outline, loud.</div>
+    <div class="row">
+      <button class="btn btn-primary btn-lg">Visualize this book →</button>
+      <button class="btn btn-yellow">Save</button>
+      <button class="btn btn-red">Continue</button>
+      <button class="btn btn-ink">Skip</button>
+      <button class="btn btn-line">Cancel</button>
+      <button class="btn btn-icon" aria-label="Add">+</button>
+    </div>
+    <div class="row">
+      <button class="btn btn-primary btn-sm">Small</button>
+      <button class="btn btn-yellow btn-sm">Small yellow</button>
+      <button class="btn btn-line btn-sm">Small line</button>
+    </div>
+  </section>
+
+  <!-- INPUTS -->
+  <section class="sec">
+    <div class="sec-tag">05 · Inputs</div>
+    <div class="sec-title">Pill fields. Hard offset shadow on focus.</div>
+    <div class="grid-2">
+      <div>
+        <label class="field-lbl">Book title</label>
+        <input class="input" placeholder="Sapiens by Y. N. Harari" />
+      </div>
+      <div>
+        <label class="field-lbl">Reading level</label>
+        <input class="input" value="General reader" />
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS -->
+  <section class="sec">
+    <div class="sec-tag">06 · Highlight</div>
+    <div class="sec-title">Solid pill behind the words. Yellow is the workhorse.</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="label" style="margin-bottom:14px;">PILL HIGHLIGHT · key claim</div>
+        <p class="hl-text">A reader can skim a page in seconds. <span class="hl hl-yellow">Highlight only the load-bearing phrases</span> — the ones that, if removed, would <span class="hl hl-red">collapse the sentence</span>. Everything else stays plain.</p>
+      </div>
+      <div class="card">
+        <div class="label" style="margin-bottom:14px;">FLAT MARK · inline emphasis</div>
+        <p class="hl-text">Modern institutions are <span class="hl-mark">not less imagined</span> than tribal gods — only <span class="hl-mark">more elaborately drawn</span>. The same engine, a louder costume.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHART PATTERNS -->
+  <section class="sec">
+    <div class="sec-tag">07 · Chart patterns</div>
+    <div class="sec-title">Four primitives: bar header, big-number grid, numbered stages, donut.</div>
+
+    <div class="card" style="margin-bottom:18px;">
+      <div class="label" style="margin-bottom:14px;">BAR HEADER · color-coded sequence</div>
+      <div class="pat-bars">
+        <div class="b b1">01 · MUTATION</div>
+        <div class="b b2">02 · IMAGINATION</div>
+        <div class="b b3">03 · FICTION</div>
+        <div class="b b4">04 · COOP</div>
+        <div class="b b5">05 · DOMINANCE</div>
+        <div class="b b6">06 · TODAY</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="label" style="margin-bottom:14px;">BIG-NUMBER GRID · figures with weight</div>
+        <div class="pat-num-grid">
+          <div class="nb n1"><div class="n">70k</div><div class="t">Years before present</div></div>
+          <div class="nb n2"><div class="n">8</div><div class="t">Other human species</div></div>
+          <div class="nb n3"><div class="n">100%</div><div class="t">Megafauna lost</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="label" style="margin-bottom:14px;">DONUT · proportion without ceremony</div>
+        <div class="pat-pie">
+          <div class="donut"></div>
+          <div class="legend">
+            <div class="lg"><span class="sw" style="background:var(--blue);"></span>Foragers · 45%</div>
+            <div class="lg"><span class="sw" style="background:var(--yellow);"></span>Farmers · 25%</div>
+            <div class="lg"><span class="sw" style="background:var(--red);"></span>Modern · 18%</div>
+            <div class="lg"><span class="sw" style="background:var(--ink);"></span>Other · 12%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px;">
+      <div class="label" style="margin-bottom:14px;">NUMBERED STAGES · 3-up logic chain</div>
+      <div class="pat-stages">
+        <div class="st s1">
+          <div class="num">1</div>
+          <div class="stt">A genetic mutation rewires the brain.</div>
+          <div class="std">~70,000 years ago. Speech turns recursive and unbounded for the first time.</div>
+        </div>
+        <div class="st s2">
+          <div class="num">2</div>
+          <div class="stt">Language describes things that don't exist.</div>
+          <div class="std">Spirits, plans, hypotheticals. Speech leaves the physical world.</div>
+        </div>
+        <div class="st s3">
+          <div class="num">3</div>
+          <div class="stt">Strangers believe the same invisible stories.</div>
+          <div class="std">The pivot. Tribes, gods, money — all real because everyone agrees.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</body>
+</html>

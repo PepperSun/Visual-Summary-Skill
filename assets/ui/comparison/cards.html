@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Cards · 3 styles</title>
+<link rel="stylesheet" href="_cmp.css">
+<style>
+  /* CLEAR card */
+  .clear .card { background:#fff;border:1px solid #E6EBF5;border-radius:14px;padding:18px;box-shadow:0 1px 0 rgba(27,34,64,0.03),0 8px 24px rgba(27,34,64,0.04); }
+  .clear .card .tag { display:inline-flex;padding:3px 10px;border-radius:999px;background:#EFEBFF;color:#6151D6;font:600 11px/1 'Inter';margin-bottom:10px; }
+  .clear .card h3 { font:700 16px/1.25 'Inter';letter-spacing:-0.01em;color:#1B2240;margin:0 0 6px; }
+  .clear .card p  { font:400 13px/1.5 'Inter';color:#4A5478;margin:0; }
+
+  /* MATURE card */
+  .mature .card { background:#FBF7F0;border:1px solid #D4C7B5;padding:20px;border-radius:0; }
+  .mature .card .tag { display:inline-block;font:400 11px/1 'JetBrains Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:#7C4A31;margin-bottom:14px; }
+  .mature .card h3 { font:700 22px/1.15 'Source Serif 4',serif;letter-spacing:-0.015em;color:#1A1614;margin:0 0 6px; }
+  .mature .card p  { font:400 13.5px/1.55 'Inter';color:#3D332C;margin:0; }
+  .mature .card p b { font-family:'Source Serif 4',serif;font-weight:700;color:#1A1614;background:#DEC4E0;padding:1px 4px;font-size:1.06em; -webkit-box-decoration-break:clone;box-decoration-break:clone; }
+
+  /* VIBRANT card */
+  .vibrant .card { background:#fff;border:2px solid #0A0A0A;border-radius:16px;padding:18px;box-shadow:6px 6px 0 #FFD400; }
+  .vibrant .card .tag { display:inline-flex;padding:4px 12px;border-radius:999px;background:#FF3024;color:#fff;font:800 11px/1 'Inter';letter-spacing:0.04em;text-transform:uppercase;margin-bottom:12px; }
+  .vibrant .card h3 { font:900 20px/1.1 'Inter';letter-spacing:-0.025em;color:#0A0A0A;margin:0 0 6px; }
+  .vibrant .card p  { font:500 13px/1.5 'Inter';color:#444;margin:0; }
+</style></head>
+<body class="cmp-page">
+  <div class="cmp-head">
+    <h1>Cards</h1>
+    <div class="sub">SUMMARY CARD WITH TAG + TITLE + BLURB</div>
+  </div>
+  <div class="cmp-grid">
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm clear"><span class="dot"></span>Clear</div><div class="meta">SOFT SHADOW</div></div>
+      <div class="cmp-stage clear">
+        <div class="card">
+          <span class="tag">PIVOT</span>
+          <h3>The Cognitive Revolution</h3>
+          <p>A still-unknown genetic shift makes Sapiens speech recursive — strangers begin to share invisible stories.</p>
+        </div>
+      </div>
+    </div>
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm mature"><span class="dot"></span>Mature</div><div class="meta">FLAT · LILAC HL</div></div>
+      <div class="cmp-stage mature">
+        <div class="card">
+          <span class="tag">CHAPTER · 03</span>
+          <h3>The Cognitive Revolution</h3>
+          <p>A still-unknown genetic shift makes Sapiens speech <b>recursive and unbounded</b>. Strangers begin to share invisible stories.</p>
+        </div>
+      </div>
+    </div>
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm vibrant"><span class="dot"></span>Vibrant</div><div class="meta">HARD SHADOW</div></div>
+      <div class="cmp-stage vibrant">
+        <div class="card">
+          <span class="tag">03 · PIVOT</span>
+          <h3>Cognitive Revolution.</h3>
+          <p>A genetic shift makes speech recursive. Strangers share invisible stories — the engine of every later civilization.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body></html>

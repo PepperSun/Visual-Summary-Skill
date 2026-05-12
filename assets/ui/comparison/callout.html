@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Callout & special styles · 3 styles</title>
+<link rel="stylesheet" href="_cmp.css">
+<style>
+  .cmp-stage { padding: 22px 22px; gap: 14px; min-height: 520px; align-items: stretch; justify-content: flex-start; }
+
+  /* shared text */
+  .lbl { font:500 9.5px/1.2 'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;opacity:0.55;margin-bottom:6px;display:block; }
+
+  /* ============ CLEAR ============ */
+  .clear .co-note { background:#EAF1FF;border-radius:12px;padding:14px 16px;color:#1B2240; }
+  .clear .co-note h4 { font:700 13px/1.2 'Inter';color:#2D5BFF;margin:0 0 4px; }
+  .clear .co-note p  { font:400 12.5px/1.5 'Inter';margin:0;color:#4A5478; }
+
+  .clear .co-warn { background:#FFEDE3;border-radius:12px;padding:14px 16px;display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start; }
+  .clear .co-warn .ico { width:22px;height:22px;border-radius:50%;background:#C66224;color:#fff;font:800 13px/1 'Inter';display:flex;align-items:center;justify-content:center; }
+  .clear .co-warn h4 { font:700 13px/1.2 'Inter';color:#C66224;margin:0 0 2px; }
+  .clear .co-warn p  { font:400 12.5px/1.5 'Inter';margin:0;color:#4A5478; }
+
+  .clear .co-key { background:#fff;border:1px solid #E6EBF5;border-left:4px solid #6151D6;border-radius:8px;padding:14px 16px;box-shadow:0 6px 16px rgba(27,34,64,0.04); }
+  .clear .co-key h4 { font:700 12px/1.2 'Inter';letter-spacing:0.04em;text-transform:uppercase;color:#6151D6;margin:0 0 4px; }
+  .clear .co-key p  { font:600 13.5px/1.45 'Inter';margin:0;color:#1B2240; }
+
+  .clear .co-defn { background:#E4F6F4;border-radius:12px;padding:14px 16px;font:400 12.5px/1.5 'Inter';color:#1B2240; }
+  .clear .co-defn dfn { font-weight:700;font-style:normal;color:#0E8C7E;border-bottom:1.5px solid #B9E6E0;padding-bottom:1px; }
+
+  .clear .co-foot { font:400 11.5px/1.5 'Inter';color:#8189A6;border-top:1px dashed #E6EBF5;padding-top:10px; }
+  .clear .co-foot sup { color:#2D5BFF;font-weight:700;font-size:0.92em;margin-right:4px; }
+
+  /* ============ MATURE ============ */
+  .mature .co-note { padding:0;border-top:1px solid #1A1614;border-bottom:1px solid #1A1614;padding:14px 0; }
+  .mature .co-note h4 { font:700 12px/1 'JetBrains Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;color:#7C4A31;margin:0 0 8px; }
+  .mature .co-note p  { font:400 13.5px/1.6 'Inter';margin:0;color:#3D332C; }
+
+  .mature .co-warn { background:#F4EEE2;padding:14px 18px;border:1px solid #D4C7B5;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:baseline; }
+  .mature .co-warn .ico { font:italic 700 28px/0.9 'Source Serif 4',serif;color:#7C4A31; }
+  .mature .co-warn h4 { font:700 14px/1.2 'Source Serif 4',serif;color:#1A1614;margin:0 0 2px; }
+  .mature .co-warn p  { font:400 13px/1.55 'Inter';margin:0;color:#3D332C; }
+
+  .mature .co-key { padding:14px 0 14px 18px;border-left:2px solid #7C4A31; }
+  .mature .co-key h4 { font:italic 400 12px/1 'Source Serif 4',serif;color:#7C4A31;margin:0 0 6px; }
+  .mature .co-key p  { font:700 17px/1.35 'Source Serif 4',serif;color:#1A1614;margin:0;letter-spacing:-0.01em; }
+  .mature .co-key p b { font-family:'Source Serif 4',serif;font-weight:700;color:#1A1614;background:#DEC4E0;padding:1px 4px;font-size:1.06em;-webkit-box-decoration-break:clone;box-decoration-break:clone; }
+
+  .mature .co-defn { font:400 13.5px/1.65 'Inter';color:#3D332C; }
+  .mature .co-defn dfn { font-family:'Source Serif 4',serif;font-weight:700;font-style:italic;color:#1A1614; }
+  .mature .co-defn dfn::after { content:" — ";color:#7A6B5F;font-style:normal; }
+
+  .mature .co-foot { font:italic 400 12.5px/1.55 'Source Serif 4',serif;color:#7A6B5F;border-top:1px solid #D4C7B5;padding-top:10px; }
+  .mature .co-foot sup { font-family:'JetBrains Mono',monospace;color:#7C4A31;font-style:normal;font-size:0.85em;margin-right:4px;vertical-align:super; }
+
+  /* ============ VIBRANT ============ */
+  .vibrant .co-note { background:#FFD400;border:2px solid #0A0A0A;border-radius:14px;padding:14px 16px; }
+  .vibrant .co-note h4 { font:900 12px/1 'Inter';letter-spacing:0.04em;text-transform:uppercase;color:#0A0A0A;margin:0 0 6px; }
+  .vibrant .co-note p  { font:600 13px/1.5 'Inter';margin:0;color:#0A0A0A; }
+
+  .vibrant .co-warn { background:#FF3024;border:2px solid #0A0A0A;border-radius:14px;padding:14px 16px;color:#fff;display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:start;box-shadow:4px 4px 0 #0A0A0A; }
+  .vibrant .co-warn .ico { width:26px;height:26px;border-radius:50%;background:#fff;color:#FF3024;font:900 16px/1 'Inter';display:flex;align-items:center;justify-content:center;border:2px solid #0A0A0A; }
+  .vibrant .co-warn h4 { font:900 13px/1 'Inter';margin:0 0 4px;letter-spacing:0.02em;text-transform:uppercase; }
+  .vibrant .co-warn p  { font:600 12.5px/1.5 'Inter';margin:0; }
+
+  .vibrant .co-key { background:#0A0A0A;color:#fff;border-radius:14px;padding:16px 18px;box-shadow:6px 6px 0 #FFD400; }
+  .vibrant .co-key h4 { font:900 11px/1 'Inter';letter-spacing:0.06em;text-transform:uppercase;color:#FFD400;margin:0 0 6px; }
+  .vibrant .co-key p  { font:900 17px/1.2 'Inter';color:#fff;margin:0;letter-spacing:-0.02em; }
+  .vibrant .co-key p em { font-style:normal;background:#FFD400;color:#0A0A0A;padding:0 5px;border-radius:4px; }
+
+  .vibrant .co-defn { font:500 13px/1.55 'Inter';color:#444; }
+  .vibrant .co-defn dfn { display:inline-block;font:900 11px/1 'Inter';letter-spacing:0.04em;text-transform:uppercase;background:#2747FF;color:#fff;padding:4px 8px;border-radius:999px;font-style:normal;margin-right:6px;vertical-align:1px; }
+
+  .vibrant .co-foot { font:600 12px/1.5 'Inter';color:#444;border-top:2px solid #0A0A0A;padding-top:10px; }
+  .vibrant .co-foot sup { background:#0A0A0A;color:#fff;font:900 10px/1 'Inter';padding:2px 5px;border-radius:4px;margin-right:5px;vertical-align:super;font-size:0.7em; }
+</style></head>
+<body class="cmp-page">
+  <div class="cmp-head">
+    <h1>Callouts &amp; special styles</h1>
+    <div class="sub">NOTE · WARNING · KEY · DEFINITION · FOOTNOTE</div>
+  </div>
+  <div class="cmp-grid">
+
+    <!-- CLEAR -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm clear"><span class="dot"></span>Clear</div><div class="meta">SOFT TINT · ROUNDED</div></div>
+      <div class="cmp-stage clear">
+        <span class="lbl">Note</span>
+        <div class="co-note">
+          <h4>A reader's note</h4>
+          <p>Highlight only phrases that, if removed, would collapse the sentence's meaning.</p>
+        </div>
+
+        <span class="lbl">Warning</span>
+        <div class="co-warn">
+          <div class="ico">!</div>
+          <div><h4>Avoid full-sentence highlights</h4><p>It defeats the skim — and trains readers to ignore the marker.</p></div>
+        </div>
+
+        <span class="lbl">Key takeaway</span>
+        <div class="co-key">
+          <h4>Pivot</h4>
+          <p>What changed is the story we live inside, not the body.</p>
+        </div>
+
+        <span class="lbl">Definition</span>
+        <div class="co-defn"><dfn>Cognitive Revolution</dfn> — a shift, ~70 kya, when Sapiens speech became recursive and unbounded.</div>
+
+        <span class="lbl">Footnote</span>
+        <div class="co-foot"><sup>1</sup>Estimate based on archaeological evidence; exact dating is debated.</div>
+      </div>
+    </div>
+
+    <!-- MATURE -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm mature"><span class="dot"></span>Mature</div><div class="meta">RULES · ITALIC</div></div>
+      <div class="cmp-stage mature">
+        <span class="lbl">Note</span>
+        <div class="co-note">
+          <h4>§ AUTHOR'S NOTE</h4>
+          <p>Highlight only phrases that, if removed, would collapse the sentence's meaning.</p>
+        </div>
+
+        <span class="lbl">Warning</span>
+        <div class="co-warn">
+          <div class="ico">!</div>
+          <div><h4>A caution</h4><p>Avoid full-sentence highlights — it defeats the skim and dulls the marker.</p></div>
+        </div>
+
+        <span class="lbl">Key takeaway</span>
+        <div class="co-key">
+          <h4>the pivot</h4>
+          <p>What changed is the <b>story we live inside</b>, not the body.</p>
+        </div>
+
+        <span class="lbl">Definition</span>
+        <div class="co-defn"><dfn>Cognitive Revolution</dfn>a shift, ~70 kya, when Sapiens speech became recursive and unbounded.</div>
+
+        <span class="lbl">Footnote</span>
+        <div class="co-foot"><sup>1</sup>Estimate based on archaeological evidence; exact dating is debated.</div>
+      </div>
+    </div>
+
+    <!-- VIBRANT -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm vibrant"><span class="dot"></span>Vibrant</div><div class="meta">FILLED · OUTLINED</div></div>
+      <div class="cmp-stage vibrant">
+        <span class="lbl">Note</span>
+        <div class="co-note">
+          <h4>NOTE</h4>
+          <p>Highlight only phrases that, if removed, would collapse the sentence.</p>
+        </div>
+
+        <span class="lbl">Warning</span>
+        <div class="co-warn">
+          <div class="ico">!</div>
+          <div><h4>DON'T DO THIS</h4><p>Full-sentence highlights defeat the skim and train readers to ignore the marker.</p></div>
+        </div>
+
+        <span class="lbl">Key takeaway</span>
+        <div class="co-key">
+          <h4>★ THE PIVOT</h4>
+          <p>What changed is the <em>story we live inside</em> — not the body.</p>
+        </div>
+
+        <span class="lbl">Definition</span>
+        <div class="co-defn"><dfn>Cog. Rev.</dfn>a shift, ~70 kya, when Sapiens speech turned recursive and unbounded.</div>
+
+        <span class="lbl">Footnote</span>
+        <div class="co-foot"><sup>01</sup>Estimate based on archaeological evidence; exact dating is debated.</div>
+      </div>
+    </div>
+
+  </div>
+</body></html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Visualized Knowledge — Design System Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin:0;padding:0;background:#F4F5F7;color:#0A0A0A;font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased; }
+  .frame { max-width:1240px;margin:0 auto;padding:48px 32px 80px; }
+
+  .head { display:flex;align-items:flex-end;justify-content:space-between;gap:32px;margin-bottom:36px;flex-wrap:wrap; }
+  .head .ttl h1 { font:700 36px/1.05 'Source Serif 4',serif;letter-spacing:-0.025em;margin:0 0 6px; }
+  .head .ttl .sub { font:500 13px/1.5 'Inter';color:#444;max-width:520px;margin:0; }
+  .head .styles { display:flex;gap:8px;align-items:center; }
+  .head .styles .pill { padding:6px 12px;border-radius:999px;font:700 11px/1 'Inter';letter-spacing:0.04em;text-transform:uppercase; }
+  .head .styles .clear   { background:#EAF1FF;color:#2D5BFF; }
+  .head .styles .mature  { background:#DEC4E0;color:#1A1614; }
+  .head .styles .vibrant { background:#FFD400;color:#0A0A0A; }
+
+  .row-tag { font:600 10.5px/1 'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin: 32px 0 14px;display:flex;align-items:center;gap:14px; }
+  .row-tag::after { content:"";flex:1;height:1px;background:#E5E5E5; }
+
+  .grid { display:grid;grid-template-columns:repeat(3,1fr);gap:14px; }
+  @media (max-width: 880px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+
+  a.card { display:flex;flex-direction:column;background:#fff;border:1px solid #E5E5E5;border-radius:14px;padding:18px 18px 16px;text-decoration:none;color:inherit;transition:all .15s ease;min-height:120px;justify-content:space-between; }
+  a.card:hover { border-color:#0A0A0A;transform:translateY(-2px);box-shadow:0 8px 24px rgba(10,10,10,0.08); }
+  a.card .nm { font:700 16px/1.2 'Inter';letter-spacing:-0.015em;margin:0 0 6px; }
+  a.card .ds { font:400 12.5px/1.5 'Inter';color:#666;margin:0; }
+  a.card .ft { display:flex;align-items:center;justify-content:space-between;margin-top:14px;gap:8px; }
+  a.card .ft .badges { display:flex;gap:5px; }
+  a.card .ft .badges span { width:10px;height:10px;border-radius:50%; }
+  a.card .ft .badges .b1{background:#2D5BFF;}
+  a.card .ft .badges .b2{background:#7C4A31;}
+  a.card .ft .badges .b3{background:#FF3024;}
+  a.card .ft .arr { font:700 13px/1 'JetBrains Mono',monospace;color:#888; }
+  a.card:hover .ft .arr { color:#0A0A0A; }
+
+  .three { display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom: 8px; }
+  .three a { display:block;padding:22px 22px 24px;border-radius:18px;text-decoration:none;border:1px solid transparent;transition:transform .15s ease; }
+  .three a:hover { transform:translateY(-2px); }
+  .three .a-clear   { background:#FBFCFF;border-color:#E6EBF5;color:#1B2240; }
+  .three .a-mature  { background:#FBF7F0;border-color:#D4C7B5;color:#1A1614; }
+  .three .a-vibrant { background:#fff;border:2px solid #0A0A0A;color:#0A0A0A;box-shadow:6px 6px 0 #FFD400; }
+  .three .lbl  { font:600 10px/1 'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:inherit;opacity:0.6; }
+  .three .a-clear .nm  { font:700 30px/1.05 'Inter';letter-spacing:-0.025em;margin:8px 0 6px; }
+  .three .a-mature .nm { font:700 32px/1 'Source Serif 4',serif;letter-spacing:-0.02em;margin:8px 0 6px; }
+  .three .a-vibrant .nm{ font:900 30px/1 'Inter';letter-spacing:-0.03em;margin:8px 0 6px; }
+  .three .ds   { font:400 12.5px/1.5 'Inter';margin:0;opacity:0.75; }
+  .three .a-mature .ds { font-style:italic; }
+  .three .a-vibrant .ds{ font-weight:600; }
+  .three .open { display:inline-flex;align-items:center;gap:6px;margin-top:14px;font:700 11.5px/1 'Inter';letter-spacing:0.03em;text-transform:uppercase; }
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <div class="head">
+    <div class="ttl">
+      <h1>Visualized Knowledge</h1>
+      <p class="sub">A design system for turning a book or essay into a styled HTML visual summary. Three styles. One pick. The kit is comprehensive, and every primitive ships in all three.</p>
+    </div>
+    <div class="styles">
+      <span class="pill clear">Clear</span>
+      <span class="pill mature">Mature</span>
+      <span class="pill vibrant">Vibrant</span>
+    </div>
+  </div>
+
+  <div class="row-tag">A · The three style kits</div>
+  <div class="three">
+    <a class="a-clear" href="elements/clear.html">
+      <div class="lbl">01 · Clear</div>
+      <div class="nm">Light, soft, breathable.</div>
+      <p class="ds">Pastel washes on a near-white surface. Pill geometry, soft shadows, Inter only. Highlight is a tinted background behind load-bearing words.</p>
+      <span class="open">Open kit →</span>
+    </a>
+    <a class="a-mature" href="elements/mature.html">
+      <div class="lbl">02 · Mature</div>
+      <div class="nm">Ivory paper, lilac highlight.</div>
+      <p class="ds">A restrained palette for long-form prose. Source Serif 4 display, Inter body. Square geometry. Bold-serif highlight on lilac is the locked rule.</p>
+      <span class="open">Open kit →</span>
+    </a>
+    <a class="a-vibrant" href="elements/vibrant.html">
+      <div class="lbl">03 · Vibrant</div>
+      <div class="nm">Loud, primary, decisive.</div>
+      <p class="ds">Saturated primary blocks, 2px ink outline, pill geometry, Inter Black. The palette is small but the contrast is total.</p>
+      <span class="open">Open kit →</span>
+    </a>
+  </div>
+
+  <div class="row-tag">B · Foundations — across all three</div>
+  <div class="grid">
+    <a class="card" href="comparison/palette.html">
+      <div><h3 class="nm">Palette</h3><p class="ds">Five families · four locked colors · primary blocks.</p></div>
+      <div class="ft"><div class="badges"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div><span class="arr">→</span></div>
+    </a>
+    <a class="card" href="comparison/type.html">
+      <div><h3 class="nm">Typography</h3><p class="ds">Inter · Source Serif 4 · Inter Black. Display, body, mono.</p></div>
+      <div class="ft"><div class="badges"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div><span class="arr">→</span></div>
+    </a>
+    <a class="card" href="comparison/special-type.html">
+      <div><h3 class="nm">Special type</h3><p class="ds"><b style="color:#0A0A0A">NEW.</b> CJK, numerals, quotes, micro labels, formulas.</p></div>
+      <div class="ft"><div class="badges"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div><span class="arr">→</span></div>
+    </a>
+    <a class="card" href="comparison/highlight.html">
+      <div><h3 class="nm">Highlight rule</h3><p class="ds">The load-bearing primitive — pastel, lilac, or yellow pill.</p></div>
+      <div class="ft"><div class="badges"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div><span class="arr">→</span></div>
+    </a>
+    <a class="card" href="comparison/callout.html">
+      <div><h3 class="nm">Callouts &amp; specials</h3><p class="ds"><b style="color:#0A0A0A">NEW.</b> Note · warning · key takeaway · definition · footnote.</p></div>
+      <div class="ft"><div class="badges"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div><span class="arr">→</span></div>
+    </a>
+    <a class="card" href="comparison/prose-blocks.html">
+      <div><h3 class="nm">Prose blocks</h3><p class="ds"><b style="color:#0A0A0A">NEW.</b> Numbered list · pull-quote · unit-prefix numerals.</p></div>
+      <div class="ft"><div class="badges"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div><span class="arr">→</span></div>
+    </a>
+    <a class="card" href="comparison/icons.html">
+      <div><h3 class="nm">Icons</h3><p class="ds">Tone-matched icon language for each style.</p></div>
+      <div class="ft"><div class="badges"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div><span class="arr">→</span></div>
+    </a>
+  </div>
+
+  <div class="row-tag">C · Components</div>
+  <div class="grid">
+    <a class="card" href="comparison/buttons.html">
+      <div><h3 class="nm">Buttons</h3><p class="ds">Pill / square / pill-ink-outline.</p></div>
+      <div class="ft"><div class="badges"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div><span class="arr">→</span></div>
+    </a>
+    <a class="card" href="comparison/inputs.html">
+      <div><h3 class="nm">Inputs</h3><p class="ds">Rounded · underlined · pill with hard-shadow focus.</p></div>
+      <div class="ft"><div class="badges"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div><span class="arr">→</span></div>
+    </a>
+    <a class="card" href="comparison/cards.html">
+      <div><h3 class="nm">Cards</h3><p class="ds">Soft-shadow · flat ruled · hard-shadow ink-outlined.</p></div>
+      <div class="ft"><div class="badges"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div><span class="arr">→</span></div>
+    </a>
+  </div>
+
+  <div class="row-tag">D · Patterns — the structural primitives</div>
+  <div class="grid">
+    <a class="card" href="comparison/pattern-timeline.html">
+      <div><h3 class="nm">Timeline</h3><p class="ds">Events along a non-linear axis.</p></div>
+      <div class="ft"><div class="badges"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div><span class="arr">→</span></div>
+    </a>
+    <a class="card" href="comparison/pattern-logic.html">
+      <div><h3 class="nm">Logic chain</h3><p class="ds">A → B → C with rationale.</p></div>
+      <div class="ft"><div class="badges"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div><span class="arr">→</span></div>
+    </a>
+    <a class="card" href="comparison/chain.html">
+      <div><h3 class="nm">Chain (4 stages)</h3><p class="ds">Connected steps with a pivot stage.</p></div>
+      <div class="ft"><div class="badges"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div><span class="arr">→</span></div>
+    </a>
+    <a class="card" href="comparison/pattern-comparison.html">
+      <div><h3 class="nm">Comparison · 3-col</h3><p class="ds">N objects × M dimensions.</p></div>
+      <div class="ft"><div class="badges"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div><span class="arr">→</span></div>
+    </a>
+    <a class="card" href="comparison/contrast.html">
+      <div><h3 class="nm">Contrast block · A vs B</h3><p class="ds"><b style="color:#0A0A0A">NEW.</b> A sharp narrative comparison block.</p></div>
+      <div class="ft"><div class="badges"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div><span class="arr">→</span></div>
+    </a>
+    <a class="card" href="comparison/table-dense.html">
+      <div><h3 class="nm">Dense table</h3><p class="ds"><b style="color:#0A0A0A">NEW.</b> 6 × 7 with row + column grouping.</p></div>
+      <div class="ft"><div class="badges"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div><span class="arr">→</span></div>
+    </a>
+    <a class="card" href="comparison/tree.html">
+      <div><h3 class="nm">Tree / taxonomy</h3><p class="ds"><b style="color:#0A0A0A">NEW.</b> Hierarchical branches with leaf rules.</p></div>
+      <div class="ft"><div class="badges"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div><span class="arr">→</span></div>
+    </a>
+    <a class="card" href="comparison/pattern-numerals.html">
+      <div><h3 class="nm">Big numerals</h3><p class="ds">Scale itself as the visual.</p></div>
+      <div class="ft"><div class="badges"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div><span class="arr">→</span></div>
+    </a>
+  </div>
+
+</div>
+</body>
+</html>

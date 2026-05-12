@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Tree · 3 styles</title>
+<link rel="stylesheet" href="_cmp.css">
+<style>
+  .cmp-stage { padding: 24px 22px; min-height: 460px; align-items: stretch; justify-content: flex-start; }
+
+  /* shared structure: nested ul/li ; connectors are CSS pseudo-elements */
+  .tree, .tree ul { list-style:none;margin:0;padding:0; }
+  .tree { padding-left:0; }
+  .tree ul { padding-left:24px;position:relative; }
+  .tree li { position:relative;padding:4px 0 4px 0; }
+  .tree li > .nd { display:inline-flex;align-items:center;gap:8px; }
+
+  /* ============ CLEAR — soft pills as nodes, dashed connectors ============ */
+  .clear .tree li { padding-left:14px; }
+  .clear .tree ul { padding-left:30px;border-left:1.5px dashed #C8DCFF;margin-left:14px; }
+  .clear .tree li::before {
+    content:"";position:absolute;left:0;top:18px;width:14px;height:1.5px;
+    border-top:1.5px dashed #C8DCFF;
+  }
+  .clear .tree > li::before { display:none; }
+  .clear .tree .nd { padding:5px 12px;border-radius:999px;font:600 12px/1 'Inter';color:#1B2240;background:#fff;border:1px solid #E6EBF5; }
+  .clear .tree .nd.root  { background:#1B2240;color:#fff;border-color:#1B2240;font-weight:700;padding:7px 16px; }
+  .clear .tree .nd.l1.blue  { background:#EAF1FF;color:#2D5BFF;border-color:#C8DCFF; }
+  .clear .tree .nd.l1.teal  { background:#E4F6F4;color:#0E8C7E;border-color:#B9E6E0; }
+  .clear .tree .nd.l1.lav   { background:#EFEBFF;color:#6151D6;border-color:#D4CCFF; }
+  .clear .tree .nd .ct { font:500 10.5px/1 'JetBrains Mono',monospace;color:#8189A6;margin-left:6px; }
+  .clear .tree .nd.pivot { outline:3px solid #D4CCFF;outline-offset:2px; }
+
+  /* ============ MATURE — square dots, hairline rules, serif labels ============ */
+  .mature .tree li { padding-left:18px; }
+  .mature .tree ul { padding-left:24px;border-left:1px solid #1A1614;margin-left:6px; }
+  .mature .tree li::before {
+    content:"";position:absolute;left:0;top:14px;width:18px;border-top:1px solid #1A1614;
+  }
+  .mature .tree > li::before { display:none; }
+  .mature .tree .nd::before {
+    content:"";display:inline-block;width:7px;height:7px;background:#1A1614;margin-right:2px;
+  }
+  .mature .tree .nd.pivot::before { background:#DEC4E0;outline:1px solid #1A1614;width:9px;height:9px; }
+  .mature .tree .nd { font:700 14px/1.2 'Source Serif 4',serif;color:#1A1614;letter-spacing:-0.01em; }
+  .mature .tree .nd.root { font-size:18px; }
+  .mature .tree .nd .ct { font:italic 400 12px/1 'Source Serif 4',serif;color:#7C4A31;margin-left:6px; }
+  .mature .tree li > .desc { display:block;margin:2px 0 2px 14px;font:400 12.5px/1.5 'Inter';color:#3D332C;max-width:36ch; }
+  .mature .tree li > .desc b { font-family:'Source Serif 4',serif;font-weight:700;color:#1A1614;background:#DEC4E0;padding:1px 4px;font-size:1.06em; }
+
+  /* ============ VIBRANT — colored blocks, ink rules ============ */
+  .vibrant .tree li { padding-left:0; }
+  .vibrant .tree ul { padding-left:30px;margin-left:18px;position:relative; }
+  /* vertical rule drawn behind nodes, stops at last child */
+  .vibrant .tree ul::before {
+    content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:#0A0A0A;z-index:0;
+  }
+  .vibrant .tree li::before {
+    content:"";position:absolute;left:-2px;top:16px;width:32px;border-top:2px solid #0A0A0A;z-index:0;
+  }
+  .vibrant .tree > li::before { display:none; }
+  .vibrant .tree .nd { position:relative;z-index:2;padding:6px 12px;border-radius:8px;border:2px solid #0A0A0A;font:800 12px/1 'Inter';letter-spacing:-0.01em;background:#fff;color:#0A0A0A; }
+  .vibrant .tree .nd.root  { background:#0A0A0A;color:#fff;font-weight:900;font-size:14px;padding:8px 14px; }
+  .vibrant .tree .nd.l1.blue  { background:#2747FF;color:#fff; }
+  .vibrant .tree .nd.l1.red   { background:#FF3024;color:#fff; }
+  .vibrant .tree .nd.l1.green { background:#1FA85A;color:#fff; }
+  .vibrant .tree .nd .ct { font:900 10px/1 'Inter';color:#0A0A0A;background:#FFD400;padding:2px 6px;border-radius:999px;margin-left:6px;border:1.5px solid #0A0A0A; }
+  .vibrant .tree .nd.pivot { box-shadow:3px 3px 0 #FFD400; }
+</style></head>
+<body class="cmp-page">
+  <div class="cmp-head">
+    <h1>Tree — taxonomy / hierarchy</h1>
+    <div class="sub">HOMINID FAMILY · 3 BRANCHES · 7 LEAVES</div>
+  </div>
+  <div class="cmp-grid">
+
+    <!-- ============ CLEAR ============ -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm clear"><span class="dot"></span>Clear</div><div class="meta">PILLS · DASHED RULES</div></div>
+      <div class="cmp-stage clear">
+        <ul class="tree">
+          <li>
+            <div class="nd root">Hominidae <span class="ct">family</span></div>
+            <ul>
+              <li>
+                <div class="nd l1 blue">Pongo <span class="ct">orangutan</span></div>
+                <ul>
+                  <li><div class="nd">P. abelii</div></li>
+                  <li><div class="nd">P. pygmaeus</div></li>
+                </ul>
+              </li>
+              <li>
+                <div class="nd l1 teal">Pan <span class="ct">chimpanzee</span></div>
+                <ul>
+                  <li><div class="nd">P. troglodytes</div></li>
+                  <li><div class="nd">P. paniscus <span class="ct">bonobo</span></div></li>
+                </ul>
+              </li>
+              <li>
+                <div class="nd l1 lav pivot">Homo <span class="ct">us</span></div>
+                <ul>
+                  <li><div class="nd">H. erectus</div></li>
+                  <li><div class="nd">H. neanderthalensis</div></li>
+                  <li><div class="nd pivot">H. sapiens</div></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ============ MATURE ============ -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm mature"><span class="dot"></span>Mature</div><div class="meta">SQUARE DOTS · HAIRLINES</div></div>
+      <div class="cmp-stage mature">
+        <ul class="tree">
+          <li>
+            <div class="nd root">Hominidae <span class="ct">— the great-ape family</span></div>
+            <ul>
+              <li>
+                <div class="nd">Pongo <span class="ct">orangutan</span></div>
+                <ul>
+                  <li><div class="nd">P. abelii</div></li>
+                  <li><div class="nd">P. pygmaeus</div></li>
+                </ul>
+              </li>
+              <li>
+                <div class="nd">Pan <span class="ct">chimpanzee</span></div>
+                <ul>
+                  <li><div class="nd">P. troglodytes</div></li>
+                  <li><div class="nd">P. paniscus</div></li>
+                </ul>
+              </li>
+              <li>
+                <div class="nd">Homo <span class="ct">us</span></div>
+                <span class="desc">A genus of <b>several species</b>; only one survives.</span>
+                <ul>
+                  <li><div class="nd">H. erectus</div></li>
+                  <li><div class="nd">H. neanderthalensis</div></li>
+                  <li><div class="nd pivot">H. sapiens</div></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ============ VIBRANT ============ -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm vibrant"><span class="dot"></span>Vibrant</div><div class="meta">BLOCKS · INK RULES</div></div>
+      <div class="cmp-stage vibrant">
+        <ul class="tree">
+          <li>
+            <div class="nd root">HOMINIDAE <span class="ct">FAMILY</span></div>
+            <ul>
+              <li>
+                <div class="nd l1 blue">PONGO <span class="ct">2 SP</span></div>
+                <ul>
+                  <li><div class="nd">P. abelii</div></li>
+                  <li><div class="nd">P. pygmaeus</div></li>
+                </ul>
+              </li>
+              <li>
+                <div class="nd l1 green">PAN <span class="ct">2 SP</span></div>
+                <ul>
+                  <li><div class="nd">P. troglodytes</div></li>
+                  <li><div class="nd">P. paniscus</div></li>
+                </ul>
+              </li>
+              <li>
+                <div class="nd l1 red pivot">HOMO <span class="ct">★ US</span></div>
+                <ul>
+                  <li><div class="nd">H. erectus</div></li>
+                  <li><div class="nd">H. neanderthalensis</div></li>
+                  <li><div class="nd pivot">H. sapiens</div></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</body></html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Pattern · Big numerals · 3 styles</title>
+<link rel="stylesheet" href="_cmp.css">
+<style>
+  .nbgrid { display:grid;grid-template-columns:1fr 1fr;gap:14px; }
+  .nb { padding:18px 16px; }
+  .nb .n { line-height:1; }
+  .nb .t { font:700 12px/1.3 'Inter';margin-top:8px; }
+  .nb .d { font:400 11.5px/1.45 'Inter';margin-top:3px; }
+
+  /* CLEAR: pastel block, accent numeral */
+  .clear .nb { border-radius:14px; }
+  .clear .nb .n { font:800 38px/1 'Inter';letter-spacing:-0.025em; }
+  .clear .nb.a1 { background:#EAF1FF; }
+  .clear .nb.a1 .n { color:#2D5BFF; }
+  .clear .nb.a1 .t { color:#1B2240; }
+  .clear .nb.a1 .d { color:#4A5478; }
+  .clear .nb.a2 { background:#EFEBFF; }
+  .clear .nb.a2 .n { color:#6151D6; }
+  .clear .nb.a2 .t { color:#1B2240; }
+  .clear .nb.a2 .d { color:#4A5478; }
+
+  /* MATURE: serif numerals, no fill */
+  .mature .nb { border-bottom:1px solid #D4C7B5;padding:14px 4px 18px; }
+  .mature .nb .n { font:700 56px/1 'Source Serif 4',serif;letter-spacing:-0.035em;color:#1A1614; }
+  .mature .nb .t { font-family:'Source Serif 4',serif;font-weight:700;font-size:14px;color:#1A1614; }
+  .mature .nb .d { color:#3D332C; }
+
+  /* VIBRANT: colored fills, white numerals */
+  .vibrant .nb { border-radius:14px;border:2px solid #0A0A0A; }
+  .vibrant .nb .n { font:900 44px/1 'Inter';letter-spacing:-0.04em; }
+  .vibrant .nb.a1 { background:#2747FF;color:#fff; }
+  .vibrant .nb.a1 .n, .vibrant .nb.a1 .t { color:#fff; }
+  .vibrant .nb.a1 .d { color:rgba(255,255,255,0.85); }
+  .vibrant .nb.a2 { background:#FFD400;color:#0A0A0A; }
+  .vibrant .nb.a2 .n, .vibrant .nb.a2 .t, .vibrant .nb.a2 .d { color:#0A0A0A; }
+</style></head>
+<body class="cmp-page">
+  <div class="cmp-head">
+    <h1>Pattern — Big numerals</h1>
+    <div class="sub">FIGURES WITH CONTEXT</div>
+  </div>
+  <div class="cmp-grid">
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm clear"><span class="dot"></span>Clear</div><div class="meta">PASTEL BLOCKS</div></div>
+      <div class="cmp-stage clear">
+        <div class="nbgrid">
+          <div class="nb a1"><div class="n">70k</div><div class="t">Cognitive Revolution</div><div class="d">years before present</div></div>
+          <div class="nb a2"><div class="n">8</div><div class="t">Other human species</div><div class="d">that shared the planet</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm mature"><span class="dot"></span>Mature</div><div class="meta">SERIF NUMERALS</div></div>
+      <div class="cmp-stage mature">
+        <div class="nbgrid">
+          <div class="nb"><div class="n">70k</div><div class="t">The Cognitive Revolution</div><div class="d">years before present, when speech turned recursive.</div></div>
+          <div class="nb"><div class="n">8</div><div class="t">Other human species</div><div class="d">that once shared the planet, now extinct.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm vibrant"><span class="dot"></span>Vibrant</div><div class="meta">SATURATED FILLS</div></div>
+      <div class="cmp-stage vibrant">
+        <div class="nbgrid">
+          <div class="nb a1"><div class="n">70k</div><div class="t">YEARS B.P.</div><div class="d">Cognitive Revolution</div></div>
+          <div class="nb a2"><div class="n">8</div><div class="t">OTHER HUMAN SPECIES</div><div class="d">that once shared Earth</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body></html>

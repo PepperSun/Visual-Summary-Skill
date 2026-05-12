@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Special type · 3 styles</title>
+<link rel="stylesheet" href="_cmp.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  .cmp-stage { padding: 24px 22px; gap: 18px; min-height: 380px; align-items: stretch; justify-content: flex-start; }
+  .ttl-mono { font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin:0 0 6px; }
+
+  /* Each row: a "scene" tag + the rendered specimen */
+  .row { display:grid; grid-template-columns: 86px 1fr; gap:14px; align-items:baseline; padding:10px 0; border-bottom:1px dashed currentColor; opacity:1; }
+  .row:last-child { border-bottom:0; }
+  .row .lbl { font:500 10px/1.2 'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;opacity:0.55; }
+
+  /* CLEAR */
+  .clear .row { border-color: rgba(27,34,64,0.10); }
+  .clear .cjk-body { font-family:'Noto Sans SC','PingFang SC',sans-serif;font-weight:400;font-size:14px;line-height:1.65;color:#1B2240; }
+  .clear .cjk-disp { font-family:'Noto Sans SC','PingFang SC',sans-serif;font-weight:700;font-size:22px;line-height:1.2;letter-spacing:0;color:#1B2240; }
+  .clear .num     { font-family:'Inter',sans-serif;font-weight:700;font-size:30px;letter-spacing:-0.025em;color:#2D5BFF;font-variant-numeric: tabular-nums lining-nums; }
+  .clear .num small{ font:500 12px/1 'Inter';color:#8189A6;letter-spacing:0;margin-left:6px; }
+  .clear .quote   { font:italic 400 16px/1.55 'Inter';color:#4A5478;border-left:3px solid #C8DCFF;padding:2px 0 2px 14px; }
+  .clear .quote::before { content:"\201C "; }
+  .clear .quote::after  { content:" \201D"; }
+  .clear .micro   { font:600 10px/1 'JetBrains Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;color:#6151D6;background:#EFEBFF;padding:4px 8px;border-radius:4px; }
+  .clear .formula { font-family:'JetBrains Mono',monospace;font-size:13px;color:#1B2240;background:#EAF1FF;padding:6px 10px;border-radius:6px;display:inline-block; }
+  .clear .formula sub{ font-size:0.7em;vertical-align:-0.25em;color:#2D5BFF; }
+
+  /* MATURE */
+  .mature .row { border-color: rgba(26,22,20,0.18); }
+  .mature .cjk-body { font-family:'Noto Serif SC','Songti SC',serif;font-weight:400;font-size:15px;line-height:1.75;color:#1A1614; }
+  .mature .cjk-disp { font-family:'Noto Serif SC','Songti SC',serif;font-weight:700;font-size:26px;line-height:1.1;letter-spacing:0;color:#1A1614; }
+  .mature .num     { font-family:'Source Serif 4',serif;font-weight:700;font-style:italic;font-size:34px;letter-spacing:-0.02em;color:#1A1614;font-variant-numeric: oldstyle-nums proportional-nums; }
+  .mature .num small{ font:italic 400 13px/1 'Source Serif 4',serif;color:#7A6B5F;margin-left:8px; }
+  .mature .quote   { font:italic 400 19px/1.4 'Source Serif 4',serif;color:#1A1614;padding-left:14px;border-left:2px solid #1A1614; }
+  .mature .quote .cite { display:block;font:400 11px/1 'JetBrains Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:#7C4A31;margin-top:8px;font-style:normal; }
+  .mature .micro   { font:italic 400 12.5px/1 'Source Serif 4',serif;color:#7C4A31;letter-spacing:0; }
+  .mature .micro::before { content:"§ "; }
+  .mature .formula { font-family:'Source Serif 4',serif;font-style:italic;font-weight:600;font-size:16px;color:#1A1614;background:#DEC4E0;padding:1px 6px; }
+  .mature .formula sub{ font-size:0.75em;font-style:normal; }
+
+  /* VIBRANT */
+  .vibrant .row { border-color: rgba(10,10,10,0.16); }
+  .vibrant .cjk-body { font-family:'Noto Sans SC','PingFang SC',sans-serif;font-weight:500;font-size:14px;line-height:1.6;color:#0A0A0A; }
+  .vibrant .cjk-disp { font-family:'Noto Sans SC','PingFang SC',sans-serif;font-weight:900;font-size:26px;line-height:1.05;letter-spacing:-0.01em;color:#0A0A0A; }
+  .vibrant .cjk-disp em{ font-style:normal;background:#FFD400;padding:0 4px; }
+  .vibrant .num     { font-family:'Inter',sans-serif;font-weight:900;font-size:38px;letter-spacing:-0.04em;color:#0A0A0A;line-height:1;font-variant-numeric: tabular-nums; }
+  .vibrant .num em  { font-style:normal;background:#FF3024;color:#fff;padding:0 6px; }
+  .vibrant .num small{ font:800 11px/1 'Inter';color:#0A0A0A;background:#FFD400;padding:3px 7px;margin-left:8px;border-radius:999px;letter-spacing:-0.01em; }
+  .vibrant .quote   { font:900 17px/1.25 'Inter';color:#0A0A0A;letter-spacing:-0.02em; }
+  .vibrant .quote::before{ content:"\201C";color:#FF3024;font-size:1.6em;line-height:0.5;margin-right:4px;vertical-align:-0.15em; }
+  .vibrant .micro   { font:900 10px/1 'Inter';letter-spacing:0.08em;text-transform:uppercase;color:#fff;background:#0A0A0A;padding:4px 8px;border-radius:999px;display:inline-block; }
+  .vibrant .formula { font:900 14px/1 'Inter';color:#0A0A0A;background:#FFD400;padding:4px 10px;border:2px solid #0A0A0A;border-radius:6px;display:inline-block; }
+  .vibrant .formula sub{ font-size:0.7em;vertical-align:-0.2em; }
+</style></head>
+<body class="cmp-page">
+  <div class="cmp-head">
+    <h1>Special type — when the default isn't enough</h1>
+    <div class="sub">CJK · NUMERALS · QUOTES · MICRO · FORMULA</div>
+  </div>
+  <div class="cmp-grid">
+
+    <!-- CLEAR -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm clear"><span class="dot"></span>Clear</div><div class="meta">NOTO SANS SC · INTER NUMS</div></div>
+      <div class="cmp-stage clear">
+        <div class="row"><div class="lbl">CJK · disp</div><div class="cjk-disp">从一只猿到一颗星球</div></div>
+        <div class="row"><div class="lbl">CJK · body</div><div class="cjk-body">同一具身体活过三种制度——觅食、耕作、现代。改变的是我们栖居其中的故事。</div></div>
+        <div class="row"><div class="lbl">Numeral</div><div><span class="num">70,000</span><small>years before present</small></div></div>
+        <div class="row"><div class="lbl">Quote</div><div class="quote">A reader can skim a page in seconds.</div></div>
+        <div class="row"><div class="lbl">Micro</div><div><span class="micro">Chapter 03 · Pivot</span></div></div>
+        <div class="row"><div class="lbl">Formula</div><div><span class="formula">CO<sub>2</sub> + H<sub>2</sub>O → C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></span></div></div>
+      </div>
+    </div>
+
+    <!-- MATURE -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm mature"><span class="dot"></span>Mature</div><div class="meta">NOTO SERIF SC · OLDSTYLE NUMS</div></div>
+      <div class="cmp-stage mature">
+        <div class="row"><div class="lbl">CJK · disp</div><div class="cjk-disp">槽边往事</div></div>
+        <div class="row"><div class="lbl">CJK · body</div><div class="cjk-body">一个在云南山野中无所不吃的人，在北京待了近二十年后，终于学会了花粉过敏。</div></div>
+        <div class="row"><div class="lbl">Numeral</div><div><span class="num">70,000</span><small>years b.p.</small></div></div>
+        <div class="row"><div class="lbl">Quote</div><div class="quote">We still run on stories. Only the stories have changed.<span class="cite">Sapiens · 2014</span></div></div>
+        <div class="row"><div class="lbl">Micro</div><div><span class="micro">From parts I – III</span></div></div>
+        <div class="row"><div class="lbl">Formula</div><div><span class="formula">e<sub>iπ</sub> + 1 = 0</span></div></div>
+      </div>
+    </div>
+
+    <!-- VIBRANT -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm vibrant"><span class="dot"></span>Vibrant</div><div class="meta">NOTO SANS SC BLACK · TAB NUMS</div></div>
+      <div class="cmp-stage vibrant">
+        <div class="row"><div class="lbl">CJK · disp</div><div class="cjk-disp">人类，<em>简史</em>。</div></div>
+        <div class="row"><div class="lbl">CJK · body</div><div class="cjk-body">同一具身体，活过三种制度。改变的不是身体，是我们栖居其中的故事。</div></div>
+        <div class="row"><div class="lbl">Numeral</div><div><span class="num">70<em>k</em></span><small>YBP</small></div></div>
+        <div class="row"><div class="lbl">Quote</div><div class="quote">Conquer the page, then keep going.</div></div>
+        <div class="row"><div class="lbl">Micro</div><div><span class="micro">★ FEATURED · 03</span></div></div>
+        <div class="row"><div class="lbl">Formula</div><div><span class="formula">E = mc<sub>2</sub></span></div></div>
+      </div>
+    </div>
+
+  </div>
+</body></html>

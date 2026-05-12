@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Palette · 3 styles</title>
+<link rel="stylesheet" href="_cmp.css">
+<style>
+  .pal { display:grid;grid-template-columns:repeat(5,1fr);gap:6px;width:100%; }
+  .pal .sw { aspect-ratio:1;border-radius:6px;display:flex;align-items:flex-end;padding:6px;font:700 10px/1 'Inter';color:#fff; }
+  .pal .sw.dark { color:#0A0A0A; }
+  .legend { font:400 11.5px/1.4 'Inter';color:#444;margin-top:14px; }
+</style></head>
+<body class="cmp-page">
+  <div class="cmp-head">
+    <h1>Palette</h1>
+    <div class="sub">THE OPERATING COLORS PER STYLE</div>
+  </div>
+  <div class="cmp-grid">
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm clear"><span class="dot"></span>Clear</div><div class="meta">5 PASTEL FAMILIES</div></div>
+      <div class="cmp-stage clear">
+        <div class="pal">
+          <div class="sw dark" style="background:#EAF1FF;color:#2D5BFF;">Blue</div>
+          <div class="sw dark" style="background:#E4F6F4;color:#0E8C7E;">Teal</div>
+          <div class="sw dark" style="background:#EFEBFF;color:#6151D6;">Lavender</div>
+          <div class="sw dark" style="background:#E8F4E8;color:#2E8B40;">Mint</div>
+          <div class="sw dark" style="background:#FFEDE3;color:#C66224;">Peach</div>
+        </div>
+        <div class="legend">Pastel tint + matching ink. Pivot = lavender.</div>
+      </div>
+    </div>
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm mature"><span class="dot"></span>Mature</div><div class="meta">4 LOCKED COLORS</div></div>
+      <div class="cmp-stage mature">
+        <div class="pal" style="grid-template-columns:repeat(4,1fr);">
+          <div class="sw dark" style="background:#FBF7F0;border:1px solid #D4C7B5;color:#1A1614;">Ivory</div>
+          <div class="sw dark" style="background:#DEC4E0;color:#1A1614;">Lilac</div>
+          <div class="sw" style="background:#7C4A31;">Chestnut</div>
+          <div class="sw" style="background:#1A1614;">Ink</div>
+        </div>
+        <div class="legend" style="font-family:'Source Serif 4',serif;font-style:italic;color:#3D332C;">Ivory · lilac · chestnut · ink. Nothing else.</div>
+      </div>
+    </div>
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm vibrant"><span class="dot"></span>Vibrant</div><div class="meta">6 SATURATED + INK</div></div>
+      <div class="cmp-stage vibrant">
+        <div class="pal" style="grid-template-columns:repeat(6,1fr);">
+          <div class="sw" style="background:#2747FF;">Blue</div>
+          <div class="sw dark" style="background:#FFD400;">Yellow</div>
+          <div class="sw" style="background:#FF3024;">Red</div>
+          <div class="sw" style="background:#1FA85A;">Green</div>
+          <div class="sw" style="background:#7A3CFF;">Purple</div>
+          <div class="sw" style="background:#0A0A0A;">Ink</div>
+        </div>
+        <div class="legend" style="font-weight:700;color:#0A0A0A;">Six chromas + ink. No tints, no shades.</div>
+      </div>
+    </div>
+  </div>
+</body></html>

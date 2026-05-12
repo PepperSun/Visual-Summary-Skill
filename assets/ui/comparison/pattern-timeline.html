@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Pattern · Timeline · 3 styles</title>
+<link rel="stylesheet" href="_cmp.css">
+<style>
+  .cmp-stage { padding: 22px 22px; min-height: 0; align-items: stretch; justify-content: flex-start; gap: 26px; }
+  .var-label { font:600 9.5px/1 'JetBrains Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;color:#999;margin-bottom:10px;display:flex;align-items:center;gap:10px; }
+  .var-label::after { content:"";flex:1;height:1px;background:#E5E5E5; }
+  .clear .var-label { color:#8189A6; }
+  .clear .var-label::after { background:#E6EBF5; }
+  .mature .var-label { color:#7C4A31;font-family:'Source Serif 4',serif;font-style:italic;font-weight:400;letter-spacing:0.04em;text-transform:none; }
+  .mature .var-label::after { background:#D4C7B5; }
+  .vibrant .var-label { color:#0A0A0A; }
+  .vibrant .var-label::after { background:#0A0A0A;height:2px; }
+
+  /* ============================================================ */
+  /* VARIANT A — AXIS / EVENT TIMELINE                            */
+  /* ============================================================ */
+
+  /* CLEAR axis: dashed horizontal line with labelled dots */
+  .clear .axis { position:relative;padding:34px 6px 38px; }
+  .clear .axis::before { content:"";position:absolute;left:6px;right:6px;top:50%;height:1.5px;border-top:1.5px dashed #C8DCFF; }
+  .clear .axis .pts { display:flex;justify-content:space-between;position:relative; }
+  .clear .axis .pt  { display:flex;flex-direction:column;align-items:center;position:relative; }
+  .clear .axis .pt .lbl { background:#fff;border:1px solid #E6EBF5;border-radius:999px;padding:4px 10px;font:600 11px/1 'Inter';color:#1B2240;margin-bottom:8px;white-space:nowrap; }
+  .clear .axis .pt .dot { width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid #2D5BFF;box-shadow:0 0 0 4px rgba(45,91,255,0.12); }
+  .clear .axis .pt .yr  { margin-top:8px;font:600 10.5px/1 'JetBrains Mono',monospace;color:#2D5BFF;letter-spacing:0.04em; }
+  .clear .axis .pt.pivot .dot { background:#6151D6;border-color:#6151D6;box-shadow:0 0 0 5px rgba(97,81,214,0.18); }
+  .clear .axis .pt.pivot .yr { color:#6151D6; }
+  .clear .axis .pt.pivot .lbl { background:#EFEBFF;border-color:#D4CCFF;color:#6151D6; }
+
+  /* MATURE axis: hairline rule, serif dates above */
+  .mature .axis { position:relative;padding:30px 8px 30px; }
+  .mature .axis::before { content:"";position:absolute;left:8px;right:8px;top:50%;height:1px;background:#1A1614; }
+  .mature .axis .pts { display:flex;justify-content:space-between;position:relative; }
+  .mature .axis .pt  { display:flex;flex-direction:column;align-items:center;text-align:center;max-width:100px; }
+  .mature .axis .pt .lbl { font:400 11.5px/1.3 'Inter';color:#3D332C;margin-bottom:8px;letter-spacing:0; }
+  .mature .axis .pt .dot { width:7px;height:7px;background:#1A1614; }
+  .mature .axis .pt .yr  { margin-top:8px;font:italic 400 12px/1 'Source Serif 4',serif;color:#7C4A31;font-variant-numeric:oldstyle-nums; }
+  .mature .axis .pt.pivot .dot { width:11px;height:11px;background:#DEC4E0;outline:1px solid #1A1614; }
+
+  /* VIBRANT axis: thick ink rule, square markers, big numerals */
+  .vibrant .axis { position:relative;padding:30px 6px 38px; }
+  .vibrant .axis::before { content:"";position:absolute;left:6px;right:6px;top:50%;height:3px;background:#0A0A0A; }
+  .vibrant .axis .pts { display:flex;justify-content:space-between;position:relative; }
+  .vibrant .axis .pt  { display:flex;flex-direction:column;align-items:center;position:relative; }
+  .vibrant .axis .pt .lbl { background:#fff;border:2px solid #0A0A0A;padding:4px 10px;font:900 10.5px/1 'Inter';color:#0A0A0A;margin-bottom:10px;white-space:nowrap;letter-spacing:-0.005em; }
+  .vibrant .axis .pt .dot { width:14px;height:14px;background:#FFD400;border:2px solid #0A0A0A; }
+  .vibrant .axis .pt .yr  { margin-top:10px;font:900 11px/1 'Inter';color:#0A0A0A;letter-spacing:-0.01em; }
+  .vibrant .axis .pt.pivot .dot { background:#FF3024;width:18px;height:18px;margin:-2px 0; }
+  .vibrant .axis .pt.pivot .lbl { background:#FFD400; }
+
+  /* ============================================================ */
+  /* VARIANT B — PROGRESS / PERIOD BARS (overlapping spans)       */
+  /* ============================================================ */
+
+  .periods { display:flex;flex-direction:column;gap:6px; }
+  .periods .row { position:relative;display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:center;height:30px; }
+  .periods .row .lab { font-size:11px;line-height:1.1;text-align:right; }
+  .periods .row .track { position:relative;height:18px;border-radius:0; }
+  .periods .row .bar { position:absolute;top:0;bottom:0;display:flex;align-items:center;padding:0 8px;font-size:10.5px;line-height:1;white-space:nowrap;overflow:hidden; }
+  .periods .scale { display:grid;grid-template-columns:90px 1fr;gap:12px;margin-top:6px; }
+  .periods .scale .ticks { display:flex;justify-content:space-between;font:500 10px/1 'JetBrains Mono',monospace; }
+
+  /* CLEAR periods */
+  .clear .periods .row .lab { font-family:'Inter';font-weight:600;color:#1B2240; }
+  .clear .periods .row .track { background:#F4F5F7;border-radius:999px; }
+  .clear .periods .row .bar { border-radius:999px;font-family:'Inter';font-weight:600; }
+  .clear .periods .b1 { background:#EAF1FF;color:#2D5BFF; }
+  .clear .periods .b2 { background:#E4F6F4;color:#0E8C7E; }
+  .clear .periods .b3 { background:#EFEBFF;color:#6151D6; }
+  .clear .periods .b4 { background:#FFEDE3;color:#C66224; }
+  .clear .periods .scale .ticks { color:#8189A6; }
+
+  /* MATURE periods */
+  .mature .periods .row .lab { font:italic 400 12px/1.2 'Source Serif 4',serif;color:#7C4A31; }
+  .mature .periods .row .track { background:transparent;border-bottom:1px solid #D4C7B5; }
+  .mature .periods .row .bar { background:transparent;border-top:1px solid #1A1614;border-bottom:1px solid #1A1614;font:400 11px/1 'Inter';color:#1A1614; }
+  .mature .periods .row .bar::before { content:"";position:absolute;left:0;top:-3px;bottom:-3px;width:1px;background:#1A1614; }
+  .mature .periods .row .bar::after  { content:"";position:absolute;right:0;top:-3px;bottom:-3px;width:1px;background:#1A1614; }
+  .mature .periods .b1 { background:#F2EAEC; }
+  .mature .periods .b2 { background:#E8E1D2; }
+  .mature .periods .b3 { background:#DEC4E0; }
+  .mature .periods .b4 { background:#EAD9C9; }
+  .mature .periods .scale .ticks { color:#7C4A31;font-family:'Source Serif 4',serif;font-style:italic;font-weight:400; }
+
+  /* VIBRANT periods */
+  .vibrant .periods .row .lab { font:900 11px/1.1 'Inter';color:#0A0A0A;text-transform:uppercase;letter-spacing:-0.01em; }
+  .vibrant .periods .row .track { background:#fff;border:2px solid #0A0A0A; }
+  .vibrant .periods .row .bar { font:900 10px/1 'Inter';letter-spacing:-0.005em;border-right:2px solid #0A0A0A;height:calc(100% + 0px);top:0;bottom:0; }
+  .vibrant .periods .b1 { background:#2747FF;color:#fff; }
+  .vibrant .periods .b2 { background:#1FA85A;color:#fff; }
+  .vibrant .periods .b3 { background:#FFD400;color:#0A0A0A; }
+  .vibrant .periods .b4 { background:#FF3024;color:#fff; }
+  .vibrant .periods .scale .ticks { color:#0A0A0A;font-weight:900; }
+</style></head>
+<body class="cmp-page">
+  <div class="cmp-head">
+    <h1>Pattern — Timeline</h1>
+    <div class="sub">TWO MODES · EVENT AXIS &amp; PERIOD BARS · ACROSS ALL 3 STYLES</div>
+  </div>
+  <div class="cmp-grid">
+
+    <!-- ============ CLEAR ============ -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm clear"><span class="dot"></span>Clear</div><div class="meta">DASHED AXIS · PILL PERIODS</div></div>
+      <div class="cmp-stage clear">
+        <div>
+          <div class="var-label">A · Event axis</div>
+          <div class="axis">
+            <div class="pts">
+              <div class="pt"><div class="lbl">Genus Homo</div><div class="dot"></div><div class="yr">2.5 mya</div></div>
+              <div class="pt"><div class="lbl">Many humans</div><div class="dot"></div><div class="yr">300 kya</div></div>
+              <div class="pt pivot"><div class="lbl">Cognitive Rev.</div><div class="dot"></div><div class="yr">70 kya</div></div>
+              <div class="pt"><div class="lbl">Agriculture</div><div class="dot"></div><div class="yr">12 kya</div></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="var-label">B · Period bars (overlapping)</div>
+          <div class="periods">
+            <div class="row"><div class="lab">H. erectus</div><div class="track"><div class="bar b1" style="left:2%;width:60%;">erectus · 1.9 mya–110 kya</div></div></div>
+            <div class="row"><div class="lab">Neanderthals</div><div class="track"><div class="bar b2" style="left:48%;width:32%;">neanderthal · 400–40 kya</div></div></div>
+            <div class="row"><div class="lab">Sapiens</div><div class="track"><div class="bar b3" style="left:55%;width:45%;">sapiens · 300 kya–today</div></div></div>
+            <div class="row"><div class="lab">Agri. era</div><div class="track"><div class="bar b4" style="left:90%;width:10%;">12 kya–now</div></div></div>
+            <div class="scale"><div></div><div class="ticks"><span>2 mya</span><span>1 mya</span><span>500 kya</span><span>now</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ MATURE ============ -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm mature"><span class="dot"></span>Mature</div><div class="meta">HAIRLINE AXIS · BRACKETED PERIODS</div></div>
+      <div class="cmp-stage mature">
+        <div>
+          <div class="var-label">i. event axis</div>
+          <div class="axis">
+            <div class="pts">
+              <div class="pt"><div class="lbl">Genus Homo emerges</div><div class="dot"></div><div class="yr">2.5 mya</div></div>
+              <div class="pt"><div class="lbl">Many humans coexist</div><div class="dot"></div><div class="yr">300 kya</div></div>
+              <div class="pt pivot"><div class="lbl">Cognitive Revolution</div><div class="dot"></div><div class="yr">70 kya</div></div>
+              <div class="pt"><div class="lbl">Agriculture begins</div><div class="dot"></div><div class="yr">12 kya</div></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="var-label">ii. period bars (overlapping)</div>
+          <div class="periods">
+            <div class="row"><div class="lab">H. erectus</div><div class="track"><div class="bar b1" style="left:2%;width:60%;">1.9 mya–110 kya</div></div></div>
+            <div class="row"><div class="lab">Neanderthals</div><div class="track"><div class="bar b2" style="left:48%;width:32%;">400–40 kya</div></div></div>
+            <div class="row"><div class="lab">H. sapiens</div><div class="track"><div class="bar b3" style="left:55%;width:45%;">300 kya–today</div></div></div>
+            <div class="row"><div class="lab">Agriculture</div><div class="track"><div class="bar b4" style="left:90%;width:10%;">12 kya–now</div></div></div>
+            <div class="scale"><div></div><div class="ticks"><span>2 mya</span><span>1 mya</span><span>500 kya</span><span>now</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ VIBRANT ============ -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm vibrant"><span class="dot"></span>Vibrant</div><div class="meta">INK AXIS · BLOCK PERIODS</div></div>
+      <div class="cmp-stage vibrant">
+        <div>
+          <div class="var-label">A · EVENT AXIS</div>
+          <div class="axis">
+            <div class="pts">
+              <div class="pt"><div class="lbl">GENUS HOMO</div><div class="dot"></div><div class="yr">2.5 MYA</div></div>
+              <div class="pt"><div class="lbl">MANY HUMANS</div><div class="dot"></div><div class="yr">300 KYA</div></div>
+              <div class="pt pivot"><div class="lbl">★ COGNITIVE REV</div><div class="dot"></div><div class="yr">70 KYA</div></div>
+              <div class="pt"><div class="lbl">AGRICULTURE</div><div class="dot"></div><div class="yr">12 KYA</div></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="var-label">B · PERIOD BARS (OVERLAP)</div>
+          <div class="periods">
+            <div class="row"><div class="lab">H. ERECTUS</div><div class="track"><div class="bar b1" style="left:2%;width:60%;">ERECTUS</div></div></div>
+            <div class="row"><div class="lab">NEANDERTHAL</div><div class="track"><div class="bar b2" style="left:48%;width:32%;">NEANDERTHAL</div></div></div>
+            <div class="row"><div class="lab">SAPIENS</div><div class="track"><div class="bar b3" style="left:55%;width:45%;">SAPIENS</div></div></div>
+            <div class="row"><div class="lab">AGRI ERA</div><div class="track"><div class="bar b4" style="left:90%;width:10%;">AGRI</div></div></div>
+            <div class="scale"><div></div><div class="ticks"><span>2 MYA</span><span>1 MYA</span><span>500 KYA</span><span>NOW</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body></html>

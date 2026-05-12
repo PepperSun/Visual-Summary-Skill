@@ -1,0 +1,7 @@
+interface:
+  display_name: "Visual Summary"
+  short_description: "Turn files into styled HTML visual summaries and summary apps."
+  default_prompt: "Use $visual-summary to turn this file into a styled HTML visual summary from locally normalized text. Section 1 may use 2 to 3 short sentences; every later point or cell must stay to one direct sentence."
+
+policy:
+  allow_implicit_invocation: true

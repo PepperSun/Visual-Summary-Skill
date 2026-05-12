@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Clear · Design elements</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FBFCFF;
+    --surface: #FFFFFF;
+    --ink: #1B2240;
+    --ink-2: #4A5478;
+    --ink-3: #8189A6;
+    --line: #E6EBF5;
+    --line-soft: #EFF2F8;
+    --blue-1: #EAF1FF;  --blue-2: #C8DCFF;  --blue-ink: #2D5BFF;
+    --teal-1: #E4F6F4;  --teal-2: #B9E6E0;  --teal-ink: #0E8C7E;
+    --lav-1:  #EFEBFF;  --lav-2:  #D4CCFF;  --lav-ink:  #6151D6;
+    --mint-1: #E8F4E8;  --mint-2: #C6E4C6;  --mint-ink: #2E8B40;
+    --peach-1:#FFEDE3;  --peach-2:#FFCFB0;  --peach-ink:#C66224;
+  }
+  html, body { margin:0; padding:0; background: var(--bg); color: var(--ink); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+  .frame { max-width: 1240px; margin: 0 auto; padding: 56px 56px 80px; }
+  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue-ink); margin: 0 0 14px; }
+  h1 { font-size: 44px; font-weight: 700; line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 12px; text-wrap: balance; }
+  .lead { font-size: 16px; color: var(--ink-2); margin: 0 0 48px; line-height: 1.55; max-width: 680px; }
+
+  .sec { margin-bottom: 56px; }
+  .sec-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px dashed var(--line); }
+  .sec-title { font-size: 22px; font-weight: 700; line-height: 1.2; letter-spacing: -0.015em; margin-bottom: 20px; }
+  .row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-bottom: 14px; }
+  .row:last-child { margin-bottom: 0; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; box-shadow: 0 1px 0 rgba(27,34,64,0.03), 0 8px 24px rgba(27,34,64,0.04); }
+  .label { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.06em; color: var(--ink-3); text-transform: uppercase; }
+
+  /* PALETTE */
+  .swatch { padding: 14px; border-radius: 12px; }
+  .swatch .chip { aspect-ratio: 5/2; border-radius: 8px; margin-bottom: 10px; border: 1px solid rgba(27,34,64,0.06); }
+  .swatch .nm { font-size: 13px; font-weight: 700; }
+  .swatch .role { font-size: 11px; color: var(--ink-3); margin-top: 2px; }
+  .swatch .hex { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--ink-2); margin-top: 6px; }
+
+  /* TYPE */
+  .type-row { display: grid; grid-template-columns: 90px 1fr 80px; align-items: baseline; gap: 18px; padding: 14px 0; border-bottom: 1px dashed var(--line-soft); }
+  .type-row:last-child { border-bottom: 0; }
+  .type-row .nm { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-3); letter-spacing: 0.04em; }
+  .type-row .meta { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--ink-3); text-align: right; }
+
+  /* TAGS */
+  .tag { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; line-height: 1; }
+  .tag .dot { width: 6px; height: 6px; border-radius: 50%; }
+  .tag-blue  { background: var(--blue-1);  color: var(--blue-ink); }   .tag-blue  .dot{background:var(--blue-ink);}
+  .tag-teal  { background: var(--teal-1);  color: var(--teal-ink); }   .tag-teal  .dot{background:var(--teal-ink);}
+  .tag-lav   { background: var(--lav-1);   color: var(--lav-ink); }    .tag-lav   .dot{background:var(--lav-ink);}
+  .tag-mint  { background: var(--mint-1);  color: var(--mint-ink); }   .tag-mint  .dot{background:var(--mint-ink);}
+  .tag-peach { background: var(--peach-1); color: var(--peach-ink); }  .tag-peach .dot{background:var(--peach-ink);}
+  .tag-ghost { background: transparent; color: var(--ink-2); border: 1px solid var(--line); }
+
+  /* BUTTONS */
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-size: 13.5px; font-weight: 600; line-height: 1; border: 0; cursor: pointer; transition: all .15s ease; font-family: inherit; }
+  .btn-primary { background: var(--blue-ink); color: #fff; }
+  .btn-primary:hover { background: #2049CC; }
+  .btn-soft    { background: var(--blue-1); color: var(--blue-ink); }
+  .btn-ghost   { background: transparent; color: var(--ink-2); border: 1px solid var(--line); }
+  .btn-icon    { width: 36px; height: 36px; padding: 0; border-radius: 50%; justify-content: center; background: var(--blue-1); color: var(--blue-ink); }
+  .btn-lg      { padding: 14px 24px; font-size: 14.5px; }
+  .btn-sm      { padding: 7px 14px; font-size: 12px; }
+
+  /* INPUTS */
+  .input { display: block; width: 100%; box-sizing: border-box; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); font-family: inherit; font-size: 14px; color: var(--ink); transition: all .15s ease; }
+  .input:focus { outline: 0; border-color: var(--blue-ink); box-shadow: 0 0 0 4px var(--blue-1); }
+  .input::placeholder { color: var(--ink-3); }
+  .field-lbl { font-size: 12px; font-weight: 600; color: var(--ink-2); margin-bottom: 6px; display: block; }
+
+  /* HIGHLIGHTS */
+  .hl-text { font-size: 16px; line-height: 1.7; color: var(--ink-2); max-width: 640px; }
+  .hl-text .hl { padding: 1px 6px; border-radius: 4px; font-weight: 600; }
+  .hl-blue  { background: var(--blue-1);  color: var(--blue-ink); }
+  .hl-teal  { background: var(--teal-1);  color: var(--teal-ink); }
+  .hl-lav   { background: var(--lav-1);   color: var(--lav-ink); }
+  .hl-mint  { background: var(--mint-1);  color: var(--mint-ink); }
+  .hl-peach { background: var(--peach-1); color: var(--peach-ink); }
+  /* slash variant */
+  .hl-slash {
+    background-image: repeating-linear-gradient(-18deg, transparent 0 3px, var(--blue-2) 3px 4.4px);
+    background-repeat: no-repeat; background-size: 100% 60%; background-position: 0 90%;
+    padding: 0 3px; color: var(--ink); font-weight: 600;
+    box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  }
+
+  /* CHART PATTERNS */
+  .pat-pillbar { display: flex; flex-direction: column; gap: 8px; }
+  .pat-pillbar .pb {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 18px; border-radius: 999px; font-size: 12.5px; font-weight: 600;
+    box-shadow: 0 1px 0 rgba(27,34,64,0.04), 0 6px 16px rgba(27,34,64,0.04);
+  }
+  .pat-pillbar .pb.b1 { background: var(--blue-1);  color: var(--blue-ink);  margin-right: 50%; }
+  .pat-pillbar .pb.b2 { background: var(--teal-1);  color: var(--teal-ink);  margin-left: 14%; margin-right: 24%; }
+  .pat-pillbar .pb.b3 { background: var(--lav-1);   color: var(--lav-ink);   margin-left: 32%; margin-right: 4%; }
+  .pat-pillbar .pb.b4 { background: var(--mint-1);  color: var(--mint-ink);  margin-left: 48%; }
+
+  .pat-numchain { display: flex; align-items: center; gap: 6px; }
+  .pat-numchain .step { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+  .pat-numchain .conn { flex: 1; height: 1px; background: var(--line); position: relative; }
+  .pat-numchain .conn::after { content:""; position: absolute; right:-1px; top:-3px; width:0; height:0; border-left: 5px solid var(--line); border-top: 3px solid transparent; border-bottom: 3px solid transparent; }
+  .pat-numchain .s1{background:var(--blue-1); color:var(--blue-ink);}
+  .pat-numchain .s2{background:var(--teal-1); color:var(--teal-ink);}
+  .pat-numchain .s3{background:var(--lav-1);  color:var(--lav-ink);}
+  .pat-numchain .s4{background:var(--mint-1); color:var(--mint-ink);}
+
+  .pat-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .pat-cards .pc { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+  .pat-cards .pc .num { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; font-size: 11px; font-weight: 700; margin-bottom: 8px; }
+  .pat-cards .pc.c1 .num { background: var(--blue-1);  color: var(--blue-ink); }
+  .pat-cards .pc.c2 .num { background: var(--teal-1);  color: var(--teal-ink); }
+  .pat-cards .pc.c3 .num { background: var(--lav-1);   color: var(--lav-ink); }
+  .pat-cards .pc .pt { font-size: 12.5px; font-weight: 700; line-height: 1.25; margin-bottom: 4px; }
+  .pat-cards .pc .pd { font-size: 11.5px; line-height: 1.45; color: var(--ink-3); }
+
+  .pat-stat { display: flex; align-items: baseline; gap: 14px; padding: 12px 16px; background: var(--blue-1); border-radius: 12px; }
+  .pat-stat .num { font-size: 32px; font-weight: 800; color: var(--blue-ink); letter-spacing: -0.02em; line-height: 1; }
+  .pat-stat .lbl { font-size: 12px; color: var(--ink-2); line-height: 1.4; }
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="eyebrow">CLEAR · DESIGN ELEMENTS</div>
+  <h1>Light, soft, breathable.</h1>
+  <p class="lead">Pastel washes on a near-white surface. Highlight is the load-bearing primitive — pale tint behind the words that carry the claim. Generous radii, subtle drop shadows, never a hard rule.</p>
+
+  <!-- PALETTE -->
+  <section class="sec">
+    <div class="sec-tag">01 · Palette</div>
+    <div class="sec-title">Five pastel families + neutrals.</div>
+    <div class="grid-5">
+      <div class="swatch"><div class="chip" style="background: var(--blue-1);"></div><div class="nm" style="color:var(--blue-ink);">Blue</div><div class="role">Primary accent</div><div class="hex">#EAF1FF · #2D5BFF</div></div>
+      <div class="swatch"><div class="chip" style="background: var(--teal-1);"></div><div class="nm" style="color:var(--teal-ink);">Teal</div><div class="role">Action / link</div><div class="hex">#E4F6F4 · #0E8C7E</div></div>
+      <div class="swatch"><div class="chip" style="background: var(--lav-1);"></div><div class="nm" style="color:var(--lav-ink);">Lavender</div><div class="role">Pivot / focus</div><div class="hex">#EFEBFF · #6151D6</div></div>
+      <div class="swatch"><div class="chip" style="background: var(--mint-1);"></div><div class="nm" style="color:var(--mint-ink);">Mint</div><div class="role">Success / new</div><div class="hex">#E8F4E8 · #2E8B40</div></div>
+      <div class="swatch"><div class="chip" style="background: var(--peach-1);"></div><div class="nm" style="color:var(--peach-ink);">Peach</div><div class="role">Warning / heat</div><div class="hex">#FFEDE3 · #C66224</div></div>
+    </div>
+  </section>
+
+  <!-- TYPE -->
+  <section class="sec">
+    <div class="sec-tag">02 · Typography</div>
+    <div class="sec-title">Inter, single family. Weight does the work.</div>
+    <div class="card">
+      <div class="type-row"><div class="nm">Display</div><div style="font-size:44px;font-weight:700;letter-spacing:-0.025em;line-height:1.05;">A clearer way to read.</div><div class="meta">44 / 700</div></div>
+      <div class="type-row"><div class="nm">H2</div><div style="font-size:28px;font-weight:700;letter-spacing:-0.02em;line-height:1.15;">Five turning points</div><div class="meta">28 / 700</div></div>
+      <div class="type-row"><div class="nm">H3</div><div style="font-size:20px;font-weight:600;letter-spacing:-0.01em;">Cognitive Revolution</div><div class="meta">20 / 600</div></div>
+      <div class="type-row"><div class="nm">Lead</div><div style="font-size:16px;line-height:1.55;color:var(--ink-2);">A plainspoken account of how Sapiens moved from one ape to a planet-running species.</div><div class="meta">16 / 400</div></div>
+      <div class="type-row"><div class="nm">Body</div><div style="font-size:14px;line-height:1.6;color:var(--ink-2);">Practical signaling — game tracks, edible plants, who slept with whom.</div><div class="meta">14 / 400</div></div>
+      <div class="type-row"><div class="nm">Caption</div><div style="font-size:12px;color:var(--ink-3);">Source · Sapiens, Y. N. Harari</div><div class="meta">12 / 400</div></div>
+      <div class="type-row"><div class="nm">Mono</div><div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ink-2);">data-direction="clear"</div><div class="meta">13 / 400</div></div>
+    </div>
+  </section>
+
+  <!-- TAGS -->
+  <section class="sec">
+    <div class="sec-tag">03 · Tags & badges</div>
+    <div class="sec-title">Pastel pill, dot prefix optional.</div>
+    <div class="row">
+      <span class="tag tag-blue"><span class="dot"></span>Origin</span>
+      <span class="tag tag-teal"><span class="dot"></span>Diversity</span>
+      <span class="tag tag-lav"><span class="dot"></span>Pivot</span>
+      <span class="tag tag-mint"><span class="dot"></span>Settlement</span>
+      <span class="tag tag-peach"><span class="dot"></span>Acceleration</span>
+      <span class="tag tag-ghost">+ 3 more</span>
+    </div>
+    <div class="row">
+      <span class="tag tag-blue">Chapter 01</span>
+      <span class="tag tag-teal">8 min read</span>
+      <span class="tag tag-lav">Pivot moment</span>
+      <span class="tag tag-mint">New</span>
+      <span class="tag tag-peach">Updated</span>
+    </div>
+  </section>
+
+  <!-- BUTTONS -->
+  <section class="sec">
+    <div class="sec-tag">04 · Buttons</div>
+    <div class="sec-title">Pill geometry. Soft default, ink on hover.</div>
+    <div class="row">
+      <button class="btn btn-primary btn-lg">Visualize this book →</button>
+      <button class="btn btn-primary">Continue reading</button>
+      <button class="btn btn-soft">Save for later</button>
+      <button class="btn btn-ghost">Cancel</button>
+      <button class="btn btn-icon" aria-label="More">+</button>
+    </div>
+    <div class="row">
+      <button class="btn btn-primary btn-sm">Small</button>
+      <button class="btn btn-soft btn-sm">Small soft</button>
+      <button class="btn btn-ghost btn-sm">Small ghost</button>
+    </div>
+  </section>
+
+  <!-- INPUTS -->
+  <section class="sec">
+    <div class="sec-tag">05 · Inputs</div>
+    <div class="sec-title">Rounded fields, soft focus halo.</div>
+    <div class="grid-2">
+      <div>
+        <label class="field-lbl">Book title</label>
+        <input class="input" placeholder="e.g. Sapiens by Y. N. Harari" />
+      </div>
+      <div>
+        <label class="field-lbl">Reading level</label>
+        <input class="input" value="General reader" />
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS -->
+  <section class="sec">
+    <div class="sec-tag">06 · Highlight</div>
+    <div class="sec-title">Tinted background behind load-bearing phrases.</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="label" style="margin-bottom:10px;">SOLID FILL · 5 colors</div>
+        <p class="hl-text">The same human, lived under three regimes — <span class="hl hl-blue">forager</span>, <span class="hl hl-teal">farmer</span>, <span class="hl hl-lav">modern</span>. What changed is the <span class="hl hl-mint">story we live inside</span>, not the <span class="hl hl-peach">body</span>.</p>
+      </div>
+      <div class="card">
+        <div class="label" style="margin-bottom:10px;">SLASH VARIANT · for prose-heavy passages</div>
+        <p class="hl-text">A reader can skim a page in seconds. <span class="hl-slash">Highlight only the load-bearing phrases</span> — the ones that, if removed, would <span class="hl-slash">collapse the sentence's meaning</span>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHART PATTERNS -->
+  <section class="sec">
+    <div class="sec-tag">07 · Chart patterns</div>
+    <div class="sec-title">Four primitives: pill bar, numbered chain, card grid, stat block.</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="label" style="margin-bottom:14px;">PILL BAR · staggered timeline</div>
+        <div class="pat-pillbar">
+          <div class="pb b1">Genus Homo · 2.5 mya</div>
+          <div class="pb b2">Many humans · 300 kya</div>
+          <div class="pb b3">Cognitive Revolution · 70 kya</div>
+          <div class="pb b4">Agriculture · 12 kya</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="label" style="margin-bottom:14px;">NUMBERED CHAIN · logic flow</div>
+        <div class="pat-numchain">
+          <div class="step s1">1</div><div class="conn"></div>
+          <div class="step s2">2</div><div class="conn"></div>
+          <div class="step s3">3</div><div class="conn"></div>
+          <div class="step s4">4</div>
+        </div>
+        <div style="margin-top:12px; font-size:12px; color:var(--ink-3); display:flex; justify-content:space-between;">
+          <span>Mutation</span><span>Imagination</span><span>Fiction</span><span>Scale</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="label" style="margin-bottom:14px;">CARD GRID · perspectives</div>
+        <div class="pat-cards">
+          <div class="pc c1"><div class="num">1</div><div class="pt">Tribe</div><div class="pd">Common ancestors unite unrelated bands.</div></div>
+          <div class="pc c2"><div class="num">2</div><div class="pt">Religion</div><div class="pd">One myth aligns thousands across valleys.</div></div>
+          <div class="pc c3"><div class="num">3</div><div class="pt">Money</div><div class="pd">A scrap of paper becomes wealth by consensus.</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="label" style="margin-bottom:14px;">STAT BLOCK · figures with context</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="pat-stat"><div class="num">70k</div><div class="lbl"><b>Cognitive Revolution</b><br>years before present</div></div>
+          <div class="pat-stat" style="background:var(--lav-1);"><div class="num" style="color:var(--lav-ink);">8</div><div class="lbl"><b>Other human species</b><br>that shared the planet with Sapiens</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</body>
+</html>

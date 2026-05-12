@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Chain · 3 styles</title>
+<link rel="stylesheet" href="_cmp.css">
+<style>
+  /* CLEAR: numbered circles + dashed connectors */
+  .clear .chain { display:flex;align-items:center;gap:6px;width:100%; }
+  .clear .chain .step { width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 12px/1 'Inter';flex:0 0 auto; }
+  .clear .chain .conn { flex:1;height:1px;background:#E6EBF5; }
+  .clear .chain .s1 { background:#EAF1FF;color:#2D5BFF; }
+  .clear .chain .s2 { background:#E4F6F4;color:#0E8C7E; }
+  .clear .chain .s3 { background:#EFEBFF;color:#6151D6;outline:3px solid #D4CCFF;outline-offset:2px; }
+  .clear .chain .s4 { background:#E8F4E8;color:#2E8B40; }
+  .clear .lbls { display:flex;justify-content:space-between;margin-top:14px;font:500 11.5px/1.3 'Inter';color:#4A5478;gap:6px; }
+
+  /* MATURE: roman numerals + thin rule */
+  .mature .chain { display:flex;align-items:center;gap:0;width:100%; }
+  .mature .chain .step { width:38px;height:38px;border:1px solid #1A1614;display:flex;align-items:center;justify-content:center;font:700 13px/1 'Source Serif 4',serif;color:#1A1614;background:#FBF7F0;flex:0 0 auto; }
+  .mature .chain .step.pivot { background:#DEC4E0; }
+  .mature .chain .conn { flex:1;height:1px;background:#1A1614; }
+  .mature .lbls { display:flex;justify-content:space-between;margin-top:14px;font:400 12px/1.3 'Source Serif 4',serif;font-style:italic;color:#3D332C;gap:6px; }
+
+  /* VIBRANT: colored squares with arrow connector */
+  .vibrant .chain { display:flex;align-items:center;gap:0;width:100%; }
+  .vibrant .chain .step { width:42px;height:42px;border-radius:12px;border:2px solid #0A0A0A;display:flex;align-items:center;justify-content:center;font:900 15px/1 'Inter';flex:0 0 auto; }
+  .vibrant .chain .conn { flex:1;height:3px;background:#0A0A0A;position:relative; }
+  .vibrant .chain .conn::after { content:"";position:absolute;right:-1px;top:-4px;border-left:8px solid #0A0A0A;border-top:5px solid transparent;border-bottom:5px solid transparent; }
+  .vibrant .chain .s1 { background:#2747FF;color:#fff; }
+  .vibrant .chain .s2 { background:#FFD400;color:#0A0A0A; }
+  .vibrant .chain .s3 { background:#FF3024;color:#fff; }
+  .vibrant .chain .s4 { background:#1FA85A;color:#fff; }
+  .vibrant .lbls { display:flex;justify-content:space-between;margin-top:14px;font:800 11px/1.3 'Inter';letter-spacing:0.04em;text-transform:uppercase;color:#0A0A0A;gap:6px; }
+
+  .lbls span { flex:1;text-align:center;min-width:0; }
+  .cmp-stage { padding:32px 22px; }
+</style></head>
+<body class="cmp-page">
+  <div class="cmp-head">
+    <h1>Chain — 4 stages</h1>
+    <div class="sub">MUTATION · IMAGINATION · FICTION (PIVOT) · COOPERATION</div>
+  </div>
+  <div class="cmp-grid">
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm clear"><span class="dot"></span>Clear</div><div class="meta">CIRCLES · OUTLINE PIVOT</div></div>
+      <div class="cmp-stage clear">
+        <div class="chain"><div class="step s1">1</div><div class="conn"></div><div class="step s2">2</div><div class="conn"></div><div class="step s3">3</div><div class="conn"></div><div class="step s4">4</div></div>
+        <div class="lbls"><span>Mutation</span><span>Imagination</span><span>Fiction</span><span>Cooperation</span></div>
+      </div>
+    </div>
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm mature"><span class="dot"></span>Mature</div><div class="meta">SQUARES · LILAC PIVOT</div></div>
+      <div class="cmp-stage mature">
+        <div class="chain"><div class="step">I</div><div class="conn"></div><div class="step">II</div><div class="conn"></div><div class="step pivot">III</div><div class="conn"></div><div class="step">IV</div></div>
+        <div class="lbls"><span>Mutation</span><span>Imagination</span><span>Fiction</span><span>Cooperation</span></div>
+      </div>
+    </div>
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm vibrant"><span class="dot"></span>Vibrant</div><div class="meta">BLOCKS · ARROW</div></div>
+      <div class="cmp-stage vibrant">
+        <div class="chain"><div class="step s1">1</div><div class="conn"></div><div class="step s2">2</div><div class="conn"></div><div class="step s3">3</div><div class="conn"></div><div class="step s4">4</div></div>
+        <div class="lbls"><span>Mutation</span><span>Imagine</span><span>Fiction</span><span>Coop</span></div>
+      </div>
+    </div>
+  </div>
+</body></html>

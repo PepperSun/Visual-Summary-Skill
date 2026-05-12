@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Prose blocks · 3 styles</title>
+<link rel="stylesheet" href="_cmp.css">
+<style>
+  .cmp-stage { padding: 22px 22px; min-height: 0; align-items: stretch; gap: 28px; }
+  .var-label { font:600 9.5px/1 'JetBrains Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;color:#999;margin-bottom:12px;display:flex;align-items:center;gap:10px; }
+  .var-label::after { content:"";flex:1;height:1px;background:#E5E5E5; }
+  .clear .var-label   { color:#8189A6; }
+  .mature .var-label  { color:#7C4A31;font-family:'Source Serif 4',serif;font-style:italic;font-weight:400;letter-spacing:0.04em;text-transform:none; }
+  .vibrant .var-label { color:#0A0A0A; }
+  .vibrant .var-label::after { background:#0A0A0A;height:2px; }
+
+  /* ========== A · NUMBERED LIST (lead-in term + em-dash + body) ========== */
+
+  /* CLEAR */
+  .clear .nlist { display:flex;flex-direction:column; }
+  .clear .nlist .item { display:grid;grid-template-columns:36px 1fr;gap:18px;padding:14px 0;border-bottom:1px solid #EFF2F8; }
+  .clear .nlist .item:last-child { border-bottom:0; }
+  .clear .nlist .num  { font:600 10.5px/1 'JetBrains Mono',monospace;color:#8189A6;letter-spacing:0.04em;padding-top:3px; }
+  .clear .nlist .body { font:400 13px/1.55 'Inter';color:#4A5478; }
+  .clear .nlist .term { background:#EAF1FF;color:#2D5BFF;font-weight:600;padding:1px 6px;border-radius:4px;margin-right:4px; }
+  .clear .nlist .item:nth-child(2) .term { background:#E4F6F4;color:#0E8C7E; }
+  .clear .nlist .item:nth-child(3) .term { background:#EFEBFF;color:#6151D6; }
+
+  /* MATURE */
+  .mature .nlist { display:flex;flex-direction:column; }
+  .mature .nlist .item { display:grid;grid-template-columns:36px 1fr;gap:22px;padding:18px 0;border-bottom:1px solid #D4C7B5; }
+  .mature .nlist .item:last-child { border-bottom:0; }
+  .mature .nlist .num  { font:italic 400 12px/1 'Source Serif 4',serif;color:#7C4A31;font-variant-numeric:oldstyle-nums;padding-top:4px; }
+  .mature .nlist .body { font:400 13.5px/1.7 'Inter';color:#3D332C; }
+  .mature .nlist .term { font-family:'Source Serif 4',serif;font-weight:700;color:#1A1614;background:#DEC4E0;padding:1px 5px;font-size:1.06em;-webkit-box-decoration-break:clone;box-decoration-break:clone; }
+
+  /* VIBRANT */
+  .vibrant .nlist { display:flex;flex-direction:column;gap:10px; }
+  .vibrant .nlist .item { display:grid;grid-template-columns:44px 1fr;gap:14px;padding:12px 14px;border:2px solid #0A0A0A;border-radius:10px;background:#fff; }
+  .vibrant .nlist .num  { font:900 22px/1 'Inter';color:#0A0A0A;letter-spacing:-0.04em; }
+  .vibrant .nlist .body { font:600 12.5px/1.5 'Inter';color:#0A0A0A; }
+  .vibrant .nlist .term { background:#FFD400;color:#0A0A0A;font-weight:900;padding:2px 7px;border:1.5px solid #0A0A0A;border-radius:4px;margin-right:4px;text-transform:uppercase;font-size:0.95em; }
+
+  /* ========== B · PULL-QUOTE ========== */
+
+  /* CLEAR — soft tint card */
+  .clear .pq { background:#EFEBFF;border-radius:14px;padding:18px 22px; }
+  .clear .pq p { font:500 italic 16px/1.5 'Source Serif 4',serif;color:#1B2240;margin:0;letter-spacing:-0.005em; }
+  .clear .pq cite { display:block;margin-top:8px;font:600 11px/1 'Inter';color:#6151D6;letter-spacing:0.04em;text-transform:uppercase;font-style:normal; }
+
+  /* MATURE — left rule + italic serif */
+  .mature .pq { padding:6px 0 6px 18px;border-left:3px solid #7C4A31; }
+  .mature .pq p { font:italic 400 18px/1.55 'Source Serif 4',serif;color:#1A1614;margin:0;letter-spacing:-0.005em; }
+  .mature .pq cite { display:block;margin-top:10px;font:italic 400 12px/1 'Source Serif 4',serif;color:#7C4A31;font-style:italic; }
+
+  /* VIBRANT — heavy block with corner */
+  .vibrant .pq { position:relative;background:#FFD400;border:2px solid #0A0A0A;border-radius:14px;padding:18px 22px;box-shadow:6px 6px 0 #0A0A0A; }
+  .vibrant .pq p { font:900 17px/1.3 'Inter';color:#0A0A0A;margin:0;letter-spacing:-0.025em; }
+  .vibrant .pq cite { display:block;margin-top:10px;font:900 11px/1 'Inter';color:#0A0A0A;letter-spacing:0.06em;text-transform:uppercase;font-style:normal; }
+
+  /* ========== C · UNIT-PREFIX BIG NUMERALS ========== */
+
+  .upgrid { display:grid;grid-template-columns:1fr 1fr;gap:14px; }
+
+  /* CLEAR */
+  .clear .up { background:#fff;border:1px solid #E6EBF5;border-radius:14px;padding:18px 18px 16px; }
+  .clear .up .n { font:800 44px/1 'Inter';letter-spacing:-0.04em;color:#1B2240; }
+  .clear .up .d { margin-top:10px;font:400 12px/1.5 'Inter';color:#4A5478; }
+  .clear .up .u { background:#EFEBFF;color:#6151D6;font-weight:600;padding:1px 6px;border-radius:4px;margin-right:4px; }
+
+  /* MATURE */
+  .mature .up { border-top:1px solid #1A1614;padding:18px 4px 14px; }
+  .mature .up .n { font:700 64px/1 'Source Serif 4',serif;letter-spacing:-0.04em;color:#1A1614;font-variant-numeric:oldstyle-nums; }
+  .mature .up .d { margin-top:14px;font:400 12.5px/1.55 'Inter';color:#3D332C; }
+  .mature .up .u { font-family:'Source Serif 4',serif;font-weight:700;color:#1A1614;background:#DEC4E0;padding:1px 5px;font-size:1.06em;margin-right:4px; }
+
+  /* VIBRANT */
+  .vibrant .up { background:#fff;border:2px solid #0A0A0A;border-radius:14px;padding:18px;box-shadow:5px 5px 0 #0A0A0A; }
+  .vibrant .up:nth-child(2) { box-shadow:5px 5px 0 #FF3024; }
+  .vibrant .up .n { font:900 50px/1 'Inter';letter-spacing:-0.045em;color:#0A0A0A; }
+  .vibrant .up .d { margin-top:12px;font:600 12px/1.45 'Inter';color:#0A0A0A; }
+  .vibrant .up .u { background:#FFD400;color:#0A0A0A;font-weight:900;padding:2px 7px;border:1.5px solid #0A0A0A;border-radius:4px;margin-right:4px;font-size:0.9em; }
+</style></head>
+<body class="cmp-page">
+  <div class="cmp-head">
+    <h1>Prose blocks — narrative primitives</h1>
+    <div class="sub">NUMBERED LIST · PULL-QUOTE · UNIT-PREFIX NUMERALS · ACROSS 3 STYLES</div>
+  </div>
+  <div class="cmp-grid">
+
+    <!-- ============ CLEAR ============ -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm clear"><span class="dot"></span>Clear</div><div class="meta">PASTEL TINTS</div></div>
+      <div class="cmp-stage clear">
+        <div>
+          <div class="var-label">A · Numbered list</div>
+          <div class="nlist">
+            <div class="item"><div class="num">01</div><div class="body"><span class="term">Detective work</span> — the author tests every variable: open window, closed window, rain, climbing. Daily life becomes a falsifiable hypothesis.</div></div>
+            <div class="item"><div class="num">02</div><div class="body"><span class="term">Cognitive shift</span> — from observer to participant. The displacement brings a faint absurdity, and a real understanding.</div></div>
+            <div class="item"><div class="num">03</div><div class="body"><span class="term">The reveal</span> — the private theory (a city rewrites the immune system) is treated not as conclusion but as an open question.</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="var-label">B · Pull-quote</div>
+          <div class="pq">
+            <p>"Allergy isn't about who you are — it's about how long you've been in a place."</p>
+            <cite>— Author's reflection</cite>
+          </div>
+        </div>
+        <div>
+          <div class="var-label">C · Unit-prefix numerals</div>
+          <div class="upgrid">
+            <div class="up"><div class="n">≈20</div><div class="d"><span class="u">yrs</span>in Beijing — the time the immune system needed to register the place.</div></div>
+            <div class="up"><div class="n">3–5</div><div class="d"><span class="u">yrs</span>typical onset for transplants in N. America (anecdotal).</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ MATURE ============ -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm mature"><span class="dot"></span>Mature</div><div class="meta">SERIF · LILAC HIGHLIGHT</div></div>
+      <div class="cmp-stage mature">
+        <div>
+          <div class="var-label">i. numbered list</div>
+          <div class="nlist">
+            <div class="item"><div class="num">01</div><div class="body"><span class="term">侦探式排查</span>——作者用"认真观察自己"的方式，像做实验一样逐项比对细节，最终锁定花粉为元凶。日常生活变成一个可证伪的假说。</div></div>
+            <div class="item"><div class="num">02</div><div class="body"><span class="term">认知转变</span>——从"旁观者"变成"当事人"。身份的位移带来轻微的荒诞感，也带来真正的理解。</div></div>
+            <div class="item"><div class="num">03</div><div class="body"><span class="term">信息揭示</span>——私人暴论（北漂改变过敏体质）在文章结尾获得自我验证。</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="var-label">ii. pull-quote</div>
+          <div class="pq">
+            <p>过敏这件事，不是你本来有没有，而是你在哪里待了多久。</p>
+            <cite>— 作者的反思</cite>
+          </div>
+        </div>
+        <div>
+          <div class="var-label">iii. unit-prefix numerals</div>
+          <div class="upgrid">
+            <div class="up"><div class="n">≈20</div><div class="d"><span class="u">年</span>北漂时长。免疫系统完成这次"入籍"用了将近二十年。</div></div>
+            <div class="up"><div class="n">3–5</div><div class="d"><span class="u">年</span>北美迁居者开始对新环境过敏所需的大致时间（作者的观察样本）。</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ VIBRANT ============ -->
+    <div class="cmp-pane">
+      <div class="cmp-pane-head"><div class="nm vibrant"><span class="dot"></span>Vibrant</div><div class="meta">INK BLOCKS · YELLOW PILLS</div></div>
+      <div class="cmp-stage vibrant">
+        <div>
+          <div class="var-label">A · NUMBERED LIST</div>
+          <div class="nlist">
+            <div class="item"><div class="num">01</div><div class="body"><span class="term">Detective</span> Tests every variable — window, rain, climb. Life becomes falsifiable hypothesis.</div></div>
+            <div class="item"><div class="num">02</div><div class="body"><span class="term">Shift</span> Observer → participant. Faint absurdity, real understanding.</div></div>
+            <div class="item"><div class="num">03</div><div class="body"><span class="term">Reveal</span> Private theory becomes open question, not conclusion.</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="var-label">B · PULL-QUOTE</div>
+          <div class="pq">
+            <p>"Allergy isn't about who you are. It's about how long you've been there."</p>
+            <cite>— Author</cite>
+          </div>
+        </div>
+        <div>
+          <div class="var-label">C · UNIT-PREFIX NUMERALS</div>
+          <div class="upgrid">
+            <div class="up"><div class="n">≈20</div><div class="d"><span class="u">YRS</span>Time in Beijing before immune system "registered" the place.</div></div>
+            <div class="up"><div class="n">3–5</div><div class="d"><span class="u">YRS</span>Typical onset for new arrivals in N. America (anecdotal).</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body></html>

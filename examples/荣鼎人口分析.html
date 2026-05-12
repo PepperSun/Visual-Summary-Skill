@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>荣鼎：官方的人口预估可能偏乐观</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:     #FFFFFF;
+    --bg-2:   #F4F5F7;
+    --ink:    #0A0A0A;
+    --ink-2:  #444444;
+    --ink-3:  #888888;
+    --line:   #E5E5E5;
+    --blue:   #2747FF;
+    --yellow: #FFD400;
+    --red:    #FF3024;
+    --green:  #1FA85A;
+    --purple: #7A3CFF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', 'Noto Sans SC', 'PingFang SC', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 860px; margin: 0 auto; padding: 64px 48px 100px; }
+
+  /* ── Header ─────────────────────────────────────────── */
+  .doc-eyebrow {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin: 0 0 16px;
+  }
+  .doc-title {
+    font-size: 44px;
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin: 0 0 22px;
+  }
+  .doc-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--ink-3);
+    margin-bottom: 20px;
+  }
+  .doc-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 52px;
+    padding-bottom: 32px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    border: 2px solid var(--ink);
+  }
+  .tag-blue   { background: var(--blue);   color: #fff; border-color: var(--blue); }
+  .tag-yellow { background: var(--yellow); color: var(--ink); }
+  .tag-line   { background: transparent;  color: var(--ink); }
+
+  /* ── Section chrome ──────────────────────────────────── */
+  .sec { margin-bottom: 56px; }
+  .sec-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sec-num { color: var(--blue); font-weight: 700; }
+  .sec-title {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 22px;
+  }
+
+  /* ── Highlight ───────────────────────────────────────── */
+  .hl {
+    display: inline;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-weight: 800;
+  }
+  .hl-y { background: var(--yellow); color: var(--ink); }
+  .hl-b { background: var(--blue);   color: #fff; }
+  .hl-r { background: var(--red);    color: #fff; }
+
+  /* ── Section 1 — judgment block ─────────────────────── */
+  .judgment {
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.75;
+    color: var(--ink-2);
+    max-width: 740px;
+  }
+  .judgment p { margin: 0 0 14px; }
+  .judgment p:last-child { margin: 0; }
+
+  /* ── Big numerals ────────────────────────────────────── */
+  .numerals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; }
+  .num-cell {
+    padding: 22px 20px 20px;
+    border: 2px solid var(--ink);
+    color: #fff;
+  }
+  .num-cell.n1 { background: var(--blue); }
+  .num-cell.n2 { background: var(--red); }
+  .num-cell.n3 { background: var(--ink); }
+  .num-val {
+    font-size: 40px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 8px;
+  }
+  .num-val span { font-size: 22px; font-weight: 700; }
+  .num-label {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+  .num-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    margin-top: 6px;
+    opacity: 0.75;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Logic chain ─────────────────────────────────────── */
+  .chain { display: flex; flex-direction: column; gap: 0; }
+  .chain-step {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+  }
+  .chain-step:last-child { border-bottom: 0; }
+  .chain-ix {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--blue);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 2px solid var(--ink);
+  }
+  .chain-body {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.7;
+    color: var(--ink-2);
+    padding-top: 5px;
+  }
+
+  /* ── Table ───────────────────────────────────────────── */
+  .tbl-wrap { overflow-x: auto; margin-bottom: 8px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  thead tr { border-bottom: 2px solid var(--ink); }
+  thead th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    padding: 10px 14px;
+    text-align: left;
+  }
+  tbody tr { border-bottom: 1px solid var(--line); }
+  tbody tr:last-child { border-bottom: 0; }
+  tbody td {
+    padding: 12px 14px;
+    vertical-align: top;
+    color: var(--ink-2);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+  tbody td:first-child { font-weight: 800; color: var(--ink); white-space: nowrap; }
+  .td-arrow { font-weight: 800; color: var(--red); }
+
+  /* ── Bullet list ─────────────────────────────────────── */
+  .blist { list-style: none; padding: 0; margin: 0; }
+  .blist li {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.7;
+    color: var(--ink-2);
+    align-items: start;
+  }
+  .blist li:last-child { border-bottom: 0; }
+  .blist .dot {
+    width: 8px;
+    height: 8px;
+    background: var(--yellow);
+    border-radius: 50%;
+    border: 2px solid var(--ink);
+    margin-top: 7px;
+    justify-self: center;
+    flex-shrink: 0;
+  }
+
+  /* ── Callout ─────────────────────────────────────────── */
+  .callout {
+    border: 2px solid var(--ink);
+    border-left: 5px solid var(--yellow);
+    padding: 14px 18px;
+    background: var(--bg-2);
+    margin: 24px 0 0;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink-2);
+    line-height: 1.65;
+  }
+
+  @media (max-width: 640px) {
+    .page { padding: 36px 20px 72px; }
+    .doc-title { font-size: 32px; }
+    .numerals { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body data-style="vibrant">
+<div class="page">
+
+  <!-- ── Document header ─────────────────────────────── -->
+  <div class="doc-eyebrow">荣鼎咨询 · Allen Feng · 2026年4月22日</div>
+  <h1 class="doc-title">官方的人口预估<br>可能偏乐观</h1>
+  <div class="doc-meta">
+    <span>荣鼎咨询（Rhodium Group）</span>
+    <span>·</span>
+    <span>宏观经济分析</span>
+  </div>
+  <div class="doc-tags">
+    <span class="tag tag-blue">人口</span>
+    <span class="tag tag-blue">宏观经济</span>
+    <span class="tag tag-yellow">中国</span>
+    <span class="tag tag-line">财政</span>
+    <span class="tag tag-line">社保</span>
+  </div>
+
+  <!-- ── Section 1: Core judgment ────────────────────── -->
+  <section class="sec">
+    <div class="sec-label"><span class="sec-num">01</span> 核心判断</div>
+    <div class="judgment">
+      <p>中国未来十年将减少约<span class="hl hl-y">6000万人口</span>，规模相当于一个法国，而官方对人口年均下降0.2%的预测在荣鼎看来明显偏乐观。</p>
+      <p>财政压力已无法被视为未来问题：2025年社保补贴达<span class="hl hl-r">2.9万亿元</span>，占一般公共预算支出逾十分之一，且缺口将随老龄化持续扩大。</p>
+      <p>消费疲弱、利率下行、信贷偏软，人口下滑的后果正在当下显现；长期经济增长预期<span class="hl hl-b">进一步下修</span>是大概率事件。</p>
+    </div>
+  </section>
+
+  <!-- ── Section 2: Demographic mechanism ────────────── -->
+  <section class="sec">
+    <div class="sec-label"><span class="sec-num">02</span> 出生崩塌与死亡加速</div>
+    <h2 class="sec-title">两端同时承压，净减少规模如何形成</h2>
+
+    <div class="chain">
+      <div class="chain-step">
+        <div class="chain-ix">1</div>
+        <div class="chain-body">
+          出生率十年腰斩，2025年降至<span class="hl hl-y">0.563%</span>（1939年以来最低），而育龄女性同期仅减少13%，差距源于婚育推迟等行为的结构性转变。
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-ix">2</div>
+        <div class="chain-body">
+          晚婚晚育之外，<span class="hl hl-b">就业不稳定</span>、零工化与AI焦虑加剧生育顾虑，"躺平/摆烂"等社会现象削弱稳定关系的形成基础。
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-ix">3</div>
+        <div class="chain-body">
+          鼓励生育政策只能放缓而无法逆转：<span class="hl hl-b">新加坡</span>长期推行全球最积极的生育政策，2025年总和生育率仍降至0.87新低。
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-ix">4</div>
+        <div class="chain-body">
+          死亡端即将加速，平均死亡年龄约73岁与1952–1975年<span class="hl hl-r">两轮婴儿潮</span>吻合，预计2035年前后年死亡人数升至约1500万。
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      两端合算，2026–2035年中国总人口将累计减少约<span class="hl hl-y">6000万</span>，自然人口净减少到2035年将达760万/年。
+    </div>
+  </section>
+
+  <!-- ── Section 3: Fiscal pressure ──────────────────── -->
+  <section class="sec">
+    <div class="sec-label"><span class="sec-num">03</span> 财政缺口</div>
+    <h2 class="sec-title">社保基金已依赖财政输血，抚养比加速恶化</h2>
+
+    <div class="numerals">
+      <div class="num-cell n1">
+        <div class="num-val">2.9<span>万亿</span></div>
+        <div class="num-label">2025年财政社保补贴</div>
+        <div class="num-note">占一般公共预算 10.1%</div>
+      </div>
+      <div class="num-cell n2">
+        <div class="num-val">1.4<span>万亿</span></div>
+        <div class="num-label">无补贴状态下的实际赤字</div>
+        <div class="num-note">按当前余额约11年耗尽</div>
+      </div>
+      <div class="num-cell n3">
+        <div class="num-val">1.1<span>万亿</span></div>
+        <div class="num-label">养老金单项缺口</div>
+        <div class="num-note">支出6.9万亿 vs 收入5.8万亿</div>
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>年份</th>
+            <th>抚养比（劳动人口：老年人口）</th>
+            <th>趋势</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2024</td>
+            <td>4.4 : 1</td>
+            <td>基准</td>
+          </tr>
+          <tr>
+            <td>2030</td>
+            <td><span class="hl hl-b">3.5 : 1</span></td>
+            <td class="td-arrow">↓ 每位老人背负劳动人口减少</td>
+          </tr>
+          <tr>
+            <td>2035</td>
+            <td><span class="hl hl-r">2.8 : 1</span></td>
+            <td class="td-arrow">↓↓ 社保压力临界点</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      去除补贴后社保基金<span class="hl hl-r">实为赤字</span>运营，按当前16万亿余额约11年耗尽。
+    </div>
+  </section>
+
+  <!-- ── Section 4: Policy failure + forecast gap ────── -->
+  <section class="sec">
+    <div class="sec-label"><span class="sec-num">04</span> 政策失效与预测偏差</div>
+    <h2 class="sec-title">官方预测过于乐观，增长目标面临进一步下修</h2>
+
+    <ul class="blist">
+      <li>
+        <span class="dot"></span>
+        <span>国家发改委预计未来十年人口年均下降<span class="hl hl-y">0.2%</span>，荣鼎认为这一假设明显偏于乐观，与出生及死亡的实际趋势不符。</span>
+      </li>
+      <li>
+        <span class="dot"></span>
+        <span>GDP增长目标实现所需年均增速已从4.8%下调至<span class="hl hl-b">4.2%</span>，但人口压力若持续超出预期，进一步下修概率较大。</span>
+      </li>
+      <li>
+        <span class="dot"></span>
+        <span>居民可支配收入、工资性收入与经营性收入增速去年均创除疫情年外的<span class="hl hl-r">最低水平</span>，发达沿海省份人口净流出进一步压低消费基础。</span>
+      </li>
+      <li>
+        <span class="dot"></span>
+        <span>"十五五"规划未明确加快农民工养老平权，鼓励生育补贴<span class="hl hl-b">绕开根本性制度改革</span>，倾向于将成本转嫁给企业与地方。</span>
+      </li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>
