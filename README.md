@@ -18,9 +18,9 @@ Three real outputs, all three styles, two languages.
 
 | Case | Style | Language | Source type |
 |------|-------|----------|-------------|
-| [Great Myths of the Great Depression](https://peppersun.github.io/Visual-Summary-Skill/examples/great-depression-trial.html) | **Clear** | English | Policy essay |
-| [Response to Jeffrey Sachs](https://peppersun.github.io/Visual-Summary-Skill/examples/response-to-jeffrey-sachs-visual-summary.html) | **Mature** | English | Academic rebuttal |
-| [官方的人口预估可能偏乐观 · 荣鼎](https://peppersun.github.io/Visual-Summary-Skill/examples/荣鼎人口分析.html) | **Vibrant** | 简体中文 | Macroeconomic report |
+| [Great Myths of the Great Depression](https://peppersun.github.io/Visual-Summary-Skill/visual-summary/examples/great-depression-trial.html) | **Clear** | English | Policy essay |
+| [Response to Jeffrey Sachs](https://peppersun.github.io/Visual-Summary-Skill/visual-summary/examples/response-to-jeffrey-sachs-visual-summary.html) | **Mature** | English | Academic rebuttal |
+| [官方的人口预估可能偏乐观 · 荣鼎](https://peppersun.github.io/Visual-Summary-Skill/visual-summary/examples/荣鼎人口分析.html) | **Vibrant** | 简体中文 | Macroeconomic report |
 
 > Live previews hosted via GitHub Pages. Clone the repo to open locally — no server needed.
 
@@ -46,31 +46,42 @@ Three real outputs, all three styles, two languages.
 
 **Cursor**
 
-Add the skill to your Cursor rules directory, or install via the Cursor plugin marketplace by pointing it to `PepperSun/visual-summary`. Cursor will pick up `SKILL.md` automatically.
+Add the `visual-summary/` folder to your Cursor rules directory, or point Cursor at the `visual-summary` subdirectory of this repo. Cursor will pick up `SKILL.md` automatically.
 
 **OpenAI Codex**
 
-The `agents/openai.yaml` file is included for Codex compatibility. Clone the repo and register the skill folder in your Codex agent configuration.
+Install from the GitHub directory URL:
 
 ```bash
-git clone https://github.com/PepperSun/Visual-Summary-Skill
+$skill-installer install https://github.com/PepperSun/Visual-Summary-Skill/tree/main/visual-summary
 ```
+
+Or clone it locally into your Codex skills directory:
+
+```bash
+mkdir -p ~/.codex/skills
+git clone https://github.com/PepperSun/Visual-Summary-Skill.git
+mv Visual-Summary-Skill/visual-summary ~/.codex/skills/visual-summary
+rm -rf Visual-Summary-Skill
+```
+
+Restart Codex if the skill does not appear immediately.
 
 **Gemini CLI**
 ```bash
 git clone https://github.com/PepperSun/Visual-Summary-Skill
-# Point your Gemini CLI skill path to the cloned folder
+# Point your Gemini CLI skill path to the cloned visual-summary/ folder
 ```
 
 **Any Agent Skills-compatible host**
 
-Download [`visual-summary.skill`](visual-summary.skill) and load it through your host's skill or plugin manager — the `.skill` format follows the [Agent Skills open standard](https://agentskills.io) supported by Claude, Cursor, Codex, Gemini CLI, Windsurf, and others.
+Download [`visual-summary.skill`](visual-summary/visual-summary.skill) and load it through your host's skill or plugin manager — the `.skill` format follows the [Agent Skills open standard](https://agentskills.io) supported by Claude, Cursor, Codex, Gemini CLI, Windsurf, and others.
 
 **From source (all platforms)**
 ```bash
 git clone https://github.com/PepperSun/Visual-Summary-Skill
 ```
-Then point your agent host at the cloned folder. The entry point is `SKILL.md`.
+Then point your agent host at the `visual-summary/` subdirectory. The entry point is `visual-summary/SKILL.md`.
 
 ---
 
@@ -176,23 +187,26 @@ The skill applies these rules to every output:
 
 ## Repo structure
 
-```
-visual-summary/
-├── SKILL.md                        # Skill instructions and workflow
-├── visual-summary.skill            # Packaged skill file (one-click install)
-├── references/
-│   ├── summary-framework.md        # Classification and output skeletons
-│   ├── ui-guidelines.md            # Visual rendering rules
-│   ├── ui-authoring-rules.md       # Component and pattern usage
-│   ├── design-system.md            # Token and color system
-│   └── cases-summary-reference.md  # Calibration examples
-├── assets/
-│   └── ui/                         # Design system: CSS tokens, component kits
-├── scripts/
-│   └── extract_text.py             # Zero-dependency text extraction
-├── agents/
-│   └── openai.yaml                 # Codex / OpenAI agent metadata
-└── examples/                       # Rendered HTML output gallery
+```text
+Visual-Summary-Skill/
+├── README.md
+├── LICENSE
+└── visual-summary/
+    ├── SKILL.md                        # Skill instructions and workflow
+    ├── visual-summary.skill            # Packaged skill file (one-click install)
+    ├── references/
+    │   ├── summary-framework.md        # Classification and output skeletons
+    │   ├── ui-guidelines.md            # Visual rendering rules
+    │   ├── ui-authoring-rules.md       # Component and pattern usage
+    │   ├── design-system.md            # Token and color system
+    │   └── cases-summary-reference.md  # Calibration examples
+    ├── assets/
+    │   └── ui/                         # Design system: CSS tokens, component kits
+    ├── scripts/
+    │   └── extract_text.py             # Zero-dependency text extraction
+    ├── agents/
+    │   └── openai.yaml                 # Codex / OpenAI agent metadata
+    └── examples/                       # Rendered HTML output gallery
 ```
 
 ---
