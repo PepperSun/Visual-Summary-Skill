@@ -50,22 +50,20 @@ Add the `visual-summary/` folder to your Cursor rules directory, or point Cursor
 
 **OpenAI Codex**
 
-Install from the GitHub directory URL:
+This repository is already a valid Codex skill root because `SKILL.md` is at the top level. The `agents/openai.yaml` file is optional UI metadata and does not need manual registration.
 
-```bash
-$skill-installer install https://github.com/PepperSun/Visual-Summary-Skill/tree/main/visual-summary
-```
-
-Or clone it locally into your Codex skills directory:
+Install it by cloning the repository into your Codex skills directory:
 
 ```bash
 mkdir -p ~/.codex/skills
-git clone https://github.com/PepperSun/Visual-Summary-Skill.git
-mv Visual-Summary-Skill/visual-summary ~/.codex/skills/visual-summary
-rm -rf Visual-Summary-Skill
-```
+git clone https://github.com/PepperSun/Visual-Summary-Skill.git ~/.codex/skills/visual-summary
 
-Restart Codex if the skill does not appear immediately.
+**ChatGPT**
+
+1. [Download the skill package](https://github.com/PepperSun/Visual-Summary-Skill/archive/refs/heads/main.zip)
+2. Open ChatGPT Skills (web only): [chatgpt.com/skills](https://chatgpt.com/skills)
+3. Upload the downloaded package
+4. Start a new ChatGPT conversation and type `/visual-summary` to use
 
 **Gemini CLI**
 ```bash
@@ -219,6 +217,7 @@ Works across any host that supports the [Agent Skills open standard](https://age
 - Claude.ai (paid plans)
 - Claude API
 - OpenAI Codex
+- ChatGPT
 - Gemini CLI
 - Cursor
 - Windsurf
