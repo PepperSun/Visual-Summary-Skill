@@ -57,7 +57,7 @@ Install it by cloning the repository into your Codex skills directory:
 ```bash
 mkdir -p ~/.codex/skills
 git clone https://github.com/PepperSun/Visual-Summary-Skill.git ~/.codex/skills/visual-summary
-
+```
 **ChatGPT**
 
 1. [Download the skill package](https://github.com/PepperSun/Visual-Summary-Skill/archive/refs/heads/main.zip)
